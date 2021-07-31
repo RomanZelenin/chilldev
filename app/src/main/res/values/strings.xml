@@ -3,4 +3,5 @@
     <string name="screen_pin_title">ПИН-код</string>
     <string name="screen_pin_description">Хотите защитить выход из детского режима?\nПридумайте ПИН-код из четырёх символов.</string>
     <string name="screen_pin_done">Не хочу задавать ПИН-код</string>
+    <string name="screen_congratulation">Поздравляем мы подключили детский режим!</string>
 </resources>
