@@ -9,6 +9,7 @@ class ScrollBarAdapter(fragment: FragmentActivity) : FragmentStateAdapter(fragme
 
     override fun createFragment(position: Int): Fragment {
         return when (position) {
+            7 -> PinCodeFragment.newInstance((position + 1).toString())
             else -> {
                 PageSampleFragment.newInstance((position + 1).toString())
             }
