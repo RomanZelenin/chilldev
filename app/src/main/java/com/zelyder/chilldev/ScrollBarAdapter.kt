@@ -13,6 +13,7 @@ class ScrollBarAdapter(fragment: FragmentActivity) : FragmentStateAdapter(fragme
         return when (position) {
             1 -> MovieAgeFragment()
             2 -> ChildGenderFragment()
+            3 -> PageFourFragment.newInstance()
             else -> {
                 PageSampleFragment.newInstance((position + 1).toString())
             }

@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Chilldev</string>
+    <string name="and_birthday">&#8230; и дата рождения</string>
+    <string name="day">ДД</string>
+    <string name="month">ММ</string>
+    <string name="year">ГГГГ</string>
+    <string name="access_to_applications_and_sites">Доступ к приложениям и сайтам</string>
+</resources>
