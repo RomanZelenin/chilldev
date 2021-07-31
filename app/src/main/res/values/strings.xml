@@ -6,4 +6,11 @@
     <string name="child_gender_female">Девочка</string>
     <string name="child_gender_male">Мальчик</string>
     <string name="child_gender_next_view_label">…и дата рождения</string>
+    <string name="movie_age_label">Какое кино будем показывать?</string>
+    <string name="movie_age_zero">0+</string>
+    <string name="movie_age_six">6+</string>
+    <string name="movie_age_twelve">12+</string>
+    <string name="movie_age_sixteen">16+</string>
+    <string name="movie_age_eighteen">18+</string>
+    <string name="movie_age_next_view_label">Пол ребенка</string>
 </resources>
