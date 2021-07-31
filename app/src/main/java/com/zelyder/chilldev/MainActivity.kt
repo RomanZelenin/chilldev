@@ -124,4 +124,8 @@ class MainActivity : FragmentActivity() {
         }
         binding.scrollBar.addView(imageViewDown)
     }
+
+    fun swipeToNext() {
+        binding.pager.setCurrentItem(binding.pager.currentItem + 1, true)
+    }
 }

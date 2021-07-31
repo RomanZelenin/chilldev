@@ -5,6 +5,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
+import com.zelyder.chilldev.MainActivity
 import com.zelyder.chilldev.databinding.FragmentMovieAgeBinding
 
 class MovieAgeFragment : Fragment() {
@@ -25,7 +26,8 @@ class MovieAgeFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        binding.rgAge.setOnCheckedChangeListener { _, checkedId ->
+        binding.rgAge.setOnCheckedChangeListener { _, _ ->
+            (activity as MainActivity).swipeToNext()
         }
     }
 
