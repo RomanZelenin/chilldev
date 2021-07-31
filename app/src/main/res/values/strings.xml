@@ -1,3 +1,9 @@
 <resources>
     <string name="app_name">Chilldev</string>
+    <string name="child_gender_label">Пол ребенка</string>
+    <string name="child_gender_description">Это поможет нам сделать рекомендации точнее</string>
+    <string name="child_gender_skip">Неважно</string>
+    <string name="child_gender_female">Девочка</string>
+    <string name="child_gender_male">Мальчик</string>
+    <string name="child_gender_next_view_label">…и дата рождения</string>
 </resources>
