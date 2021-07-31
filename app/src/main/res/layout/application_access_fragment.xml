@@ -1,0 +1,161 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <TextView
+        android:id="@+id/check_information"
+        android:layout_width="490dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="50dp"
+        android:gravity="center"
+        android:text="@string/check_information"
+        android:textSize="40sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+
+    <TextView
+        android:id="@+id/kid_name_text_view"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="30dp"
+        android:paddingBottom="5dp"
+        android:text="@string/check_name_text_view"
+        android:textSize="20sp"
+        app:layout_constraintEnd_toStartOf="@+id/kid_answer"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/check_information" />
+
+    <TextView
+        android:id="@+id/kid_answer"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="30dp"
+        android:paddingBottom="5dp"
+        android:text="@string/limitation"
+        android:textSize="20sp"
+        app:layout_constraintEnd_toStartOf="@+id/kid_gender"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toEndOf="@+id/kid_name_text_view"
+        app:layout_constraintTop_toBottomOf="@id/check_information" />
+
+    <TextView
+        android:id="@+id/kid_gender"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="30dp"
+        android:paddingBottom="5dp"
+        android:text="@string/gender"
+        android:textSize="20sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toEndOf="@+id/kid_answer"
+        app:layout_constraintTop_toBottomOf="@id/check_information" />
+
+    <TextView
+        android:id="@+id/saved_kid_name_view"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/saved_kid_name"
+        android:textSize="25sp"
+        android:paddingBottom="20dp"
+        app:layout_constraintEnd_toStartOf="@id/kid_name_text_view"
+        app:layout_constraintStart_toEndOf="@id/kid_name_text_view"
+        app:layout_constraintTop_toBottomOf="@id/kid_name_text_view" />
+
+    <TextView
+        android:id="@+id/saved_limitation_text_view"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/saved_limitation"
+        android:textSize="25sp"
+        app:layout_constraintEnd_toStartOf="@id/kid_answer"
+        app:layout_constraintStart_toEndOf="@id/kid_answer"
+        app:layout_constraintTop_toBottomOf="@id/kid_answer" />
+
+    <TextView
+        android:id="@+id/saved_gender_text_view"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/saved_gender"
+        android:textSize="25sp"
+        app:layout_constraintEnd_toStartOf="@id/kid_gender"
+        app:layout_constraintStart_toEndOf="@id/kid_gender"
+        app:layout_constraintTop_toBottomOf="@id/kid_gender" />
+
+    <TextView
+        android:id="@+id/kid_interests"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/kid_interests"
+        android:textSize="20sp"
+        android:paddingBottom="10dp"
+        app:layout_constraintEnd_toStartOf="@id/saved_kid_name_view"
+        app:layout_constraintHorizontal_bias="0.29"
+        app:layout_constraintStart_toEndOf="@id/saved_kid_name_view"
+        app:layout_constraintTop_toBottomOf="@id/saved_kid_name_view" />
+
+    <TextView
+        android:id="@+id/description_kid_interests"
+        android:layout_width="400dp"
+        android:layout_height="wrap_content"
+        android:text="@string/saved_kid_interests"
+        android:textSize="25sp"
+        android:paddingBottom="15dp"
+        app:layout_constraintEnd_toStartOf="@id/kid_interests"
+        app:layout_constraintHorizontal_bias="0.361"
+        app:layout_constraintStart_toEndOf="@id/kid_interests"
+        app:layout_constraintTop_toBottomOf="@+id/kid_interests" />
+
+    <TextView
+        android:id="@+id/confirm_sites"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="12dp"
+        android:paddingBottom="10dp"
+        android:text="@string/confirm_sites"
+        android:textSize="20sp"
+        app:layout_constraintEnd_toStartOf="@id/description_kid_interests"
+        app:layout_constraintHorizontal_bias="0.546"
+        app:layout_constraintStart_toEndOf="@id/description_kid_interests"
+        app:layout_constraintTop_toBottomOf="@id/description_kid_interests" />
+
+    <TextView
+        android:id="@+id/saved_confirm_sites"
+        android:layout_width="400dp"
+        android:layout_height="wrap_content"
+        android:paddingBottom="15dp"
+        android:text="@string/saved_confirm_sites"
+        android:textSize="25sp"
+        app:layout_constraintEnd_toStartOf="@id/confirm_sites"
+        app:layout_constraintHorizontal_bias="0.453"
+        app:layout_constraintStart_toEndOf="@id/confirm_sites"
+        app:layout_constraintTop_toBottomOf="@+id/confirm_sites" />
+
+    <Button
+        android:id="@+id/create_acc_btn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="24dp"
+        android:text="@string/create_account_btn"
+        app:layout_constraintEnd_toStartOf="@id/saved_confirm_sites"
+        app:layout_constraintHorizontal_bias="0.439"
+        app:layout_constraintStart_toEndOf="@id/saved_confirm_sites"
+        app:layout_constraintTop_toBottomOf="@+id/saved_confirm_sites" />
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="36dp"
+        android:text="@string/cancel"
+        android:colo="@color/lb_default_brand_color"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintLeft_toRightOf="@id/create_acc_btn" />
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>

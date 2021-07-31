@@ -34,4 +34,21 @@
     <string name="screen_pin_done">Не хочу задавать ПИН-код</string>
     <string name="fragment_title_5">Что ребенку интересно?</string>
     <string name="fragment_title_6">Выберите к каким сайтам и приложениям дать доступ</string>
+    <string name="kid_name_text_view">Как зовут ребёнка?</string>
+    <string name="next_fragment_text_view">Какое кино будем показывать?</string>
+    <string name="create_account">Создать профиль</string>
+    <string name="check_information">Проверим?</string>
+    <string name="check_name_text_view">Как зовут?</string>
+    <string name="limitation">Ограничение</string>
+    <string name="gender">Пол</string>
+    <string name="saved_kid_name">Зайка</string>
+    <string name="saved_limitation">6+</string>
+    <string name="saved_gender">Неважно</string>
+    <string name="kid_interests">Что ребёнку интересно?</string>
+    <string name="name_hint">Зайка</string>
+    <string name="saved_kid_interests">Я познаю мир, Приключения, Животные, Для всей семьи</string>
+    <string name="confirm_sites">Разрешённые приложения и сайты</string>
+    <string name="saved_confirm_sites">Кинопоиск HD</string>
+    <string name="create_account_btn">Создать профиль ребёнка</string>
+    <string name="cancel">Отмена</string>
 </resources>

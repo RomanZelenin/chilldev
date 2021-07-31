@@ -17,6 +17,8 @@ class ScrollBarAdapter(fragment: FragmentActivity) : FragmentStateAdapter(fragme
             7 -> PinCodeFragment.newInstance((position + 1).toString())
             4 -> InterestsScreenFragment()
             5 -> AddAppScreenFragment()
+            0-> KidNameFragment()
+            6-> ApplicationAccessFragment()
             else -> {
                 PageSampleFragment.newInstance((position + 1).toString())
             }
