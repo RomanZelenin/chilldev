@@ -14,6 +14,7 @@ class ScrollBarAdapter(fragment: FragmentActivity) : FragmentStateAdapter(fragme
             1 -> MovieAgeFragment()
             2 -> ChildGenderFragment()
             3 -> PageFourFragment.newInstance()
+            7 -> PinCodeFragment.newInstance((position + 1).toString())
             else -> {
                 PageSampleFragment.newInstance((position + 1).toString())
             }
