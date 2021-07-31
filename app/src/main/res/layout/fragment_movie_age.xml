@@ -125,7 +125,7 @@
         android:id="@+id/tvNextScreen"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:paddingBottom="20dp"
+        android:layout_marginBottom="20dp"
         android:text="@string/movie_age_next_view_label"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
