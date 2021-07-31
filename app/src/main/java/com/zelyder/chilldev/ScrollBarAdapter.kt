@@ -9,6 +9,8 @@ class ScrollBarAdapter(fragment: FragmentActivity) : FragmentStateAdapter(fragme
 
     override fun createFragment(position: Int): Fragment {
         return when (position) {
+            4 -> InterestsScreenFragment()
+            5 -> AddAppScreenFragment()
             else -> {
                 PageSampleFragment.newInstance((position + 1).toString())
             }

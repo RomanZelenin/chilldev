@@ -1,3 +1,5 @@
 <resources>
     <string name="app_name">Chilldev</string>
+    <string name="fragment_title_5">Что ребенку интересно?</string>
+    <string name="fragment_title_6">Выберите к каким сайтам и приложениям дать доступ</string>
 </resources>
