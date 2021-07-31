@@ -31,6 +31,12 @@ class MovieAgeFragment : Fragment() {
         }
     }
 
+
+    override fun onStop() {
+        binding.root.clearFocus()
+        super.onStop()
+    }
+
     override fun onDestroyView() {
         _binding = null
         super.onDestroyView()

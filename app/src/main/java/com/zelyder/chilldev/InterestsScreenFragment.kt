@@ -26,6 +26,7 @@ class InterestsScreenFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        binding.firstInterests.requestFocus()
     }
 
     override fun onDestroyView() {

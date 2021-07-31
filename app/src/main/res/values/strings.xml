@@ -32,10 +32,9 @@
     <string name="screen_pin_title">ПИН-код</string>
     <string name="screen_pin_description">Хотите защитить выход из детского режима?\nПридумайте ПИН-код из четырёх символов.</string>
     <string name="screen_pin_done">Не хочу задавать ПИН-код</string>
-    <string name="fragment_title_5">Что ребенку интересно?</string>
-    <string name="fragment_title_6">Выберите к каким сайтам и приложениям дать доступ</string>
+    <string name="screen_congratulation">Поздравляем мы подключили детский режим!</string>
+    <string name="next_fragment_text_view"></string>
     <string name="kid_name_text_view">Как зовут ребёнка?</string>
-    <string name="next_fragment_text_view">Какое кино будем показывать?</string>
     <string name="create_account">Создать профиль</string>
     <string name="check_information">Проверим?</string>
     <string name="check_name_text_view">Как зовут?</string>
@@ -51,4 +50,6 @@
     <string name="saved_confirm_sites">Кинопоиск HD</string>
     <string name="create_account_btn">Создать профиль ребёнка</string>
     <string name="cancel">Отмена</string>
+    <string name="fragment_title_5">Что ребенку интересно?</string>
+    <string name="fragment_title_6">Выберите к каким сайтам и приложениям дать доступ</string>
 </resources>

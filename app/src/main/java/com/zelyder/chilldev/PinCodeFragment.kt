@@ -29,6 +29,15 @@ class PinCodeFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+//        binding.buttonWithoutPin.setOnClickListener {
+//            childFragmentManager.beginTransaction()
+//                .add(CongratulationFragment(), CongratulationFragment::class.simpleName)
+//                .commit()
+//        }
+    }
+
+    override fun onResume() {
+        super.onResume()
     }
 
     companion object {

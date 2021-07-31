@@ -21,7 +21,7 @@ class PageFourFragment : Fragment() {
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ): View {
         _binding = FragmentPageFourBinding.inflate(inflater, container, false)
         val view = binding.root
         return view
@@ -30,6 +30,16 @@ class PageFourFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         binding.day.requestFocus(View.FOCUSABLES_ALL)
+    }
+
+    override fun onResume() {
+        super.onResume()
+        binding.day.requestFocus(View.FOCUSABLES_ALL)
+    }
+
+    override fun onStop() {
+        super.onStop()
+        binding.root.clearFocus()
     }
 
     companion object {
