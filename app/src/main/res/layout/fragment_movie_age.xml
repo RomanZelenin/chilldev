@@ -78,8 +78,8 @@
 
         <ImageView
             android:id="@+id/ivFirst"
-            android:layout_width="40dp"
-            android:layout_height="60dp"
+            android:layout_width="100dp"
+            android:layout_height="160dp"
             android:layout_marginEnd="40dp"
             android:background="#FFFFFF"
             android:contentDescription="@null"
@@ -87,8 +87,8 @@
 
         <ImageView
             android:id="@+id/ivSecond"
-            android:layout_width="40dp"
-            android:layout_height="60dp"
+            android:layout_width="100dp"
+            android:layout_height="160dp"
             android:layout_marginEnd="40dp"
             android:background="#FFFFFF"
             android:contentDescription="@null"
@@ -96,8 +96,8 @@
 
         <ImageView
             android:id="@+id/ivThird"
-            android:layout_width="40dp"
-            android:layout_height="60dp"
+            android:layout_width="100dp"
+            android:layout_height="160dp"
             android:layout_marginEnd="40dp"
             android:background="#FFFFFF"
             android:contentDescription="@null"
@@ -105,8 +105,8 @@
 
         <ImageView
             android:id="@+id/ivFourth"
-            android:layout_width="40dp"
-            android:layout_height="60dp"
+            android:layout_width="100dp"
+            android:layout_height="160dp"
             android:layout_marginEnd="40dp"
             android:background="#FFFFFF"
             android:contentDescription="@null"
@@ -114,8 +114,8 @@
 
         <ImageView
             android:id="@+id/ivFives"
-            android:layout_width="40dp"
-            android:layout_height="60dp"
+            android:layout_width="100dp"
+            android:layout_height="160dp"
             android:background="#FFFFFF"
             android:contentDescription="@null"
             android:scaleType="fitXY" />
