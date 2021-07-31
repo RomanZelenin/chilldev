@@ -32,4 +32,6 @@
     <string name="screen_pin_title">ПИН-код</string>
     <string name="screen_pin_description">Хотите защитить выход из детского режима?\nПридумайте ПИН-код из четырёх символов.</string>
     <string name="screen_pin_done">Не хочу задавать ПИН-код</string>
+    <string name="fragment_title_5">Что ребенку интересно?</string>
+    <string name="fragment_title_6">Выберите к каким сайтам и приложениям дать доступ</string>
 </resources>
