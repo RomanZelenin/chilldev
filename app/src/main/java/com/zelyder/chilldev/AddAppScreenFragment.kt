@@ -24,10 +24,10 @@ class AddAppScreenFragment : Fragment() {
         val view = inflater.inflate(R.layout.fragment_page_6, container, false)
 
         recyclerView = view.findViewById(R.id.recycler)
-
         recyclerView.setHasFixedSize(true)
         recyclerView.layoutManager = LinearLayoutManager(view.context)
         adapter = AppRecyclerAdapter(view.context)
+        recyclerView.adapter = adapter
 
         return view
     }
