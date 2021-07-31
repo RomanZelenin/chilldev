@@ -29,8 +29,6 @@ class AddAppScreenFragment : Fragment() {
         recyclerView.layoutManager = LinearLayoutManager(view.context)
         adapter = AppRecyclerAdapter(view.context)
 
-        val appList : List<String> = listOf("Кинопоиск HD", "youtube.com", "more.tv", "MEGOGO")
-        adapter.setData(appList)
         return view
     }
 

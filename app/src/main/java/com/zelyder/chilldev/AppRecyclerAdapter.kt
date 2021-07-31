@@ -7,21 +7,15 @@ import android.view.ViewGroup
 import android.widget.AdapterView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
-import kotlin.collections.ArrayList
 
 class AppRecyclerAdapter(private val context: Context) :
     RecyclerView.Adapter<AppRecyclerAdapter.MyViewHolder>() {
 
-    private val apps = ArrayList<String>()
+    private val apps = listOf("Кинопоиск HD", "youtube.com", "more.tv", "MEGOGO")
     private lateinit var mListener: AdapterView.OnItemClickListener
 
-    fun getItems() = apps
-
-    fun getItem(position: Int) = apps[position]
-
     class MyViewHolder(
-        itemView: View,
-        private val listener: AdapterView.OnItemClickListener,
+        itemView: View
     ) : RecyclerView.ViewHolder(itemView) {
         private val appTextView: TextView = itemView.findViewById(R.id.app_text)
 
@@ -30,15 +24,11 @@ class AppRecyclerAdapter(private val context: Context) :
        }
     }
 
-    fun setData(items: List<String>) {
-        apps.addAll(items)
-        notifyDataSetChanged()
-    }
-
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MyViewHolder {
         val itemView = LayoutInflater.from(parent.context)
             .inflate(R.layout.app_item, parent, false)
-        return MyViewHolder(itemView, mListener)
+
+        return MyViewHolder(itemView)
     }
 
     override fun onBindViewHolder(holder: MyViewHolder, position: Int) {
