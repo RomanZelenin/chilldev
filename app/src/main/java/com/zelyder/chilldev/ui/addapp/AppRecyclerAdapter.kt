@@ -1,4 +1,4 @@
-package com.zelyder.chilldev
+package com.zelyder.chilldev.ui.addapp
 
 import android.content.Context
 import android.view.LayoutInflater
@@ -7,6 +7,7 @@ import android.view.ViewGroup
 import android.widget.AdapterView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
+import com.zelyder.chilldev.R
 
 class AppRecyclerAdapter(private val context: Context) :
     RecyclerView.Adapter<AppRecyclerAdapter.MyViewHolder>() {
@@ -26,7 +27,7 @@ class AppRecyclerAdapter(private val context: Context) :
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MyViewHolder {
         val itemView = LayoutInflater.from(parent.context)
-            .inflate(R.layout.app_item, parent, false)
+            .inflate(R.layout.app_item_page, parent, false)
 
         return MyViewHolder(itemView)
     }

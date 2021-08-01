@@ -1,4 +1,4 @@
-package com.zelyder.chilldev
+package com.zelyder.chilldev.customview
 
 import android.content.Context
 import android.util.AttributeSet
@@ -11,6 +11,7 @@ import androidx.appcompat.widget.LinearLayoutCompat
 import androidx.core.content.ContextCompat
 import androidx.core.view.get
 import androidx.core.view.size
+import com.zelyder.chilldev.R
 
 class ScrollBarView(context: Context, attrSet: AttributeSet?) :
     LinearLayoutCompat(context, attrSet) {
@@ -114,11 +115,11 @@ class ScrollBarView(context: Context, attrSet: AttributeSet?) :
         }
 
 
-    fun setOnScrollListenerToPreviousItem(listener: View.OnClickListener) {
+    fun setOnScrollListenerToPreviousItem(listener: OnClickListener) {
         imageViewUp.value.setOnClickListener(listener)
     }
 
-    fun setOnScrollListenerToNextItem(listener: View.OnClickListener) {
+    fun setOnScrollListenerToNextItem(listener: OnClickListener) {
         imageViewDown.value.setOnClickListener(listener)
     }
 

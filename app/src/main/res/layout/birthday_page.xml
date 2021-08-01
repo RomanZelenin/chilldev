@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".PageFourFragment">
+    tools:context=".ui.birthday.BirthdayFragment">
 
 
     <TextView
@@ -153,12 +153,13 @@
             android:id="@+id/day"
             android:layout_width="65dp"
             android:layout_height="53dp"
-            android:imeOptions="actionNext"
             android:ems="10"
             android:gravity="center"
             android:hint="@string/day"
+            android:imeOptions="actionNext"
             android:inputType="numberDecimal"
-            android:maxLength="2" />
+            android:maxLength="2"
+            android:nextFocusRight="@id/month" />
 
         <TextView
             android:id="@+id/textView2"
@@ -168,15 +169,16 @@
             android:textSize="34sp" />
 
         <EditText
-            android:imeOptions="actionNext"
             android:id="@+id/month"
             android:layout_width="65dp"
             android:layout_height="53dp"
             android:ems="10"
             android:gravity="center"
             android:hint="@string/month"
+            android:imeOptions="actionNext"
             android:inputType="numberDecimal"
-            android:maxLength="2" />
+            android:maxLength="2"
+            android:nextFocusRight="@id/year" />
 
         <TextView
             android:id="@+id/textView3"
