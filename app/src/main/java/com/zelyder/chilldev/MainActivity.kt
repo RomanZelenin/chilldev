@@ -4,7 +4,11 @@ import android.os.Bundle
 import android.view.KeyEvent
 import androidx.fragment.app.FragmentActivity
 import androidx.viewpager2.widget.ViewPager2
+import com.zelyder.chilldev.data.RemoteService
 import com.zelyder.chilldev.databinding.ActivityMainBinding
+import com.zelyder.chilldev.di.DaggerAppComponent
+import kotlinx.coroutines.*
+import javax.inject.Inject
 
 
 interface SwipePage {
@@ -14,12 +18,20 @@ interface SwipePage {
 
 class MainActivity : FragmentActivity(), SwipePage {
 
+    val mainActivityScope = CoroutineScope(Job())
     private lateinit var binding: ActivityMainBinding
+
+    @Inject
+    lateinit var remoteService: RemoteService
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
+
+        DaggerAppComponent.factory()
+            .create()
+            .inject(this)
 
         binding.pager.apply {
             adapter = ScrollBarAdapter(this@MainActivity)
@@ -55,6 +67,11 @@ class MainActivity : FragmentActivity(), SwipePage {
                 pager.setCurrentItem(pager.currentItem + 1, true)
             }
         }
+    }
+
+    override fun onDestroy() {
+        mainActivityScope.cancel()
+        super.onDestroy()
     }
 
     override fun swipeToNext() {
