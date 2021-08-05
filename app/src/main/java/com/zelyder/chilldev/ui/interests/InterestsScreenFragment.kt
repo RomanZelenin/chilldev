@@ -19,7 +19,7 @@ class InterestsScreenFragment : FragmentPage<InterestsPageBinding>() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        binding.firstInterests.requestFocus()
+        //TODO: make focus on first interest element
     }
 
     companion object {
