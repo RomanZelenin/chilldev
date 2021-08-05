@@ -1,6 +1,6 @@
 package com.zelyder.chilldev.domain.models
 
-data class ChildAccess(
+data class AvailableService(
     val id: Int,
     val title: String,
 )
