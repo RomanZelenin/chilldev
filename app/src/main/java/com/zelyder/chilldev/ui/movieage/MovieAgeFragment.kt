@@ -4,8 +4,16 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ImageView
+import androidx.core.view.get
+import com.squareup.picasso.Picasso
 import com.zelyder.chilldev.databinding.MovieAgePageBinding
+import com.zelyder.chilldev.domain.models.AgeLimit
 import com.zelyder.chilldev.ui.FragmentPage
+import com.zelyder.chilldev.ui.main.MainActivity
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 
 class MovieAgeFragment : FragmentPage<MovieAgePageBinding>() {
 
@@ -21,6 +29,20 @@ class MovieAgeFragment : FragmentPage<MovieAgePageBinding>() {
         super.onViewCreated(view, savedInstanceState)
         binding.rgAge.setOnCheckedChangeListener { _, _ ->
             page.swipeToNext()
+        }
+
+        with((requireActivity() as MainActivity)) {
+            mainActivityScope.launch {
+                remoteService.posters(AgeLimit.SIX_PLUS).body()
+                    ?.message
+                    ?.forEachIndexed { index, poster_url ->
+                        withContext(Dispatchers.Main) {
+                            Picasso.get().load(poster_url)
+                                .fit()
+                                .into((binding.llPosterContainer[index] as ImageView))
+                        }
+                    }
+            }
         }
     }
 
