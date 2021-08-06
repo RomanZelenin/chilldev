@@ -1,4 +1,4 @@
-package com.zelyder.chilldev.ui
+package com.zelyder.chilldev.ui.core
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
@@ -9,7 +9,7 @@ import com.zelyder.chilldev.domain.models.AvailableService
 import com.zelyder.chilldev.domain.models.Category
 import com.zelyder.chilldev.domain.models.KidInfo
 
-class MainViewModel : ViewModel() {
+class PageViewModel : ViewModel() {
     private val _kidInfo = MutableLiveData(KidInfo())
     val kidInfo: LiveData<KidInfo> get() = _kidInfo
 
