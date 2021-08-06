@@ -30,7 +30,7 @@ class InterestView(context: Context, attrs: AttributeSet?) : LinearLayout(contex
         inflate(context, R.layout.interest_view, this)
         context.obtainStyledAttributes(attrs, R.styleable.InterestView).apply {
             try {
-                text = getText(R.styleable.InterestView_android_text) as String
+                text = getString(R.styleable.InterestView_android_text).toString()
                 checked = getBoolean(R.styleable.InterestView_android_checked, false)
             } finally {
                 recycle()

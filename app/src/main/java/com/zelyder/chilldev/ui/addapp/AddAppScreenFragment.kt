@@ -15,9 +15,8 @@ class AddAppScreenFragment : FragmentPage<AppAccessPageBinding>() {
     ): View {
         super.onCreateView(inflater, container, savedInstanceState)
         binding.recycler.apply {
-            setHasFixedSize(true)
             layoutManager = LinearLayoutManager(requireContext())
-            adapter = AppRecyclerAdapter(requireContext())
+            adapter = AppRecyclerAdapter()
         }
         return binding.root
     }
