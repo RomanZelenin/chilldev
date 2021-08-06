@@ -9,6 +9,7 @@ import android.widget.Toast
 import com.zelyder.chilldev.R
 import com.zelyder.chilldev.databinding.PinCodePageBinding
 import com.zelyder.chilldev.ui.FragmentPage
+import com.zelyder.chilldev.ui.main.MainActivity
 
 class PinCodeFragment : FragmentPage<PinCodePageBinding>() {
 
@@ -66,6 +67,7 @@ class PinCodeFragment : FragmentPage<PinCodePageBinding>() {
             }
             len = binding.pinView.text?.length ?: 0
             if (len == 4) {
+                (activity as MainActivity).pageViewModel.setPinCode(binding.pinView.text.toString())
                 page.swipeToNext()
             }
         }
