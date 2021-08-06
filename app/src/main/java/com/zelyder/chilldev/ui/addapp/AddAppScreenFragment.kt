@@ -29,6 +29,11 @@ class AddAppScreenFragment : FragmentPage<AppAccessPageBinding>() {
         _binding = AppAccessPageBinding.inflate(inflater, container, attachToParent)
     }
 
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        binding.recycler.smoothScrollToPosition(0)
+    }
+
     companion object {
         @JvmStatic
         fun newInstance() = AddAppScreenFragment()

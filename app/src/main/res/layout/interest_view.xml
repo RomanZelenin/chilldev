@@ -19,7 +19,7 @@
         android:layout_height="wrap_content"
         android:layout_gravity="center_vertical"
         android:layout_marginStart="32dp"
-        android:src="@drawable/ic_check_interest"
+        android:src="@drawable/ic_unfocused_check_interest"
         android:visibility="gone"
         tools:visibility="visible" />
 

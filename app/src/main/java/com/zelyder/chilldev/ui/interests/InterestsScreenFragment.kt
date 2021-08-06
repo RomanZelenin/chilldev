@@ -21,8 +21,6 @@ class InterestsScreenFragment : FragmentPage<InterestsPageBinding>() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        //TODO: make focus on first interest element
-
         binding.interestsRecycler.apply {
             layoutManager = StaggeredGridLayoutManager(2, StaggeredGridLayoutManager.HORIZONTAL)
             adapter = InterestsRecyclerAdapter(context)
@@ -30,7 +28,6 @@ class InterestsScreenFragment : FragmentPage<InterestsPageBinding>() {
         }
 
         val items = listOf("Я познаю мир", "Спорт", "Приключения", "На английском языке")
-
         setInterests(items)
     }
 

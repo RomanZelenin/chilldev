@@ -60,6 +60,16 @@ class InterestView(context: Context, attrs: AttributeSet?) : LinearLayout(contex
                 R.drawable.interest_unchecked_unfocused_background
             } to R.color.white
         }
+
+        if (checked) {
+            val checkImageResource = if (hasFocus) {
+                R.drawable.ic_focused_check_interest
+            } else {
+                R.drawable.ic_unfocused_check_interest
+            }
+            findViewById<ImageView>(R.id.check_image_view).setImageDrawable(ContextCompat.getDrawable(context, checkImageResource))
+        }
+
         val textColor = ContextCompat.getColor(context, textColorId)
         setBackgroundResource(backgroundResource)
         findViewById<TextView>(R.id.interest_text).setTextColor(textColor)
