@@ -5,13 +5,14 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <androidx.constraintlayout.utils.widget.ImageFilterView
-        android:layout_width="75dp"
-        android:layout_height="75dp"
+    <ImageView
+        android:layout_width="wrap_content"
+        android:layout_height="90dp"
         android:src="@drawable/avas1"
-        app:layout_constraintRight_toLeftOf="@id/kid_name_text_view"
+        app:layout_constraintEnd_toEndOf="@id/kid_age"
         app:layout_constraintTop_toTopOf="@id/kid_name_text_view"
-        app:roundPercent="1"
+        app:layout_constraintLeft_toLeftOf="parent"
+        android:foreground="@drawable/rounded_fg"
         tools:ignore="ContentDescription" />
 
     <TextView
@@ -33,21 +34,21 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="30dp"
-        android:paddingStart="15dp"
+        android:paddingBottom="5dp"
         android:text="@string/check_name_text_view"
         android:textColor="@color/lb_browse_header_color"
         android:textSize="30sp"
         app:layout_constraintEnd_toStartOf="@+id/kid_age"
         app:layout_constraintHorizontal_chainStyle="packed"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/check_information"
-        tools:ignore="RtlSymmetry" />
+        app:layout_constraintTop_toBottomOf="@id/check_information" />
 
     <TextView
         android:id="@+id/kid_age"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="30dp"
+        android:paddingBottom="5dp"
         android:text="@string/check_age_text_view"
         android:textColor="@color/lb_browse_header_color"
         android:textSize="30sp"
@@ -61,6 +62,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="30dp"
+        android:paddingBottom="5dp"
         android:text="@string/check_gender_text_view"
         android:textColor="@color/lb_browse_header_color"
         android:textSize="30sp"
@@ -76,19 +78,17 @@
         android:text="@string/limitation_text_view"
         android:textColor="@color/lb_browse_header_color"
         android:textSize="25sp"
-        android:paddingStart="15dp"
         app:layout_constraintEnd_toStartOf="@id/kid_name_text_view"
         app:layout_constraintHorizontal_bias="0.452"
         app:layout_constraintHorizontal_chainStyle="packed"
         app:layout_constraintStart_toEndOf="@id/kid_name_text_view"
-        app:layout_constraintTop_toBottomOf="@id/kid_name_text_view"
-        tools:ignore="RtlSymmetry" />
+        app:layout_constraintTop_toBottomOf="@id/kid_name_text_view" />
 
     <TextView
         android:id="@+id/saved_limitation_age"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:paddingBottom="25dp"
+        android:paddingBottom="40dp"
         android:text="@string/check_limitation_text_view"
         android:textColor="@color/lb_browse_header_color"
         android:textSize="25sp"
@@ -146,12 +146,10 @@
 
     <Button
         android:id="@+id/create_acc_btn"
-        android:layout_width="250dp"
-        android:layout_height="45dp"
-        android:layout_marginTop="25dp"
-        android:background="@drawable/background_circle_corners"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
         android:text="@string/create_account_btn"
-        android:textColor="#4F4F4F"
         app:layout_constraintEnd_toStartOf="@id/saved_confirm_sites"
         app:layout_constraintStart_toEndOf="@id/saved_confirm_sites"
         app:layout_constraintTop_toBottomOf="@+id/saved_confirm_sites" />

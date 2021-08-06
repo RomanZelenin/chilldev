@@ -4,17 +4,15 @@
     <string name="next_fragment_text_view">Какое кино будем показывать?</string>
     <string name="create_account">Создать профиль</string>
     <string name="check_information">Проверим?</string>
-    <string name="check_name_text_view">Как зовут?</string>
-    <string name="limitation">Ограничение</string>
-    <string name="gender">Пол</string>
-    <string name="saved_kid_name">Зайка</string>
-    <string name="saved_limitation">6+</string>
-    <string name="saved_gender">Неважно</string>
-    <string name="kid_interests">Что ребёнку интересно?</string>
+    <string name="check_name_text_view">Вовочка, </string>
+    <string name="check_age_text_view">4 года, </string>
+    <string name="limitation_text_view">Ограничение:</string>
+    <string name="check_limitation_text_view">6+</string>
+    <string name="check_gender_text_view">мальчик</string>
+    <string name="kid_interests_text_view">Что интересно?</string>
     <string name="name_hint">Зайка</string>
-    <string name="saved_kid_interests">Я познаю мир, Приключения, Животные, Для всей семьи</string>
-    <string name="confirm_sites">Разрешённые приложения и сайты</string>
-    <string name="saved_confirm_sites">Кинопоиск HD</string>
+    <string name="check_kid_interests">Я познаю мир, Приключения, Животные, На английском языке</string>
+    <string name="confirm_sites_text_view">Разрешённые приложения и сайты</string>
+    <string name="check_confirm_sites">Кинопоиск HD, YouTube</string>
     <string name="create_account_btn">Создать профиль ребёнка</string>
-    <string name="cancel">Отмена</string>
 </resources>
