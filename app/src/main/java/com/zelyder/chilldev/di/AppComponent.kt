@@ -1,8 +1,6 @@
 package com.zelyder.chilldev.di
 
-import android.app.Application
-import com.zelyder.chilldev.MainActivity
-import com.zelyder.chilldev.YandexKidTvApplication
+import com.zelyder.chilldev.ui.main.MainActivity
 import dagger.Component
 import javax.inject.Scope
 

@@ -1,10 +1,12 @@
-package com.zelyder.chilldev
+package com.zelyder.chilldev.ui.main
 
 import android.os.Bundle
 import android.view.KeyEvent
+import androidx.activity.viewModels
 import androidx.fragment.app.FragmentActivity
 import androidx.viewpager2.widget.ViewPager2
-import com.zelyder.chilldev.data.RemoteService
+import com.zelyder.chilldev.ScrollBarAdapter
+import com.zelyder.chilldev.domain.models.RemoteService
 import com.zelyder.chilldev.databinding.ActivityMainBinding
 import com.zelyder.chilldev.di.DaggerAppComponent
 import kotlinx.coroutines.*
@@ -20,6 +22,7 @@ class MainActivity : FragmentActivity(), SwipePage {
 
     val mainActivityScope = CoroutineScope(Job())
     private lateinit var binding: ActivityMainBinding
+    val pageViewModel: PageViewModel by viewModels { PageViewModelFactory() }
 
     @Inject
     lateinit var remoteService: RemoteService

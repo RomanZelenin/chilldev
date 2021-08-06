@@ -2,7 +2,7 @@ package com.zelyder.chilldev.di
 
 import com.google.gson.Gson
 import com.google.gson.GsonBuilder
-import com.zelyder.chilldev.data.RemoteService
+import com.zelyder.chilldev.domain.models.RemoteService
 import dagger.Module
 import dagger.Provides
 import okhttp3.OkHttpClient

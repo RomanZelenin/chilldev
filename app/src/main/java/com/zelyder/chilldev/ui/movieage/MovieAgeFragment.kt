@@ -7,10 +7,10 @@ import android.view.ViewGroup
 import android.widget.ImageView
 import androidx.core.view.get
 import com.squareup.picasso.Picasso
-import com.zelyder.chilldev.MainActivity
-import com.zelyder.chilldev.data.ChildAges
 import com.zelyder.chilldev.databinding.MovieAgePageBinding
+import com.zelyder.chilldev.domain.models.AgeLimit
 import com.zelyder.chilldev.ui.FragmentPage
+import com.zelyder.chilldev.ui.main.MainActivity
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
@@ -33,7 +33,7 @@ class MovieAgeFragment : FragmentPage<MovieAgePageBinding>() {
 
         with((requireActivity() as MainActivity)) {
             mainActivityScope.launch {
-                remoteService.posters(ChildAges.SIX).body()
+                remoteService.posters(AgeLimit.SIX_PLUS).body()
                     ?.message
                     ?.forEachIndexed { index, poster_url ->
                         withContext(Dispatchers.Main) {

@@ -1,13 +1,13 @@
-package com.zelyder.chilldev.ui.core
+package com.zelyder.chilldev.ui.main
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import com.zelyder.chilldev.domain.enums.AgeLimit
-import com.zelyder.chilldev.domain.enums.Gender
-import com.zelyder.chilldev.domain.models.AvailableService
+import com.zelyder.chilldev.domain.models.AgeLimit
 import com.zelyder.chilldev.domain.models.Category
+import com.zelyder.chilldev.domain.models.Gender
 import com.zelyder.chilldev.domain.models.KidInfo
+import com.zelyder.chilldev.domain.models.AvailableService
 
 class PageViewModel : ViewModel() {
     private val _kidInfo = MutableLiveData(KidInfo())
@@ -18,7 +18,7 @@ class PageViewModel : ViewModel() {
     }
 
     fun setKidAgeLimit(ageLimit: AgeLimit) {
-        _kidInfo.value?.ageLimit = ageLimit
+        _kidInfo.value?.age_limit = ageLimit
     }
 
     fun setKidGender(gender: Gender) {
@@ -26,7 +26,7 @@ class PageViewModel : ViewModel() {
     }
 
     fun setKidBirthday(birthday: String) {
-        _kidInfo.value?.birthday = birthday
+        _kidInfo.value?.birthdate = birthday
     }
 
     fun setKidCategories(categories: List<Category>) {
@@ -34,12 +34,10 @@ class PageViewModel : ViewModel() {
     }
 
     fun setKidServices(availableServices: List<AvailableService>) {
-        _kidInfo.value?.availableServices = availableServices
+        _kidInfo.value?.app = availableServices
     }
 
     fun setPinCode(pinCode: String) {
-        _kidInfo.value?.pinCode = pinCode
+        _kidInfo.value?.pin = pinCode
     }
-
-
 }
