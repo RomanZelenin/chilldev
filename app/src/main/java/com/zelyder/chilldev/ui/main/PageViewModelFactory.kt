@@ -8,7 +8,7 @@ import java.lang.IllegalArgumentException
 @Suppress("UNCHECKED_CAST")
 class PageViewModelFactory() : ViewModelProvider.Factory {
     override fun <T : ViewModel?> create(modelClass: Class<T>): T = when (modelClass) {
-        FragmentPage::class.java -> PageViewModel()
+        PageViewModel::class.java -> PageViewModel()
         else -> throw IllegalArgumentException("$modelClass is not registered ViewModel")
     } as T
 }
