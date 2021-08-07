@@ -75,6 +75,9 @@ class CustomNumKeyboard(
                         if (len > 0) {
                             it.text?.delete(len - 1, len)
                         }
+                        if (len == 1) {
+                            keyboardOutput?.onFieldIsEmpty()
+                        }
                     }
                 }
                 len = it.length()

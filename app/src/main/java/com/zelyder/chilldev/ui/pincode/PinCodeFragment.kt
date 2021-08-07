@@ -33,6 +33,9 @@ class PinCodeFragment : FragmentPage<PinCodePageBinding>() {
                 page.swipeToNext()
             }
 
+            override fun onFieldIsEmpty() {
+            }
+
         })
     }
 
