@@ -91,13 +91,13 @@ class MainActivity : FragmentActivity(), SwipePage {
 
     private fun getAccessToken(callback: (String?) -> Unit) {
         thread {
-            try {
-                val passportProviderSdk = PassportProviderSdk(this)
-                Handler(Looper.getMainLooper()).post {
+            val passportProviderSdk = PassportProviderSdk(this)
+            Handler(Looper.getMainLooper()).post {
+                try {
                     callback(passportProviderSdk.currentAccount?.token)
+                } catch (e: Exception) {
+                    Log.e(TAG, "Cannot get access token", e)
                 }
-            } catch (e: Exception) {
-                Log.e(TAG, "Cannot get access token", e)
             }
         }
     }
