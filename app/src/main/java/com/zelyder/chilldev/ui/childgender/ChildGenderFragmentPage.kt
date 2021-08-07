@@ -5,6 +5,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import com.zelyder.chilldev.databinding.ChildGenderPageBinding
+import com.zelyder.chilldev.domain.models.Gender
 import com.zelyder.chilldev.ui.FragmentPage
 
 class ChildGenderFragmentPage : FragmentPage<ChildGenderPageBinding>() {
@@ -24,6 +25,15 @@ class ChildGenderFragmentPage : FragmentPage<ChildGenderPageBinding>() {
         }
     }
 
+    override fun onPause() {
+        super.onPause()
+        val genderIdx = when (binding.rgGender.checkedRadioButtonId) {
+            binding.rbMale.id -> 0
+            binding.rbFemale.id -> 1
+            else -> 2
+        }
+        viewModel.setKidGender(Gender.values()[genderIdx])
+    }
     companion object {
         @JvmStatic
         fun newInstance() = ChildGenderFragmentPage()

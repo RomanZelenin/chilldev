@@ -27,7 +27,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.501"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/linearLayout">
+        app:layout_constraintTop_toBottomOf="@+id/birthday_container">
 
         <TextView
             android:id="@+id/one"
@@ -139,7 +139,7 @@
         app:layout_constraintStart_toStartOf="parent" />
 
     <LinearLayout
-        android:id="@+id/linearLayout"
+        android:id="@+id/birthday_container"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="16dp"

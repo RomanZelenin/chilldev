@@ -70,6 +70,11 @@ class MovieAgeFragment : FragmentPage<MovieAgePageBinding>() {
         binding.layoutAgeRating.requestFocus()
     }
 
+    override fun onPause() {
+        super.onPause()
+        viewModel.setKidAgeLimit(AgeLimit.values()[binding.layoutAgeRating.selectedPosition + 1])
+    }
+
     companion object {
         @JvmStatic
         fun newInstance() = MovieAgeFragment()

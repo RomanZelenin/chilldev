@@ -5,7 +5,7 @@ import android.view.ViewGroup
 import com.zelyder.chilldev.databinding.KidNamePageBinding
 import com.zelyder.chilldev.ui.FragmentPage
 
-class KidNameFragment: FragmentPage<KidNamePageBinding>() {
+class KidNameFragment : FragmentPage<KidNamePageBinding>() {
 
     override fun inflateBinding(
         inflater: LayoutInflater,
@@ -13,6 +13,12 @@ class KidNameFragment: FragmentPage<KidNamePageBinding>() {
         attachToParent: Boolean
     ) {
         _binding = KidNamePageBinding.inflate(inflater, container, attachToParent)
+    }
+
+
+    override fun onPause() {
+        super.onPause()
+        viewModel.setKidName(binding.kidNameEditText.text.toString())
     }
 
     companion object {

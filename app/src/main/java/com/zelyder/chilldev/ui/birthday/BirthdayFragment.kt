@@ -16,6 +16,11 @@ class BirthdayFragment : FragmentPage<BirthdayPageBinding>() {
         _binding = BirthdayPageBinding.inflate(inflater, container, attachToParent)
     }
 
+    override fun onPause() {
+        super.onPause()
+        viewModel.setKidBirthday("${binding.year.text}-${binding.month.text}-${binding.day.text}")
+    }
+
     companion object {
         @JvmStatic
         fun newInstance() =

@@ -45,6 +45,11 @@ class PinCodeFragment : FragmentPage<PinCodePageBinding>() {
 
     }
 
+    override fun onPause() {
+        super.onPause()
+        Log.d("Congratulation",viewModel.kidInfo.value.toString())
+    }
+
     inner class ClickLister : View.OnClickListener {
         override fun onClick(view: View?) {
             var len = binding.pinView.text?.length ?: 0
