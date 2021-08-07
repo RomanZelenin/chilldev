@@ -2,6 +2,7 @@ package com.zelyder.chilldev.ui.main
 
 import android.util.Log
 import androidx.lifecycle.*
+import com.google.gson.JsonObject
 import com.zelyder.chilldev.domain.models.*
 import kotlinx.coroutines.launch
 
@@ -31,12 +32,12 @@ class PageViewModel(private val remoteService: RemoteService) : ViewModel() {
     }
 
     fun setKidAgeLimit(ageLimit: AgeLimit) {
-        _kidInfo.value?.age_limit = ageLimit
+        _kidInfo.value?.age_limit = ageLimit.type
         Log.d(TAG, "Added age limit: $ageLimit")
     }
 
     fun setKidGender(gender: Gender) {
-        _kidInfo.value?.gender = gender
+        _kidInfo.value?.gender = gender.type.lowercase()
         Log.d(TAG, "Added gender: $gender")
     }
 
@@ -51,7 +52,7 @@ class PageViewModel(private val remoteService: RemoteService) : ViewModel() {
     }
 
     fun setKidServices(availableServices: List<AvailableService>) {
-        _kidInfo.value?.app = availableServices
+        _kidInfo.value?.apps = JsonObject()
     }
 
     fun setPinCode(pinCode: String) {
