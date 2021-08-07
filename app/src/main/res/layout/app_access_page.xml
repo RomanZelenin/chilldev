@@ -10,13 +10,18 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:gravity="center_horizontal"
-        android:paddingBottom="80dp"
-        android:text="@string/fragment_title_6"
-        android:textSize="30sp" />
+        android:paddingStart="50dp"
+        android:paddingEnd="50dp"
+        android:paddingBottom="30dp"
+        style="@style/Title.White"
+        android:paddingTop="100dp"
+        android:text="@string/fragment_title_6" />
 
     <FrameLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        android:paddingStart="100dp"
+        android:paddingEnd="100dp">
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/recycler"
@@ -30,7 +35,6 @@
             android:layout_height="112dp"
             android:layout_gravity="bottom"
             android:background="@drawable/app_recycler_background"/>
-
     </FrameLayout>
 
 
