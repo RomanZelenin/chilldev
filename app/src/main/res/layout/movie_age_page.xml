@@ -1,0 +1,134 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <TextView
+        android:id="@+id/tvMovieAge"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/movie_age_label"
+        app:layout_constraintBottom_toTopOf="@id/rgAge"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_chainStyle="packed" />
+
+    <RadioGroup
+        android:id="@+id/rgAge"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintBottom_toTopOf="@+id/llPosterContainer"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tvMovieAge">
+
+        <RadioButton
+            android:id="@+id/rbZeroAge"
+            android:layout_width="100dp"
+            android:layout_height="100dp"
+            android:layout_marginEnd="16dp"
+            android:gravity="center"
+            android:text="@string/movie_age_zero" />
+
+        <RadioButton
+            android:id="@+id/rbSixAge"
+            android:layout_width="100dp"
+            android:layout_height="100dp"
+            android:layout_marginEnd="16dp"
+            android:gravity="center"
+            android:text="@string/movie_age_six" />
+
+        <RadioButton
+            android:id="@+id/rbTwelveAge"
+            android:layout_width="100dp"
+            android:layout_height="100dp"
+            android:layout_marginEnd="16dp"
+            android:gravity="center"
+            android:text="@string/movie_age_twelve" />
+
+        <RadioButton
+            android:id="@+id/rbSixteenAge"
+            android:layout_width="100dp"
+            android:layout_height="100dp"
+            android:layout_marginEnd="16dp"
+            android:gravity="center"
+            android:text="@string/movie_age_sixteen" />
+
+        <RadioButton
+            android:id="@+id/rbEighteenAge"
+            android:layout_width="100dp"
+            android:layout_height="100dp"
+            android:layout_marginEnd="16dp"
+            android:gravity="center"
+            android:text="@string/movie_age_eighteen" />
+    </RadioGroup>
+
+    <LinearLayout
+        android:id="@+id/llPosterContainer"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/rgAge">
+
+        <ImageView
+            android:id="@+id/ivFirst"
+            android:layout_width="100dp"
+            android:layout_height="160dp"
+            android:layout_marginEnd="40dp"
+            android:background="#FFFFFF"
+            android:contentDescription="@null"
+            android:scaleType="fitXY" />
+
+        <ImageView
+            android:id="@+id/ivSecond"
+            android:layout_width="100dp"
+            android:layout_height="160dp"
+            android:layout_marginEnd="40dp"
+            android:background="#FFFFFF"
+            android:contentDescription="@null"
+            android:scaleType="fitXY" />
+
+        <ImageView
+            android:id="@+id/ivThird"
+            android:layout_width="100dp"
+            android:layout_height="160dp"
+            android:layout_marginEnd="40dp"
+            android:background="#FFFFFF"
+            android:contentDescription="@null"
+            android:scaleType="fitXY" />
+
+        <ImageView
+            android:id="@+id/ivFourth"
+            android:layout_width="100dp"
+            android:layout_height="160dp"
+            android:layout_marginEnd="40dp"
+            android:background="#FFFFFF"
+            android:contentDescription="@null"
+            android:scaleType="fitXY" />
+
+        <ImageView
+            android:id="@+id/ivFives"
+            android:layout_width="100dp"
+            android:layout_height="160dp"
+            android:background="#FFFFFF"
+            android:contentDescription="@null"
+            android:scaleType="fitXY" />
+    </LinearLayout>
+
+    <TextView
+        android:id="@+id/tvNextScreen"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="20dp"
+        android:text="@string/movie_age_next_view_label"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

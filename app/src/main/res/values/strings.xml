@@ -1,7 +1,40 @@
 <resources>
     <string name="app_name">Chilldev</string>
+    <string name="child_gender_label">Пол ребенка</string>
+    <string name="child_gender_description">Это поможет нам сделать рекомендации точнее</string>
+    <string name="child_gender_skip">Неважно</string>
+    <string name="child_gender_female">Девочка</string>
+    <string name="child_gender_male">Мальчик</string>
+    <string name="child_gender_next_view_label">…и дата рождения</string>
+    <string name="movie_age_label">Какое кино будем показывать?</string>
+    <string name="movie_age_zero">0+</string>
+    <string name="movie_age_six">6+</string>
+    <string name="movie_age_twelve">12+</string>
+    <string name="movie_age_sixteen">16+</string>
+    <string name="movie_age_eighteen">18+</string>
+    <string name="movie_age_next_view_label">Пол ребенка</string>
+    <string name="last_screen_message">Поздравляем! Вы успешно создали детский аккаунт =)</string>
+    <string name="and_birthday">&#8230; and birthday day</string>
+    <string name="day">DD</string>
+    <string name="month">MM</string>
+    <string name="year">YYYY</string>
+    <string name="one" translatable="false">1</string>
+    <string name="two" translatable="false">2</string>
+    <string name="three" translatable="false">3</string>
+    <string name="four" translatable="false">4</string>
+    <string name="five" translatable="false">5</string>
+    <string name="six" translatable="false">6</string>
+    <string name="seven" translatable="false">7</string>
+    <string name="eight" translatable="false">8</string>
+    <string name="nine" translatable="false">9</string>
+    <string name="zero" translatable="false">0</string>
+    <string name="access_to_applications_and_sites">Access to applications and sites</string>
+    <string name="screen_pin_title">ПИН-код</string>
+    <string name="screen_pin_description">Хотите защитить выход из детского режима?\nПридумайте ПИН-код из четырёх символов.</string>
+    <string name="screen_pin_done">Не хочу задавать ПИН-код</string>
+    <string name="screen_congratulation">Поздравляем мы подключили детский режим!</string>
+    <string name="next_fragment_text_view"></string>
     <string name="kid_name_text_view">Как зовут ребёнка?</string>
-    <string name="next_fragment_text_view">Какое кино будем показывать?</string>
     <string name="create_account">Создать профиль</string>
     <string name="check_information">Проверим?</string>
     <string name="check_name_text_view">Вовочка, </string>
@@ -15,4 +48,7 @@
     <string name="confirm_sites_text_view">Разрешённые приложения и сайты</string>
     <string name="check_confirm_sites">Кинопоиск HD, YouTube</string>
     <string name="create_account_btn">Создать профиль ребёнка</string>
+    <string name="cancel">Отмена</string>
+    <string name="fragment_title_5">Что ребенку интересно?</string>
+    <string name="fragment_title_6">Выберите к каким сайтам и приложениям дать доступ</string>
 </resources>

@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".ui.interests.InterestsScreenFragment">
+
+    <TextView
+        android:padding="60dp"
+        android:gravity="center|center_horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/fragment_title_5"
+        android:textSize="30sp">
+    </TextView>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:padding="20pt"
+        android:layout_gravity="center"
+        android:layout_marginTop="60dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content">
+
+        <CheckBox
+            android:id="@+id/first_interests"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:paddingEnd="10dp"
+            android:layout_marginStart="10dp"
+            android:text="Я познаю мир"
+            android:background="@drawable/interests_shape"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintStart_toStartOf="parent" />
+
+        <CheckBox
+            android:id="@+id/second_interests"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Спорт"
+            android:layout_marginStart="10dp"
+            android:paddingEnd="10dp"
+            android:background="@drawable/interests_shape"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintStart_toEndOf="@id/first_interests" />
+
+        <CheckBox
+            android:id="@+id/third_interests"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Приключения"
+            android:layout_marginStart="10dp"
+            android:paddingEnd="10dp"
+            android:background="@drawable/interests_shape"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintStart_toEndOf="@id/second_interests" />
+
+        <CheckBox
+            android:id="@+id/fourth_interests"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="10dp"
+            android:paddingEnd="10dp"
+            android:text="На английском языке"
+            android:background="@drawable/interests_shape"
+            app:layout_constraintTop_toBottomOf="@id/first_interests"
+            app:layout_constraintStart_toStartOf="@id/first_interests" />
+
+        <CheckBox
+            android:id="@+id/fifth_interests"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="10dp"
+            android:text="Про дружбу"
+            android:background="@drawable/interests_shape"
+            app:layout_constraintTop_toBottomOf="@id/second_interests"
+            app:layout_constraintStart_toEndOf="@id/fourth_interests" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</LinearLayout>
