@@ -6,7 +6,7 @@
     <string name="child_gender_female">Девочка</string>
     <string name="child_gender_male">Мальчик</string>
     <string name="child_gender_next_view_label">…и дата рождения</string>
-    <string name="movie_age_label">Какое кино будем показывать?</string>
+    <string name="movie_age_label" translatable="false">Какое кино будем показывать?</string>
     <string name="movie_age_zero" translatable="false">0+</string>
     <string name="movie_age_six" translatable="false">6+</string>
     <string name="movie_age_twelve" translatable="false">12+</string>
@@ -33,11 +33,10 @@
     <string name="screen_pin_description">Хотите защитить выход из детского режима?\nПридумайте ПИН-код из четырёх символов.</string>
     <string name="screen_pin_done">Не хочу задавать ПИН-код</string>
     <string name="screen_congratulation">Поздравляем, вы подключили детский режим!</string>
-    <string name="next_fragment_text_view"></string>
+    <string name="next_fragment_text_view">Какое кино будем показывать?</string>
     <string name="kid_name_text_view">Как зовут ребёнка?</string>
     <string name="create_account">Создать профиль</string>
     <string name="check_information">Проверим?</string>
-    <string name="check_name_text_view">Как зовут?</string>
     <string name="limitation">Ограничение</string>
     <string name="gender">Пол</string>
     <string name="saved_kid_name">Зайка</string>
