@@ -7,11 +7,11 @@
     <string name="child_gender_male">Мальчик</string>
     <string name="child_gender_next_view_label">…и дата рождения</string>
     <string name="movie_age_label">Какое кино будем показывать?</string>
-    <string name="movie_age_zero">0+</string>
-    <string name="movie_age_six">6+</string>
-    <string name="movie_age_twelve">12+</string>
-    <string name="movie_age_sixteen">16+</string>
-    <string name="movie_age_eighteen">18+</string>
+    <string name="movie_age_zero" translatable="false">0+</string>
+    <string name="movie_age_six" translatable="false">6+</string>
+    <string name="movie_age_twelve" translatable="false">12+</string>
+    <string name="movie_age_sixteen" translatable="false">16+</string>
+    <string name="movie_age_eighteen" translatable="false">18+</string>
     <string name="movie_age_next_view_label">Пол ребенка</string>
     <string name="last_screen_message">Поздравляем! Вы успешно создали детский аккаунт =)</string>
     <string name="and_birthday">&#8230; and birthday day</string>
@@ -32,11 +32,18 @@
     <string name="screen_pin_title">ПИН-код</string>
     <string name="screen_pin_description">Хотите защитить выход из детского режима?\nПридумайте ПИН-код из четырёх символов.</string>
     <string name="screen_pin_done">Не хочу задавать ПИН-код</string>
-    <string name="screen_congratulation">Поздравляем мы подключили детский режим!</string>
+    <string name="screen_congratulation">Поздравляем, вы подключили детский режим!</string>
     <string name="next_fragment_text_view"></string>
     <string name="kid_name_text_view">Как зовут ребёнка?</string>
     <string name="create_account">Создать профиль</string>
     <string name="check_information">Проверим?</string>
+    <string name="check_name_text_view">Как зовут?</string>
+    <string name="limitation">Ограничение</string>
+    <string name="gender">Пол</string>
+    <string name="saved_kid_name">Зайка</string>
+    <string name="saved_limitation" translatable="false">6+</string>
+    <string name="saved_gender">Неважно</string>
+    <string name="kid_interests">Что ребёнку интересно?</string>
     <string name="check_name_text_view">Вовочка, </string>
     <string name="check_age_text_view">4 года, </string>
     <string name="limitation_text_view">Ограничение:</string>
@@ -51,4 +58,5 @@
     <string name="cancel">Отмена</string>
     <string name="fragment_title_5">Что ребенку интересно?</string>
     <string name="fragment_title_6">Выберите к каким сайтам и приложениям дать доступ</string>
+    <string name="create_profile_text">Создать профиль</string>
 </resources>

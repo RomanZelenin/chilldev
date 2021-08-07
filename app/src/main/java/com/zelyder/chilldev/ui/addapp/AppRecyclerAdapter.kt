@@ -1,40 +1,51 @@
 package com.zelyder.chilldev.ui.addapp
 
-import android.content.Context
-import android.view.LayoutInflater
-import android.view.View
 import android.view.ViewGroup
-import android.widget.AdapterView
-import android.widget.TextView
+import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.RecyclerView
 import com.zelyder.chilldev.R
+import com.zelyder.chilldev.customview.AppView
+import com.zelyder.chilldev.extensions.dpToPx
 
-class AppRecyclerAdapter(private val context: Context) :
+class AppRecyclerAdapter :
     RecyclerView.Adapter<AppRecyclerAdapter.MyViewHolder>() {
 
-    private val apps = listOf("Кинопоиск HD", "youtube.com", "more.tv", "MEGOGO")
-    private lateinit var mListener: AdapterView.OnItemClickListener
+    private val items = listOf(
+        AppItem("Кинопоиск HD", R.color.orange),
+        AppItem("youtube.com", R.color.red),
+        AppItem("more.tv", R.color.blue),
+        AppItem("MEGOGO", R.color.cyan)
+    )
 
     class MyViewHolder(
-        itemView: View
-    ) : RecyclerView.ViewHolder(itemView) {
-        private val appTextView: TextView = itemView.findViewById(R.id.app_text)
+        private val appView: AppView
+    ) : RecyclerView.ViewHolder(appView) {
 
-       fun bind(str : String, context : Context) {
-           appTextView.text = str
-       }
+        fun bind(item: AppItem) {
+            appView.text = item.name
+            appView.color = ContextCompat.getColor(appView.context, item.color)
+        }
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MyViewHolder {
-        val itemView = LayoutInflater.from(parent.context)
-            .inflate(R.layout.app_item_page, parent, false)
-
-        return MyViewHolder(itemView)
+        val view = AppView(parent.context, null).apply {
+            layoutParams = ViewGroup.LayoutParams(
+                ViewGroup.LayoutParams.MATCH_PARENT,
+                124.dpToPx()
+            )
+        }
+        return MyViewHolder(view)
     }
 
     override fun onBindViewHolder(holder: MyViewHolder, position: Int) {
-        holder.bind(apps[position], context)
+        holder.bind(items[position])
     }
 
-    override fun getItemCount() = apps.size
+    override fun onViewAttachedToWindow(holder: MyViewHolder) {
+        super.onViewAttachedToWindow(holder)
+        if (holder.bindingAdapterPosition == 0) {
+            holder.itemView.requestFocus()
+        }
+    }
+    override fun getItemCount() = items.size
 }
