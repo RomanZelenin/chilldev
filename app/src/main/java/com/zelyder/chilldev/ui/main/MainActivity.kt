@@ -2,15 +2,14 @@ package com.zelyder.chilldev.ui.main
 
 import android.os.Bundle
 import android.view.KeyEvent
-import androidx.activity.viewModels
 import androidx.fragment.app.FragmentActivity
 import androidx.lifecycle.ViewModelProvider
-import androidx.lifecycle.ViewModelStoreOwner
+import androidx.recyclerview.widget.RecyclerView
 import androidx.viewpager2.widget.ViewPager2
 import com.zelyder.chilldev.ScrollBarAdapter
-import com.zelyder.chilldev.domain.models.RemoteService
 import com.zelyder.chilldev.databinding.ActivityMainBinding
 import com.zelyder.chilldev.di.DaggerAppComponent
+import com.zelyder.chilldev.domain.models.RemoteService
 import kotlinx.coroutines.*
 import javax.inject.Inject
 
@@ -42,6 +41,12 @@ class MainActivity : FragmentActivity(), SwipePage {
             viewModelStore,
             PageViewModelFactory(remoteService)
         )[PageViewModel::class.java]
+
+        // Hack to prevent ViewPager2 from grabbing focus
+        val recyclerView = ViewPager2::class.java.getDeclaredField("mRecyclerView")
+            .also { it.isAccessible = true }
+            .get(binding.pager) as RecyclerView
+        recyclerView.isFocusable = false
 
         binding.pager.apply {
             adapter = ScrollBarAdapter(this@MainActivity)
