@@ -3,4 +3,12 @@
     <declare-styleable name="ScrollBarView">
         <attr name="numItems" format="integer"/>
     </declare-styleable>
+    <declare-styleable name="InterestView">
+        <attr name="android:text"/>
+        <attr name="android:checked"/>
+    </declare-styleable>
+    <declare-styleable name="AppView">
+        <attr name="android:color"/>
+        <attr name="android:text"/>
+    </declare-styleable>
 </resources>

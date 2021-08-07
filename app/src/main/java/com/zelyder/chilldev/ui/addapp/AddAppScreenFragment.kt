@@ -15,9 +15,8 @@ class AddAppScreenFragment : FragmentPage<AppAccessPageBinding>() {
     ): View {
         super.onCreateView(inflater, container, savedInstanceState)
         binding.recycler.apply {
-            setHasFixedSize(true)
             layoutManager = LinearLayoutManager(requireContext())
-            adapter = AppRecyclerAdapter(requireContext())
+            adapter = AppRecyclerAdapter()
         }
         return binding.root
     }
@@ -28,6 +27,11 @@ class AddAppScreenFragment : FragmentPage<AppAccessPageBinding>() {
         attachToParent: Boolean
     ) {
         _binding = AppAccessPageBinding.inflate(inflater, container, attachToParent)
+    }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        binding.recycler.smoothScrollToPosition(0)
     }
 
     companion object {

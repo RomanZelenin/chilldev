@@ -52,4 +52,5 @@
     <string name="cancel">Отмена</string>
     <string name="fragment_title_5">Что ребенку интересно?</string>
     <string name="fragment_title_6">Выберите к каким сайтам и приложениям дать доступ</string>
+    <string name="create_profile_text">Создать профиль</string>
 </resources>
