@@ -40,7 +40,7 @@ class AgeRatingLayout(context: Context, attrSet: AttributeSet?) :
             val tvAgeRating = TextView(context).apply {
                 configureDefaultTextView(this, isLast(i))
                 gravity = Gravity.CENTER
-                textSize = 28.dpToPx().toFloat()
+                textSize = 14.dpToPx().toFloat()
                 text = AgeRating.values()[i].rating
             }
             addView(tvAgeRating)
@@ -54,8 +54,8 @@ class AgeRatingLayout(context: Context, attrSet: AttributeSet?) :
         return textView.apply {
             setBackgroundResource(R.drawable.shp_focused_age_rating_bg)
             setTextColor(ContextCompat.getColor(context, android.R.color.white))
-            val layoutParams = LayoutParams(100.dpToPx(), 100.dpToPx())
-            layoutParams.rightMargin = 16.dpToPx()
+            val layoutParams = LayoutParams(60.dpToPx(), 60.dpToPx())
+            layoutParams.rightMargin = 8.dpToPx()
             setLayoutParams(layoutParams)
         }
     }
@@ -64,9 +64,9 @@ class AgeRatingLayout(context: Context, attrSet: AttributeSet?) :
         return textView.apply {
             setBackgroundResource(R.drawable.shp_default_age_rating_bg)
             setTextColor(ContextCompat.getColor(context, android.R.color.white))
-            val layoutParams = LayoutParams(100.dpToPx(), 100.dpToPx())
+            val layoutParams = LayoutParams(60.dpToPx(), 60.dpToPx())
             if (!isLast) {
-                layoutParams.rightMargin = 16.dpToPx()
+                layoutParams.rightMargin = 8.dpToPx()
             }
             setLayoutParams(layoutParams)
         }
@@ -76,9 +76,9 @@ class AgeRatingLayout(context: Context, attrSet: AttributeSet?) :
         return textView.apply {
             setBackgroundResource(R.drawable.shp_selected_age_rating_bg)
             setTextColor(ContextCompat.getColor(context, android.R.color.black))
-            val layoutParams = LayoutParams(120.dpToPx(), 120.dpToPx())
+            val layoutParams = LayoutParams(70.dpToPx(), 70.dpToPx())
             if (!isLast) {
-                layoutParams.rightMargin = 16.dpToPx()
+                layoutParams.rightMargin = 8.dpToPx()
             }
             setLayoutParams(layoutParams)
         }

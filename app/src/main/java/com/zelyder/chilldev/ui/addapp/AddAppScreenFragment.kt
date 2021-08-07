@@ -56,6 +56,11 @@ class AddAppScreenFragment : FragmentPage<AppAccessPageBinding>() {
         viewModel.setKidServices()
     }*/
 
+    override fun onResume() {
+        super.onResume()
+        binding.recycler.smoothScrollToPosition(0)
+    }
+
     companion object {
         @JvmStatic
         fun newInstance() = AddAppScreenFragment()
