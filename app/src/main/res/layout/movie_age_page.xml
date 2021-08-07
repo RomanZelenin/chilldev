@@ -9,62 +9,22 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/movie_age_label"
-        app:layout_constraintBottom_toTopOf="@id/rgAge"
+        app:layout_constraintBottom_toTopOf="@id/layoutAgeRating"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_chainStyle="packed" />
 
-    <RadioGroup
-        android:id="@+id/rgAge"
+    <com.zelyder.chilldev.ui.movieage.AgeRatingLayout
+        android:id="@+id/layoutAgeRating"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:orientation="horizontal"
+        android:focusable="true"
+        android:focusedByDefault="true"
         app:layout_constraintBottom_toTopOf="@+id/llPosterContainer"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tvMovieAge">
-
-        <RadioButton
-            android:id="@+id/rbZeroAge"
-            android:layout_width="100dp"
-            android:layout_height="100dp"
-            android:layout_marginEnd="16dp"
-            android:gravity="center"
-            android:text="@string/movie_age_zero" />
-
-        <RadioButton
-            android:id="@+id/rbSixAge"
-            android:layout_width="100dp"
-            android:layout_height="100dp"
-            android:layout_marginEnd="16dp"
-            android:gravity="center"
-            android:text="@string/movie_age_six" />
-
-        <RadioButton
-            android:id="@+id/rbTwelveAge"
-            android:layout_width="100dp"
-            android:layout_height="100dp"
-            android:layout_marginEnd="16dp"
-            android:gravity="center"
-            android:text="@string/movie_age_twelve" />
-
-        <RadioButton
-            android:id="@+id/rbSixteenAge"
-            android:layout_width="100dp"
-            android:layout_height="100dp"
-            android:layout_marginEnd="16dp"
-            android:gravity="center"
-            android:text="@string/movie_age_sixteen" />
-
-        <RadioButton
-            android:id="@+id/rbEighteenAge"
-            android:layout_width="100dp"
-            android:layout_height="100dp"
-            android:layout_marginEnd="16dp"
-            android:gravity="center"
-            android:text="@string/movie_age_eighteen" />
-    </RadioGroup>
+        app:layout_constraintTop_toBottomOf="@+id/tvMovieAge"/>
 
     <LinearLayout
         android:id="@+id/llPosterContainer"
@@ -74,7 +34,7 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/rgAge">
+        app:layout_constraintTop_toBottomOf="@id/layoutAgeRating">
 
         <ImageView
             android:id="@+id/ivFirst"
