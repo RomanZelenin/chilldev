@@ -18,12 +18,12 @@ object NetworkModule {
     @ApplicationScope
     fun provideOkHttpClient(): OkHttpClient {
         return OkHttpClient.Builder()
-            /*.connectTimeout(30, TimeUnit.SECONDS)
+            //.connectTimeout(30, TimeUnit.SECONDS)
             .addInterceptor { chain ->
                 val requestBuilder = chain.request().newBuilder()
-                requestBuilder.addHeader("Authorization", "Bearer $token")
+                requestBuilder.addHeader("Authorization", "OAuth AQAAAAAn24kQAAdMKtm-VDWEMkljrl20f4nKnEk")
                 chain.proceed(requestBuilder.build())
-            }*/.build()
+            }.build()
     }
 
     @Provides

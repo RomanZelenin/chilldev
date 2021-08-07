@@ -27,19 +27,17 @@ class PinCodeFragment : FragmentPage<PinCodePageBinding>() {
         binding.buttonWithoutPin.setOnClickListener {
             page.swipeToNext()
         }
-        binding.numPad.setupKeyboard(binding.pinView, 4, object: KeyboardOutput {
+        binding.numPad.setupKeyboard(binding.pinView, 4, object : KeyboardOutput {
             override fun onSizeIsReached() {
                 (activity as MainActivity).pageViewModel.setPinCode(binding.pinView.text.toString())
                 page.swipeToNext()
             }
-
         })
     }
 
-    override fun onResume() {
-        super.onResume()
-//        binding.numPad.requestFocus()
-
+    override fun onPause() {
+        super.onPause()
+        Log.d(PinCodeFragment::javaClass.name, viewModel.kidInfo.value.toString())
     }
 
     companion object {

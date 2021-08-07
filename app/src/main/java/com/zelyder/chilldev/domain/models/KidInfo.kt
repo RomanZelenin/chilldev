@@ -5,7 +5,7 @@ data class KidInfo(
     var age_limit: AgeLimit = AgeLimit.NONE,
     var gender: Gender = Gender.WHATEVER,
     var birthdate:String? = null,
-    var categories: List<Category> = emptyList(),
+    var categories: List<Int> = emptyList(),
     var app: List<AvailableService> = emptyList(),
     var pin:String? = null
 )

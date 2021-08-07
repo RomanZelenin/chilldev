@@ -33,6 +33,12 @@ class AddAppScreenFragment : FragmentPage<AppAccessPageBinding>() {
         super.onViewCreated(view, savedInstanceState)
         binding.recycler.smoothScrollToPosition(0)
     }
+/*
+    override fun onPause() {
+        super.onPause()
+
+        viewModel.setKidServices()
+    }*/
 
     companion object {
         @JvmStatic

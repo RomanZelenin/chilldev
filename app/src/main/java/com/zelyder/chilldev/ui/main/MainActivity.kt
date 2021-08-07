@@ -4,6 +4,8 @@ import android.os.Bundle
 import android.view.KeyEvent
 import androidx.activity.viewModels
 import androidx.fragment.app.FragmentActivity
+import androidx.lifecycle.ViewModelProvider
+import androidx.lifecycle.ViewModelStoreOwner
 import androidx.viewpager2.widget.ViewPager2
 import com.zelyder.chilldev.ScrollBarAdapter
 import com.zelyder.chilldev.domain.models.RemoteService
@@ -22,7 +24,7 @@ class MainActivity : FragmentActivity(), SwipePage {
 
     val mainActivityScope = CoroutineScope(Job())
     private lateinit var binding: ActivityMainBinding
-    val pageViewModel: PageViewModel by viewModels { PageViewModelFactory() }
+    lateinit var pageViewModel: PageViewModel
 
     @Inject
     lateinit var remoteService: RemoteService
@@ -35,6 +37,11 @@ class MainActivity : FragmentActivity(), SwipePage {
         DaggerAppComponent.factory()
             .create()
             .inject(this)
+
+        pageViewModel = ViewModelProvider(
+            viewModelStore,
+            PageViewModelFactory(remoteService)
+        )[PageViewModel::class.java]
 
         binding.pager.apply {
             adapter = ScrollBarAdapter(this@MainActivity)

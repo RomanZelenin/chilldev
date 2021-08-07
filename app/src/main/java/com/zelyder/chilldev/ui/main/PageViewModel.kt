@@ -1,16 +1,11 @@
 package com.zelyder.chilldev.ui.main
 
 import android.util.Log
-import androidx.lifecycle.LiveData
-import androidx.lifecycle.MutableLiveData
-import androidx.lifecycle.ViewModel
-import com.zelyder.chilldev.domain.models.AgeLimit
-import com.zelyder.chilldev.domain.models.Category
-import com.zelyder.chilldev.domain.models.Gender
-import com.zelyder.chilldev.domain.models.KidInfo
-import com.zelyder.chilldev.domain.models.AvailableService
+import androidx.lifecycle.*
+import com.zelyder.chilldev.domain.models.*
+import kotlinx.coroutines.launch
 
-class PageViewModel : ViewModel() {
+class PageViewModel(private val remoteService: RemoteService) : ViewModel() {
     private val _kidInfo = MutableLiveData(KidInfo())
     val kidInfo: LiveData<KidInfo> get() = _kidInfo
 
@@ -19,16 +14,16 @@ class PageViewModel : ViewModel() {
     }
 
 
-    fun getCategories(): List<Category> {
-      return  listOf(
-            Category(1, "Я познаю мир"),
-            Category(2, "Спорт"),
-            Category(3, "Приключения"),
-            Category(4, "На английском языке"),
-            Category(5, "Про дружбу"),
-            Category(6, "Животные")
+    val categories = liveData {
+        emit(
+            listOf(
+                Category(1, "Я познаю мир"),
+                Category(2, "Спорт"),
+            )
         )
+        emit(remoteService.categories().body()?.message!!)
     }
+
 
     fun setKidName(name: String) {
         _kidInfo.value?.name = name
@@ -42,7 +37,7 @@ class PageViewModel : ViewModel() {
 
     fun setKidGender(gender: Gender) {
         _kidInfo.value?.gender = gender
-        Log.d(TAG, "Added age limit: $gender")
+        Log.d(TAG, "Added gender: $gender")
     }
 
     fun setKidBirthday(birthday: String) {
@@ -51,8 +46,8 @@ class PageViewModel : ViewModel() {
     }
 
     fun setKidCategories(categories: List<Category>) {
-        _kidInfo.value?.categories = categories
-        Log.d(TAG, "Added age categories: $categories")
+        _kidInfo.value?.categories = categories.map { it.id }
+        Log.d(TAG, "Added categories: $categories")
     }
 
     fun setKidServices(availableServices: List<AvailableService>) {
@@ -61,10 +56,12 @@ class PageViewModel : ViewModel() {
 
     fun setPinCode(pinCode: String) {
         _kidInfo.value?.pin = pinCode
-        Log.d(TAG, "Added age pinCode: $pinCode")
+        Log.d(TAG, "Added pinCode: $pinCode")
     }
 
-    fun postKidInfo(){
-
+    fun postKidInfo() {
+        viewModelScope.launch {
+            remoteService.kidInfo(_kidInfo.value!!)
+        }
     }
 }

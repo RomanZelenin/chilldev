@@ -26,8 +26,9 @@ class InterestsScreenFragment : FragmentPage<InterestsPageBinding>() {
             adapter = InterestsRecyclerAdapter(context)
             addItemDecoration(InterestsItemDecoration())
         }
-        val items = viewModel.getCategories().map { it.title }
-        setInterests(items)
+        viewModel.categories.observe(viewLifecycleOwner) { items ->
+            setInterests(items.map { it.title })
+        }
     }
 
     private fun setInterests(items: List<String>) {
@@ -37,11 +38,12 @@ class InterestsScreenFragment : FragmentPage<InterestsPageBinding>() {
                 StaggeredGridLayoutManager(spanCount, StaggeredGridLayoutManager.HORIZONTAL)
         }
         (binding.interestsRecycler.adapter as InterestsRecyclerAdapter).setItems(items)
+        (binding.interestsRecycler.adapter as InterestsRecyclerAdapter).notifyDataSetChanged()
     }
 
     override fun onPause() {
         super.onPause()
-        //viewModel.setKidCategories()
+        viewModel.setKidCategories((binding.interestsRecycler.adapter as InterestsRecyclerAdapter).checkedCategories)
     }
 
     companion object {
