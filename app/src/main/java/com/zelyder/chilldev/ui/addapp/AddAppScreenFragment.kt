@@ -45,10 +45,6 @@ class AddAppScreenFragment : FragmentPage<AppAccessPageBinding>() {
         (binding.recycler.adapter as AppRecyclerAdapter).setItems(appItems)
     }
 
-    override fun onResume() {
-        super.onResume()
-        binding.recycler.smoothScrollToPosition(0)
-    }
 /*
     override fun onPause() {
         super.onPause()
