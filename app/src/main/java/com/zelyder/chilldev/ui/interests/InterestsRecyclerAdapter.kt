@@ -4,12 +4,14 @@ import android.content.Context
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.zelyder.chilldev.customview.InterestView
+import com.zelyder.chilldev.domain.models.Category
 
 class InterestsRecyclerAdapter(
     private val context: Context
 ) : RecyclerView.Adapter<InterestsRecyclerAdapter.MyViewHolder>() {
 
     private val interests = arrayListOf<String>()
+    val checkedCategories = mutableListOf<Category>()
 
     override fun onCreateViewHolder(
         parent: ViewGroup,
@@ -20,6 +22,14 @@ class InterestsRecyclerAdapter(
     }
 
     override fun onBindViewHolder(holder: MyViewHolder, position: Int) {
+        val view = holder.itemView as InterestView
+        view.customOnClick = {
+            if (view.checked){
+                checkedCategories.add(Category(position+1,view.text))
+            }else{
+                checkedCategories.remove(Category(position+1,view.text))
+            }
+        }
         holder.bind(interests[position])
     }
 

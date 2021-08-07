@@ -11,6 +11,9 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center_vertical"
+        android:textColor="@color/white"
+        android:textSize="21dp"
+        android:fontFamily="@font/ys_display_normal"
         tools:text="Про дружбу" />
 
     <ImageView

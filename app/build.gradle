@@ -2,6 +2,7 @@ plugins {
     id 'com.android.application'
     id 'kotlin-android'
     id 'kotlin-kapt'
+    id 'kotlin-parcelize'
 }
 
 android {
@@ -44,6 +45,9 @@ dependencies {
     def coroutine_version = "1.5.1"
 
     implementation fileTree(dir: "libs", include: ["*.aar"])
+    
+    implementation 'androidx.navigation:navigation-fragment-ktx:2.3.5'
+    implementation "androidx.lifecycle:lifecycle-livedata-ktx:2.4.0-alpha02"
 
     //Dagger
     implementation "com.google.dagger:dagger:$dagger_version"

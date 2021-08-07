@@ -34,8 +34,8 @@ class PinCodeFragment : FragmentPage<PinCodePageBinding>() {
             }
 
             override fun onFieldIsEmpty() {
+                TODO("Not yet implemented")
             }
-
         })
     }
 
