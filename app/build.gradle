@@ -44,6 +44,8 @@ dependencies {
     def coroutine_version = "1.5.1"
 
     implementation fileTree(dir: "libs", include: ["*.aar"])
+    
+    implementation 'androidx.navigation:navigation-fragment-ktx:2.3.5'
 
     //Dagger
     implementation "com.google.dagger:dagger:$dagger_version"

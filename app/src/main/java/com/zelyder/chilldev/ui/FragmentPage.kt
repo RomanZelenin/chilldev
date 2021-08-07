@@ -7,7 +7,9 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.annotation.CallSuper
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.activityViewModels
 import androidx.viewbinding.ViewBinding
+import com.zelyder.chilldev.ui.main.PageViewModel
 import com.zelyder.chilldev.ui.main.SwipePage
 
 abstract class FragmentPage<T : ViewBinding> : Fragment() {
@@ -17,6 +19,7 @@ abstract class FragmentPage<T : ViewBinding> : Fragment() {
         get() = _binding!!
 
     protected lateinit var page: SwipePage
+    protected val viewModel: PageViewModel by activityViewModels()
 
     override fun onAttach(context: Context) {
         super.onAttach(context)
