@@ -34,14 +34,39 @@ class MovieAgeFragment : FragmentPage<MovieAgePageBinding>() {
                 when (keyCode) {
                     KeyEvent.KEYCODE_DPAD_RIGHT -> {
                         (v as AgeRatingLayout).moveToNext()
+                        with((requireActivity() as MainActivity)) {
+                            lifecycleScope.launch {
+                                remoteService.posters(AgeLimit.values()[binding.layoutAgeRating.selectedPosition]).body()
+                                    ?.message
+                                    ?.forEachIndexed { index, poster_url ->
+                                        withContext(Dispatchers.Main) {
+                                            Picasso.get().load(poster_url)
+                                                .fit()
+                                                .into((binding.llPosterContainer[index] as ImageView))
+                                        }
+                                    }
+                            }
+                        }
                         true
                     }
                     KeyEvent.KEYCODE_DPAD_LEFT -> {
                         (v as AgeRatingLayout).moveToPrevious()
+                        with((requireActivity() as MainActivity)) {
+                            lifecycleScope.launch {
+                                remoteService.posters(AgeLimit.values()[binding.layoutAgeRating.selectedPosition]).body()
+                                    ?.message
+                                    ?.forEachIndexed { index, poster_url ->
+                                        withContext(Dispatchers.Main) {
+                                            Picasso.get().load(poster_url)
+                                                .fit()
+                                                .into((binding.llPosterContainer[index] as ImageView))
+                                        }
+                                    }
+                            }
+                        }
                         true
                     }
                     KeyEvent.KEYCODE_DPAD_CENTER -> {
-                        page.swipeToNext()
                         true
                     }
                     else -> false

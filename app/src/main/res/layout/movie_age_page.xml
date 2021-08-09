@@ -21,6 +21,7 @@
         android:layout_height="wrap_content"
         android:focusable="true"
         android:focusedByDefault="true"
+        android:layout_marginTop="32dp"
         app:layout_constraintBottom_toTopOf="@+id/llPosterContainer"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -31,6 +32,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
+        android:layout_marginTop="32dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -41,7 +43,6 @@
             android:layout_width="100dp"
             android:layout_height="160dp"
             android:layout_marginEnd="40dp"
-            android:background="#FFFFFF"
             android:contentDescription="@null"
             android:scaleType="fitXY" />
 
@@ -50,7 +51,6 @@
             android:layout_width="100dp"
             android:layout_height="160dp"
             android:layout_marginEnd="40dp"
-            android:background="#FFFFFF"
             android:contentDescription="@null"
             android:scaleType="fitXY" />
 
@@ -59,7 +59,6 @@
             android:layout_width="100dp"
             android:layout_height="160dp"
             android:layout_marginEnd="40dp"
-            android:background="#FFFFFF"
             android:contentDescription="@null"
             android:scaleType="fitXY" />
 
@@ -68,21 +67,11 @@
             android:layout_width="100dp"
             android:layout_height="160dp"
             android:layout_marginEnd="40dp"
-            android:background="#FFFFFF"
-            android:contentDescription="@null"
-            android:scaleType="fitXY" />
-
-        <ImageView
-            android:id="@+id/ivFives"
-            android:layout_width="100dp"
-            android:layout_height="160dp"
-            android:background="#FFFFFF"
             android:contentDescription="@null"
             android:scaleType="fitXY" />
     </LinearLayout>
 
     <TextView
-        style="@style/Text.NextTitle"
         android:id="@+id/tvNextScreen"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
