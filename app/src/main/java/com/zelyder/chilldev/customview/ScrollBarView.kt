@@ -65,8 +65,11 @@ class ScrollBarView(context: Context, attrSet: AttributeSet?) :
                 (this[i] as TextView).apply {
                     background =
                         AppCompatResources.getDrawable(context, R.drawable.circle_item)
-                    setTextColor(ContextCompat.getColor(context, android.R.color.black))
+                    setTextColor(ContextCompat.getColor(context, android.R.color.white))
                     text = ""
+                    val params =  LayoutParams(LayoutParams.WRAP_CONTENT, LayoutParams.WRAP_CONTENT)
+                    params.setMargins(0,0,0,8)
+                    layoutParams = params
                 }
             }
             if (startPos != endPos) {
@@ -105,6 +108,7 @@ class ScrollBarView(context: Context, attrSet: AttributeSet?) :
                         background =
                             AppCompatResources.getDrawable(context, R.drawable.circle_item)
                         setTextColor(ContextCompat.getColor(context, android.R.color.black))
+                        text = " "
                         gravity = Gravity.CENTER
                     }
                     addView(item)
