@@ -52,7 +52,7 @@
         <EditText
             android:id="@+id/day"
             android:layout_width="65dp"
-            android:layout_height="53dp"
+            android:layout_height="match_parent"
             android:background="@android:color/transparent"
             android:ems="10"
             android:focusable="false"
@@ -61,19 +61,21 @@
             android:imeOptions="actionNext"
             android:inputType="numberDecimal"
             android:maxLength="2"
-            android:nextFocusRight="@id/month" />
+            android:minHeight="48dp"
+            android:nextFocusRight="@id/month"
+            android:textSize="34sp" />
 
         <TextView
             android:id="@+id/textView2"
             android:layout_width="wrap_content"
-            android:layout_height="53dp"
+            android:layout_height="match_parent"
             android:text="/"
             android:textSize="34sp" />
 
         <EditText
             android:id="@+id/month"
             android:layout_width="65dp"
-            android:layout_height="53dp"
+            android:layout_height="match_parent"
             android:background="@color/transparent"
             android:ems="10"
             android:focusable="false"
@@ -82,26 +84,29 @@
             android:imeOptions="actionNext"
             android:inputType="numberDecimal"
             android:maxLength="2"
-            android:nextFocusRight="@id/year" />
+            android:minHeight="48dp"
+            android:nextFocusRight="@id/year"
+            android:textSize="34sp" />
 
         <TextView
             android:id="@+id/textView3"
             android:layout_width="wrap_content"
-            android:layout_height="53dp"
+            android:layout_height="match_parent"
             android:text="/"
             android:textSize="34sp" />
 
         <EditText
             android:id="@+id/year"
-            android:layout_width="65dp"
-            android:layout_height="53dp"
+            android:layout_width="77dp"
+            android:layout_height="match_parent"
             android:background="@color/transparent"
             android:ems="10"
             android:focusable="false"
             android:gravity="center"
             android:hint="@string/year"
             android:inputType="numberDecimal"
-            android:maxLength="4" />
+            android:maxLength="4"
+            android:textSize="34sp" />
     </LinearLayout>
 
     <TextView
@@ -109,7 +114,6 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="8dp"
-        android:text="TextView"
         android:textColor="@color/red"
         android:visibility="invisible"
         app:layout_constraintEnd_toEndOf="@+id/linearLayout"
