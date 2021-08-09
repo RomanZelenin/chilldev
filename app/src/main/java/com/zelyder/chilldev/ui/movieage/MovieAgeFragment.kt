@@ -7,6 +7,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
 import androidx.core.view.get
+import androidx.lifecycle.lifecycleScope
 import com.squareup.picasso.Picasso
 import com.zelyder.chilldev.databinding.MovieAgePageBinding
 import com.zelyder.chilldev.domain.models.AgeLimit
@@ -51,7 +52,7 @@ class MovieAgeFragment : FragmentPage<MovieAgePageBinding>() {
         }
 
         with((requireActivity() as MainActivity)) {
-            mainActivityScope.launch {
+            lifecycleScope.launch {
                 remoteService.posters(AgeLimit.SIX_PLUS).body()
                     ?.message
                     ?.forEachIndexed { index, poster_url ->

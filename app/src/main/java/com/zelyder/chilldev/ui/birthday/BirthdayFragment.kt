@@ -22,7 +22,6 @@ class BirthdayFragment : FragmentPage<BirthdayPageBinding>() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-
         binding.numPad.setupKeyboard(binding.day, 2, KeyboardOutputDay())
     }
 
@@ -34,7 +33,7 @@ class BirthdayFragment : FragmentPage<BirthdayPageBinding>() {
 
     inner class KeyboardOutputYear() : KeyboardOutput {
         override fun onSizeIsReached() {
-            (activity as MainActivity).pageViewModel.setKidBirthday("${binding.day.text}.${binding.month.text}.${binding.year.text}")
+            (activity as MainActivity).pageViewModel.setKidBirthday("${binding.year.text}-${binding.month.text}-${binding.day.text}")
             page.swipeToNext()
         }
 

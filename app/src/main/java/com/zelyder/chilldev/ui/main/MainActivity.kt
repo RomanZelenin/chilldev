@@ -1,12 +1,11 @@
 package com.zelyder.chilldev.ui.main
 
 import android.os.Bundle
-import android.os.Handler
-import android.os.Looper
 import android.util.Log
 import android.view.KeyEvent
 import androidx.fragment.app.FragmentActivity
 import androidx.lifecycle.ViewModelProvider
+import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.RecyclerView
 import androidx.viewpager2.widget.ViewPager2
 import com.yandex.tv.services.passport.PassportProviderSdk
@@ -16,7 +15,6 @@ import com.zelyder.chilldev.di.DaggerAppComponent
 import com.zelyder.chilldev.domain.models.RemoteService
 import kotlinx.coroutines.*
 import javax.inject.Inject
-import kotlin.concurrent.thread
 
 
 interface SwipePage {
@@ -26,7 +24,6 @@ interface SwipePage {
 
 class MainActivity : FragmentActivity(), SwipePage {
 
-    val mainActivityScope = CoroutineScope(Job())
     private lateinit var binding: ActivityMainBinding
     lateinit var pageViewModel: PageViewModel
 
@@ -95,9 +92,9 @@ class MainActivity : FragmentActivity(), SwipePage {
     }
 
     private fun getAccessToken(callback: (String?) -> Unit) {
-        thread {
-            val passportProviderSdk = PassportProviderSdk(this)
-            Handler(Looper.getMainLooper()).post {
+        lifecycleScope.launch {
+            val passportProviderSdk = PassportProviderSdk(this@MainActivity)
+            withContext(Dispatchers.Main) {
                 try {
                     callback(passportProviderSdk.currentAccount?.token)
                 } catch (e: Exception) {
@@ -105,11 +102,6 @@ class MainActivity : FragmentActivity(), SwipePage {
                 }
             }
         }
-    }
-
-    override fun onDestroy() {
-        mainActivityScope.cancel()
-        super.onDestroy()
     }
 
     override fun swipeToNext() {
@@ -123,6 +115,6 @@ class MainActivity : FragmentActivity(), SwipePage {
     }
 
     companion object {
-        private const val TAG = "MainActivity"
+        private val TAG = MainActivity::class.java.name
     }
 }
