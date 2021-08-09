@@ -41,7 +41,6 @@ class PinCodeFragment : FragmentPage<PinCodePageBinding>() {
 
     override fun onResume() {
         super.onResume()
-//        binding.numPad.requestFocus()
 
     }
 
