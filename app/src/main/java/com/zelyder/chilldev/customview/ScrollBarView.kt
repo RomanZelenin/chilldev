@@ -26,6 +26,7 @@ class ScrollBarView(context: Context, attrSet: AttributeSet?) :
                     R.drawable.ic_baseline_keyboard_arrow_up_24
                 )
             )
+            gravity = Gravity.CENTER
             visibility = View.INVISIBLE
         }
     }
@@ -37,6 +38,7 @@ class ScrollBarView(context: Context, attrSet: AttributeSet?) :
                     R.drawable.ic_baseline_keyboard_arrow_down_24
                 )
             )
+            gravity = Gravity.CENTER
             visibility = View.INVISIBLE
         }
     }
