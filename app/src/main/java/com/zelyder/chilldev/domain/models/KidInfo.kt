@@ -4,7 +4,7 @@ import com.google.gson.JsonObject
 
 data class KidInfo(
     var name: String? = null,
-    var age_limit: Int = -1,
+    var age_limit: Int = 0,
     var gender: String = "",
     var birthdate:String? = null,
     var categories: List<Int> = emptyList(),
