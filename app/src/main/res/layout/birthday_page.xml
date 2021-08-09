@@ -25,7 +25,7 @@
         android:layout_marginTop="24dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/linearLayout" />
+        app:layout_constraintTop_toBottomOf="@+id/error_message" />
 
     <TextView
         android:id="@+id/next_screen_title"
@@ -51,10 +51,11 @@
 
         <EditText
             android:id="@+id/day"
-            android:focusable="false"
             android:layout_width="65dp"
             android:layout_height="53dp"
+            android:background="@android:color/transparent"
             android:ems="10"
+            android:focusable="false"
             android:gravity="center"
             android:hint="@string/day"
             android:imeOptions="actionNext"
@@ -73,6 +74,7 @@
             android:id="@+id/month"
             android:layout_width="65dp"
             android:layout_height="53dp"
+            android:background="@color/transparent"
             android:ems="10"
             android:focusable="false"
             android:gravity="center"
@@ -91,14 +93,27 @@
 
         <EditText
             android:id="@+id/year"
-            android:focusable="false"
             android:layout_width="65dp"
             android:layout_height="53dp"
+            android:background="@color/transparent"
             android:ems="10"
+            android:focusable="false"
             android:gravity="center"
             android:hint="@string/year"
             android:inputType="numberDecimal"
             android:maxLength="4" />
     </LinearLayout>
+
+    <TextView
+        android:id="@+id/error_message"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:text="TextView"
+        android:textColor="@color/red"
+        android:visibility="invisible"
+        app:layout_constraintEnd_toEndOf="@+id/linearLayout"
+        app:layout_constraintStart_toStartOf="@+id/linearLayout"
+        app:layout_constraintTop_toBottomOf="@+id/linearLayout" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
