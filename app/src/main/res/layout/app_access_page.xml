@@ -13,7 +13,7 @@
         android:paddingStart="50dp"
         android:paddingEnd="50dp"
         android:paddingBottom="30dp"
-        style="@style/Title.White"
+        style="@style/Text.Title"
         android:paddingTop="100dp"
         android:text="@string/fragment_title_6" />
 
@@ -39,6 +39,7 @@
 
 
     <TextView
+        style="@style/Text.NextTitle"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="@string/create_profile_text"
