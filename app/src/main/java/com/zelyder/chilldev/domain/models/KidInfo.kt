@@ -9,5 +9,5 @@ data class KidInfo(
     var birthdate:String? = null,
     var categories: List<Int> = emptyList(),
     var apps:JsonObject = JsonObject(),
-    var pin:String? = null
+    var pin:String = ""
 )
