@@ -114,6 +114,7 @@
     </androidx.constraintlayout.widget.ConstraintLayout>
 
     <TextView
+        style="@style/Text.NextTitle"
         android:id="@+id/tvNextScreen"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
