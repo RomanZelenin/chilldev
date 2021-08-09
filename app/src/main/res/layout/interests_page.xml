@@ -12,7 +12,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginBottom="20dp"
-        style="@style/Title"
+        style="@style/Text.Title"
         android:text="@string/fragment_title_5"/>
 
     <androidx.recyclerview.widget.RecyclerView
