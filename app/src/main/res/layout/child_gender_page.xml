@@ -21,13 +21,13 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="24dp"
         android:text="@string/child_gender_description"
-        app:layout_constraintBottom_toTopOf="@id/rgGender"
+        app:layout_constraintBottom_toTopOf="@id/browseContainer"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/tvGender" />
 
-    <RadioGroup
-        android:id="@+id/rgGender"
+    <androidx.leanback.widget.BrowseFrameLayout
+        android:id="@+id/browseContainer"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="80dp"
@@ -37,29 +37,45 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/tvDescription">
 
-        <RadioButton
-            android:id="@+id/rbSkip"
-            android:layout_width="100dp"
-            android:layout_height="80dp"
-            android:layout_marginEnd="24dp"
-            android:gravity="center"
-            android:text="@string/child_gender_skip" />
+        <RadioGroup
+            android:id="@+id/rgGender"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
 
-        <RadioButton
-            android:id="@+id/rbFemale"
-            android:layout_width="100dp"
-            android:layout_height="80dp"
-            android:layout_marginEnd="24dp"
-            android:gravity="center"
-            android:text="@string/child_gender_female" />
+            <RadioButton
+                android:id="@+id/rbSkip"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="12dp"
+                android:background="@drawable/rb_gender_bg"
+                android:button="@null"
+                android:gravity="center"
+                android:text="@string/child_gender_skip"
+                android:textColor="@color/rb_text_color" />
 
-        <RadioButton
-            android:id="@+id/rbMale"
-            android:layout_width="100dp"
-            android:layout_height="80dp"
-            android:gravity="center"
-            android:text="@string/child_gender_male" />
-    </RadioGroup>
+            <RadioButton
+                android:id="@+id/rbFemale"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="12dp"
+                android:background="@drawable/rb_gender_bg"
+                android:button="@null"
+                android:gravity="center"
+                android:text="@string/child_gender_female"
+                android:textColor="@color/rb_text_color" />
+
+            <RadioButton
+                android:id="@+id/rbMale"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@drawable/rb_gender_bg"
+                android:button="@null"
+                android:gravity="center"
+                android:text="@string/child_gender_male"
+                android:textColor="@color/rb_text_color" />
+        </RadioGroup>
+    </androidx.leanback.widget.BrowseFrameLayout>
 
     <TextView
         android:id="@+id/tvNextScreen"
