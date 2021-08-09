@@ -96,7 +96,7 @@
             android:id="@+id/cvSecond"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="180dp"
+            android:layout_marginStart="176dp"
             app:cardCornerRadius="8dp"
             app:cardElevation="4dp"
             app:layout_constraintBottom_toBottomOf="parent"

@@ -28,37 +28,46 @@ class MovieAgeFragment : FragmentPage<MovieAgePageBinding>() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         setObservers()
-        binding.layoutAgeRating.setOnKeyListener { v, keyCode, event ->
-            if (event.action == KeyEvent.ACTION_DOWN) {
-                when (keyCode) {
-                    KeyEvent.KEYCODE_DPAD_RIGHT -> {
-                        (v as AgeRatingLayout).moveToNext()
-                        viewModel.setPosters(AgeLimit.values()[binding.layoutAgeRating.selectedPosition + 1])
-                        true
+        with(binding) {
+            layoutAgeRating.setOnKeyListener { v, keyCode, event ->
+                if (event.action == KeyEvent.ACTION_DOWN) {
+                    when (keyCode) {
+                        KeyEvent.KEYCODE_DPAD_RIGHT -> {
+                            (v as AgeRatingLayout).moveToNext()
+                            viewModel.setPosters(AgeLimit.values()[layoutAgeRating.selectedPosition])
+                            true
+                        }
+                        KeyEvent.KEYCODE_DPAD_LEFT -> {
+                            (v as AgeRatingLayout).moveToPrevious()
+                            viewModel.setPosters(AgeLimit.values()[layoutAgeRating.selectedPosition])
+                            true
+                        }
+                        KeyEvent.KEYCODE_DPAD_CENTER -> {
+                            layoutAgeRating.isEnabled = false
+                            Handler(Looper.getMainLooper()).postDelayed(
+                                {
+                                    page.swipeToNext()
+                                    layoutAgeRating.isEnabled = true
+                                },
+                                1000
+                            )
+                            true
+                        }
+                        else -> false
                     }
-                    KeyEvent.KEYCODE_DPAD_LEFT -> {
-                        (v as AgeRatingLayout).moveToPrevious()
-                        viewModel.setPosters(AgeLimit.values()[binding.layoutAgeRating.selectedPosition + 1])
-                        true
-                    }
-                    KeyEvent.KEYCODE_DPAD_CENTER -> {
-                        binding.layoutAgeRating.isEnabled = false
-                        Handler(Looper.getMainLooper()).postDelayed(
-                            {
-                                page.swipeToNext()
-                                binding.layoutAgeRating.isEnabled = true
-                            },
-                            1000
-                        )
-                        true
-                    }
-                    else -> false
+                } else {
+                    false
                 }
-            } else {
-                false
             }
+            viewModel.kidInfo.value?.age_limit?.let { ageLimit ->
+                AgeLimit.values().forEachIndexed { i, item ->
+                    if (item.type == ageLimit) {
+                        layoutAgeRating.selectedPosition = i
+                    }
+                }
+            }
+            viewModel.setPosters(AgeLimit.values()[layoutAgeRating.selectedPosition])
         }
-        viewModel.setPosters(AgeLimit.values()[binding.layoutAgeRating.selectedPosition + 1])
     }
 
     private fun setObservers() {
@@ -79,8 +88,8 @@ class MovieAgeFragment : FragmentPage<MovieAgePageBinding>() {
     }
 
     override fun onPause() {
+        viewModel.setKidAgeLimit(AgeLimit.values()[binding.layoutAgeRating.selectedPosition])
         super.onPause()
-        viewModel.setKidAgeLimit(AgeLimit.values()[binding.layoutAgeRating.selectedPosition + 1])
     }
 
     companion object {
