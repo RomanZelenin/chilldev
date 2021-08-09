@@ -8,4 +8,8 @@
     <color name="blue">#59A5FF</color>
     <color name="cyan">#15BBBB</color>
     <color name="transparent">#00000000</color>
+    <color name="dark_gray">#404041</color>
+    <color name="gray">#333333</color>
+    <color name="gray_next">#8A8A8B</color>
+    <color name="light_gray">#D0D0D1</color>
 </resources>
