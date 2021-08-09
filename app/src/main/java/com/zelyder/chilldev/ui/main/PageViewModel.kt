@@ -10,6 +10,10 @@ class PageViewModel(private val remoteService: RemoteService) : ViewModel() {
     private val _kidInfo = MutableLiveData(KidInfo())
     val kidInfo: LiveData<KidInfo> get() = _kidInfo
 
+    private val _posters = MutableLiveData<List<String>>()
+    val posters: LiveData<List<String>>
+        get() = _posters
+
     companion object {
         val TAG = PageViewModel::class.java.canonicalName
     }
@@ -23,6 +27,13 @@ class PageViewModel(private val remoteService: RemoteService) : ViewModel() {
             )
         )
         emit(remoteService.categories().body()?.message!!)
+    }
+
+    fun setPosters(ageLimit: AgeLimit) {
+        viewModelScope.launch {
+            _posters.value =
+                remoteService.posters(ageLimit).body()?.message
+        }
     }
 
 
