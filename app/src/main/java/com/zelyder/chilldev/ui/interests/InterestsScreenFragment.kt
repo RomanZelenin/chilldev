@@ -26,7 +26,7 @@ class InterestsScreenFragment : FragmentPage<InterestsPageBinding>() {
             adapter = InterestsRecyclerAdapter(context)
             addItemDecoration(InterestsItemDecoration())
         }
-        viewModel.categories.observe(viewLifecycleOwner) { items ->
+        viewModel.getCategories().observe(viewLifecycleOwner) { items ->
             setInterests(items.map { it.title })
         }
     }

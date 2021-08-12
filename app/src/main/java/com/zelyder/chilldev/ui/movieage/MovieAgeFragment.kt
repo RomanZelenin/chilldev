@@ -10,15 +10,10 @@ import android.view.ViewGroup
 import android.widget.ImageView
 import androidx.cardview.widget.CardView
 import androidx.core.view.get
-import androidx.lifecycle.lifecycleScope
 import com.squareup.picasso.Picasso
 import com.zelyder.chilldev.databinding.MovieAgePageBinding
 import com.zelyder.chilldev.domain.models.AgeLimit
 import com.zelyder.chilldev.ui.FragmentPage
-import com.zelyder.chilldev.ui.main.MainActivity
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.launch
-import kotlinx.coroutines.withContext
 
 class MovieAgeFragment : FragmentPage<MovieAgePageBinding>() {
 
@@ -32,19 +27,34 @@ class MovieAgeFragment : FragmentPage<MovieAgePageBinding>() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        setObservers()
+
+        viewModel.urlPosters.observe(viewLifecycleOwner, { posters ->
+            with(binding) {
+                for (i in posters.indices) {
+                    Picasso.get().load(posters[i])
+                        .fit()
+                        .centerCrop()
+                        .into(((clPosterContainer[i]) as CardView).getChildAt(0) as ImageView)
+                }
+            }
+        })
+        viewModel.kidInfo.observe(viewLifecycleOwner) { kid ->
+            binding.layoutAgeRating.selectedPosition =
+                AgeLimit.values().indexOfFirst { ageLimit -> ageLimit.type == kid.age_limit }
+            viewModel.kidInfo.removeObservers(viewLifecycleOwner)
+        }
         with(binding) {
             layoutAgeRating.setOnKeyListener { v, keyCode, event ->
                 if (event.action == KeyEvent.ACTION_DOWN) {
                     when (keyCode) {
                         KeyEvent.KEYCODE_DPAD_RIGHT -> {
                             (v as AgeRatingLayout).moveToNext()
-                            viewModel.setPosters(AgeLimit.values()[layoutAgeRating.selectedPosition])
+                            viewModel.setKidAgeLimit(AgeLimit.values()[layoutAgeRating.selectedPosition])
                             true
                         }
                         KeyEvent.KEYCODE_DPAD_LEFT -> {
                             (v as AgeRatingLayout).moveToPrevious()
-                            viewModel.setPosters(AgeLimit.values()[layoutAgeRating.selectedPosition])
+                            viewModel.setKidAgeLimit(AgeLimit.values()[layoutAgeRating.selectedPosition])
                             true
                         }
                         KeyEvent.KEYCODE_DPAD_CENTER -> {
@@ -54,7 +64,7 @@ class MovieAgeFragment : FragmentPage<MovieAgePageBinding>() {
                                     page.swipeToNext()
                                     layoutAgeRating.isEnabled = true
                                 },
-                                1000
+                                500
                             )
                             true
                         }
@@ -64,37 +74,12 @@ class MovieAgeFragment : FragmentPage<MovieAgePageBinding>() {
                     false
                 }
             }
-            viewModel.kidInfo.value?.build()?.age_limit?.let { ageLimit ->
-                AgeLimit.values().forEachIndexed { i, item ->
-                    if (item.type == ageLimit) {
-                        layoutAgeRating.selectedPosition = i
-                    }
-                }
-            }
-            viewModel.setPosters(AgeLimit.values()[layoutAgeRating.selectedPosition])
         }
-    }
-
-    private fun setObservers() {
-        viewModel.posters.observe(viewLifecycleOwner, { posters ->
-            with(binding) {
-                for (i in posters.indices) {
-                    Picasso.get().load(posters[i])
-                        .fit()
-                        .into(((clPosterContainer[i]) as CardView).getChildAt(0) as ImageView)
-                }
-            }
-        })
     }
 
     override fun onResume() {
         super.onResume()
         binding.layoutAgeRating.requestFocus()
-    }
-
-    override fun onPause() {
-        viewModel.setKidAgeLimit(AgeLimit.values()[binding.layoutAgeRating.selectedPosition])
-        super.onPause()
     }
 
     companion object {

@@ -1,56 +1,25 @@
 package com.zelyder.chilldev.domain.models
 
 import com.google.gson.JsonObject
+import java.text.SimpleDateFormat
+import java.util.*
 
 data class KidInfo(
-    var name: String? = null,
-    var age_limit: Int = 0,
-    var gender: String = "",
-    var birthdate: String? = null,
-    var categories: List<Int> = emptyList(),
-    var apps: JsonObject = JsonObject(),
-    var pin: String? = null
-) {
-    inner class Builder {
+    val name: String = "Anon",
+    val age_limit: Int = AgeLimit.ZERO_PLUS.type,
+    val gender: String = Gender.WHATEVER.type,
+    val birthdate: String = Date().formatToString(),
+    val categories: List<Int> = emptyList(),
+    val apps: JsonObject = JsonObject(),
+    val pin: String? = null
+)
 
-        fun setName(name: String):Builder{
-            this@KidInfo.name = name
-            return this
-        }
+fun Date.formatToString(pattern: String = "yyyy-MM-dd"): String {
+    val jdf = SimpleDateFormat(pattern, Locale.getDefault())
+    return jdf.format(this)
+}
 
-        fun setAgeLimit(ageLimit: AgeLimit):Builder{
-            this@KidInfo.age_limit = ageLimit.type
-            return this
-        }
-
-        fun setGender(gender: Gender):Builder{
-            this@KidInfo.gender = gender.type.lowercase()
-            return this
-        }
-
-        fun setBirthDate(date:String):Builder{
-            this@KidInfo.birthdate = date
-            return this
-        }
-
-        fun setCategories(categories: List<Category>):Builder{
-            this@KidInfo.categories = categories.map { it.id }
-            return this
-        }
-
-        fun setApps(jsonObject: JsonObject):Builder{
-            this@KidInfo.apps = jsonObject
-            return this
-        }
-
-        fun setPin(pin: String):Builder{
-            this@KidInfo.pin = pin
-            return this
-        }
-
-        fun build():KidInfo{
-            return this@KidInfo
-        }
-
-    }
+fun String.parseToDate(): Date? {
+    if (this.isEmpty()) return null
+    return SimpleDateFormat("yyyy-MM-dd", Locale.getDefault()).parse(this)
 }
