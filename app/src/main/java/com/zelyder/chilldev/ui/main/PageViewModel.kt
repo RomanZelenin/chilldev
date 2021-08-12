@@ -18,9 +18,9 @@ class PageViewModel(private val remoteService: RemoteService) : ViewModel() {
 
     var cachedCategories = listOf<Category>(Category(1,"Дружба"))
     fun getCategories() = liveData {
-        emit(cachedCategories)
+        emit(cachedCategories.map { it.title })
         cachedCategories = remoteService.categories().body()?.message!!
-        emit(cachedCategories)
+        emit(cachedCategories.map { it.title })
     }
 
     private fun getPosters(ageLimit: AgeLimit) = liveData {
