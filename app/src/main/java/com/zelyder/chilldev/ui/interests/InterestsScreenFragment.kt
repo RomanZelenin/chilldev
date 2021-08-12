@@ -30,8 +30,10 @@ class InterestsScreenFragment : FragmentPage<InterestsPageBinding>() {
 
     override fun onResume() {
         super.onResume()
-        viewModel.getCategories().observe(viewLifecycleOwner) { items ->
-            setInterests(items)
+        if ((binding.interestsRecycler.adapter as InterestsRecyclerAdapter).checkedCategories.isEmpty()) {
+            viewModel.getCategories().observe(viewLifecycleOwner) { items ->
+                setInterests(items)
+            }
         }
     }
 

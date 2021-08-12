@@ -22,7 +22,7 @@ class ApplicationAccessFragment : FragmentPage<ApplicationAccessPageBinding>() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         viewModel.kidInfo.observe(viewLifecycleOwner) {
-            binding.kidNameTextView.text = it.name
+            /*binding.kidNameTextView.text = it.name
             val age = (Date().year - it.birthdate.parseToDate()!!.year)
             binding.kidAge.text = buildString {
                 append("$age ")
@@ -42,7 +42,7 @@ class ApplicationAccessFragment : FragmentPage<ApplicationAccessPageBinding>() {
                     if (index < it.categories.size - 1) append(", ")
                 }
             }
-            binding.kidGender.text = it.gender
+            binding.kidGender.text = it.gender*/
         }
         binding.createAccBtn.setOnClickListener {
             viewModel.postKidInfo()
