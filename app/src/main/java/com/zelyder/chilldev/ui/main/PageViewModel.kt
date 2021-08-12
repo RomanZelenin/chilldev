@@ -4,7 +4,9 @@ import android.util.Log
 import androidx.lifecycle.*
 import com.google.gson.JsonObject
 import com.zelyder.chilldev.domain.models.*
+import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 
 class PageViewModel(private val remoteService: RemoteService) : ViewModel() {
     private val _kidInfo = MutableLiveData(KidInfo().Builder())
@@ -14,20 +16,23 @@ class PageViewModel(private val remoteService: RemoteService) : ViewModel() {
     val posters: LiveData<List<String>>
         get() = _posters
 
+    private val _categories = MutableLiveData<List<String>>()
+    val categories: LiveData<List<String>>
+        get() = _categories
+
     companion object {
         val TAG = PageViewModel::class.java.canonicalName
     }
 
-
-    val categories = liveData {
-        emit(
-            listOf(
-                Category(1, "Я познаю мир"),
-                Category(2, "Спорт"),
-
-            )
-        )
-        emit(remoteService.categories().body()?.message!!)
+    fun fetchCategories() {
+        viewModelScope.launch {
+            val result = withContext(Dispatchers.IO) {
+                 remoteService.categories().body()?.message!!.map { it.title }
+            }
+            withContext(Dispatchers.Main) {
+                _categories.value = result
+            }
+        }
     }
 
     fun setPosters(ageLimit: AgeLimit) {
