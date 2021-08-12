@@ -6,18 +6,23 @@
     android:layout_height="match_parent">
 
     <TextView
+        style="@style/Text.Title"
         android:id="@+id/kid_name_text_view"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="50dp"
         android:gravity="center"
         android:text="@string/kid_name_text_view"
-        android:textSize="50sp"
-        android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
+    <androidx.constraintlayout.utils.widget.ImageFilterView
+        android:id="@+id/kid_icon"
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        android:layout_marginTop="40dp"
+        android:src="@drawable/avas1"
     <LinearLayout
         android:id="@+id/item_list_layout"
         android:layout_width="match_parent"
@@ -59,9 +64,10 @@
         android:focusable="true"
         android:hint="@string/name_hint"
         android:imeOptions="actionNext"
+        android:privateImeOptions="horizontalAlignment=center"
+        android:textSize="32sp"
         android:inputType="textPersonName"
         android:paddingTop="20dp"
-        android:textSize="40sp"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toBottomOf="@id/item_list_layout" />
@@ -76,13 +82,13 @@
         tools:ignore="ContentDescription" />
 
     <TextView
+        style="@style/Text.NextTitle"
         android:id="@+id/next_fragment"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginBottom="10dp"
         android:gravity="center"
         android:text="@string/next_fragment_text_view"
-        android:textSize="20sp"
         app:layout_constraintBottom_toBottomOf="parent" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
