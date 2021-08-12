@@ -15,6 +15,7 @@
         tools:ignore="ContentDescription" />
 
     <TextView
+        style="@style/Text.Title"
         android:id="@+id/check_information"
         android:layout_width="490dp"
         android:layout_height="wrap_content"
@@ -22,8 +23,6 @@
         android:gravity="center"
         android:text="@string/check_information"
         android:textColor="@color/lb_browse_header_color"
-        android:textSize="40sp"
-        android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
@@ -99,40 +98,41 @@
         app:layout_constraintTop_toBottomOf="@id/kid_age" />
 
     <TextView
+        style="@style/Text.H4"
         android:id="@+id/kid_interests"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/kid_interests_text_view"
-        android:textSize="20sp"
         app:layout_constraintEnd_toStartOf="@id/saved_limitation_age"
         app:layout_constraintStart_toEndOf="@id/saved_limitation_age"
         app:layout_constraintTop_toBottomOf="@id/saved_limitation_age" />
 
     <TextView
         android:id="@+id/description_kid_interests"
-        android:layout_width="514dp"
-        android:layout_height="92dp"
+        style="@style/Text"
+        android:layout_width="367dp"
+        android:layout_height="77dp"
         android:gravity="center"
         android:paddingBottom="25dp"
         android:text="@string/check_kid_interests"
         android:textColor="@color/lb_browse_header_color"
-        android:textSize="25sp"
         app:layout_constraintEnd_toStartOf="@id/kid_interests"
         app:layout_constraintStart_toEndOf="@id/kid_interests"
         app:layout_constraintTop_toBottomOf="@+id/kid_interests" />
 
     <TextView
+        style="@style/Text.H4"
         android:id="@+id/confirm_sites"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:gravity="center"
         android:text="@string/confirm_sites_text_view"
-        android:textSize="20sp"
         app:layout_constraintEnd_toStartOf="@id/description_kid_interests"
         app:layout_constraintStart_toEndOf="@id/description_kid_interests"
         app:layout_constraintTop_toBottomOf="@id/description_kid_interests" />
 
     <TextView
+        style="@style/Text"
         android:id="@+id/saved_confirm_sites"
         android:layout_width="400dp"
         android:layout_height="wrap_content"
@@ -140,19 +140,16 @@
         android:paddingBottom="15dp"
         android:text="@string/check_confirm_sites"
         android:textColor="@color/lb_browse_header_color"
-        android:textSize="25sp"
         app:layout_constraintEnd_toStartOf="@id/confirm_sites"
         app:layout_constraintStart_toEndOf="@id/confirm_sites"
         app:layout_constraintTop_toBottomOf="@+id/confirm_sites" />
 
     <Button
         android:id="@+id/create_acc_btn"
-        android:layout_width="250dp"
-        android:layout_height="45dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         android:layout_marginTop="25dp"
-        android:background="@drawable/background_circle_corners"
         android:text="@string/create_account_btn"
-        android:textColor="#4F4F4F"
         app:layout_constraintEnd_toStartOf="@id/saved_confirm_sites"
         app:layout_constraintStart_toEndOf="@id/saved_confirm_sites"
         app:layout_constraintTop_toBottomOf="@+id/saved_confirm_sites" />
