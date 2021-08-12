@@ -18,33 +18,53 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <androidx.constraintlayout.utils.widget.ImageFilterView
-        android:id="@+id/kid_icon"
-        android:layout_width="90dp"
-        android:layout_height="90dp"
-        android:layout_marginTop="40dp"
-        android:src="@drawable/avas1"
+    <LinearLayout
+        android:id="@+id/item_list_layout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="50dp"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/kid_name_text_view"
-        app:roundPercent="1"
-        tools:ignore="ContentDescription" />
+        app:layout_constraintTop_toBottomOf="@id/kid_name_text_view">
+
+        <com.zelyder.chilldev.HorizontalCarouselRecyclerView
+            android:id="@+id/item_list"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:clipToPadding="false"
+            android:overScrollMode="never" />
+    </LinearLayout>
+
+<!--    <androidx.constraintlayout.utils.widget.ImageFilterView-->
+<!--        android:id="@+id/kid_icon"-->
+<!--        android:layout_width="90dp"-->
+<!--        android:layout_height="90dp"-->
+<!--        android:layout_marginTop="40dp"-->
+<!--        android:src="@drawable/ic_avas1"-->
+<!--        app:layout_constraintLeft_toLeftOf="parent"-->
+<!--        app:layout_constraintRight_toRightOf="parent"-->
+<!--        app:layout_constraintTop_toBottomOf="@id/kid_name_text_view"-->
+<!--        app:roundPercent="1"-->
+<!--        tools:ignore="ContentDescription" />-->
 
     <EditText
         android:id="@+id/kid_name_edit_text"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginTop="15dp"
         android:autofillHints="username"
         android:background="@null"
-        android:focusable="true"
         android:clickable="true"
+        android:focusable="true"
         android:hint="@string/name_hint"
         android:imeOptions="actionNext"
+        android:inputType="textPersonName"
+        android:paddingTop="20dp"
         android:textSize="40sp"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/kid_icon"
-        android:inputType="textPersonName" />
+        app:layout_constraintTop_toBottomOf="@id/item_list_layout" />
 
     <ImageView
         android:layout_width="80dp"
@@ -64,6 +84,5 @@
         android:text="@string/next_fragment_text_view"
         android:textSize="20sp"
         app:layout_constraintBottom_toBottomOf="parent" />
-
 
 </androidx.constraintlayout.widget.ConstraintLayout>

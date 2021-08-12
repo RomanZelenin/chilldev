@@ -8,7 +8,7 @@
     <androidx.constraintlayout.utils.widget.ImageFilterView
         android:layout_width="75dp"
         android:layout_height="75dp"
-        android:src="@drawable/avas1"
+        android:src="@drawable/ic_avas1"
         app:layout_constraintRight_toLeftOf="@id/kid_name_text_view"
         app:layout_constraintTop_toTopOf="@id/kid_name_text_view"
         app:roundPercent="1"

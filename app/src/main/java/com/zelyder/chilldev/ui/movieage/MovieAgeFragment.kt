@@ -50,19 +50,19 @@ class MovieAgeFragment : FragmentPage<MovieAgePageBinding>() {
             }
         }
 
-        with((requireActivity() as MainActivity)) {
-            mainActivityScope.launch {
-                remoteService.posters(AgeLimit.SIX_PLUS).body()
-                    ?.message
-                    ?.forEachIndexed { index, poster_url ->
-                        withContext(Dispatchers.Main) {
-                            Picasso.get().load(poster_url)
-                                .fit()
-                                .into((binding.llPosterContainer[index] as ImageView))
-                        }
-                    }
-            }
-        }
+//        with((requireActivity() as MainActivity)) {
+//            mainActivityScope.launch {
+//                remoteService.posters(AgeLimit.SIX_PLUS).body()
+//                    ?.message
+//                    ?.forEachIndexed { index, poster_url ->
+//                        withContext(Dispatchers.Main) {
+//                            Picasso.get().load(poster_url)
+//                                .fit()
+//                                .into((binding.llPosterContainer[index] as ImageView))
+//                        }
+//                    }
+//            }
+//        }
     }
 
     override fun onResume() {
