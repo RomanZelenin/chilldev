@@ -58,4 +58,6 @@
     <string name="fragment_title_5">Что ребенку интересно?</string>
     <string name="fragment_title_6">Выберите к каким сайтам и приложениям дать доступ</string>
     <string name="create_profile_text">Создать профиль</string>
+    <string name="day_message_error">Day is not existed :(</string>
+    <string name="month_message_error">Month is not exsisted :(</string>
 </resources>

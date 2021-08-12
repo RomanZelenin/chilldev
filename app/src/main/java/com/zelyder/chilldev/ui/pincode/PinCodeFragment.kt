@@ -34,14 +34,13 @@ class PinCodeFragment : FragmentPage<PinCodePageBinding>() {
             }
 
             override fun onFieldIsEmpty() {
+                TODO("Not yet implemented")
             }
-
         })
     }
 
     override fun onResume() {
         super.onResume()
-//        binding.numPad.requestFocus()
 
     }
 

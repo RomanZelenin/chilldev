@@ -8,6 +8,7 @@ import android.widget.TextView
 import androidx.core.content.ContextCompat
 import androidx.core.view.get
 import com.zelyder.chilldev.R
+import com.zelyder.chilldev.extensions.dpToPx
 
 class AgeRatingLayout(context: Context, attrSet: AttributeSet?) :
     LinearLayout(context, attrSet) {
@@ -40,7 +41,7 @@ class AgeRatingLayout(context: Context, attrSet: AttributeSet?) :
             val tvAgeRating = TextView(context).apply {
                 configureDefaultTextView(this, isLast(i))
                 gravity = Gravity.CENTER
-                textSize = 28.dpToPx().toFloat()
+                textSize = 12.dpToPx().toFloat()
                 text = AgeRating.values()[i].rating
             }
             addView(tvAgeRating)
@@ -54,8 +55,8 @@ class AgeRatingLayout(context: Context, attrSet: AttributeSet?) :
         return textView.apply {
             setBackgroundResource(R.drawable.shp_focused_age_rating_bg)
             setTextColor(ContextCompat.getColor(context, android.R.color.white))
-            val layoutParams = LayoutParams(100.dpToPx(), 100.dpToPx())
-            layoutParams.rightMargin = 16.dpToPx()
+            val layoutParams = LayoutParams(50.dpToPx(), 50.dpToPx())
+            layoutParams.rightMargin = 8.dpToPx()
             setLayoutParams(layoutParams)
         }
     }
@@ -64,9 +65,9 @@ class AgeRatingLayout(context: Context, attrSet: AttributeSet?) :
         return textView.apply {
             setBackgroundResource(R.drawable.shp_default_age_rating_bg)
             setTextColor(ContextCompat.getColor(context, android.R.color.white))
-            val layoutParams = LayoutParams(100.dpToPx(), 100.dpToPx())
+            val layoutParams = LayoutParams(50.dpToPx(), 50.dpToPx())
             if (!isLast) {
-                layoutParams.rightMargin = 16.dpToPx()
+                layoutParams.rightMargin = 8.dpToPx()
             }
             setLayoutParams(layoutParams)
         }
@@ -76,9 +77,9 @@ class AgeRatingLayout(context: Context, attrSet: AttributeSet?) :
         return textView.apply {
             setBackgroundResource(R.drawable.shp_selected_age_rating_bg)
             setTextColor(ContextCompat.getColor(context, android.R.color.black))
-            val layoutParams = LayoutParams(120.dpToPx(), 120.dpToPx())
+            val layoutParams = LayoutParams(60.dpToPx(), 60.dpToPx())
             if (!isLast) {
-                layoutParams.rightMargin = 16.dpToPx()
+                layoutParams.rightMargin = 8.dpToPx()
             }
             setLayoutParams(layoutParams)
         }

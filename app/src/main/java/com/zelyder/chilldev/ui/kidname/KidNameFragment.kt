@@ -21,6 +21,12 @@ class KidNameFragment : FragmentPage<KidNamePageBinding>() {
         _binding = KidNamePageBinding.inflate(inflater, container, attachToParent)
     }
 
+
+    override fun onPause() {
+        super.onPause()
+        viewModel.setKidName(binding.kidNameEditText.text.toString())
+    }
+
     companion object {
         @JvmStatic
         fun newInstance() = KidNameFragment()

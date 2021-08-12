@@ -1,11 +1,14 @@
 package com.zelyder.chilldev.ui.main
 
 import android.os.Bundle
+import android.util.Log
 import android.view.KeyEvent
-import androidx.activity.viewModels
 import androidx.fragment.app.FragmentActivity
+import androidx.lifecycle.ViewModelProvider
+import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.RecyclerView
 import androidx.viewpager2.widget.ViewPager2
+import com.yandex.tv.services.passport.PassportProviderSdk
 import com.zelyder.chilldev.ScrollBarAdapter
 import com.zelyder.chilldev.databinding.ActivityMainBinding
 import com.zelyder.chilldev.di.DaggerAppComponent
@@ -21,9 +24,8 @@ interface SwipePage {
 
 class MainActivity : FragmentActivity(), SwipePage {
 
-    val mainActivityScope = CoroutineScope(Job())
     private lateinit var binding: ActivityMainBinding
-    val pageViewModel: PageViewModel by viewModels { PageViewModelFactory() }
+    lateinit var pageViewModel: PageViewModel
 
     @Inject
     lateinit var remoteService: RemoteService
@@ -36,6 +38,11 @@ class MainActivity : FragmentActivity(), SwipePage {
         DaggerAppComponent.factory()
             .create()
             .inject(this)
+
+        pageViewModel = ViewModelProvider(
+            viewModelStore,
+            PageViewModelFactory(remoteService)
+        )[PageViewModel::class.java]
 
         // Hack to prevent ViewPager2 from grabbing focus
         val recyclerView = ViewPager2::class.java.getDeclaredField("mRecyclerView")
@@ -52,6 +59,11 @@ class MainActivity : FragmentActivity(), SwipePage {
                 }
             })
             offscreenPageLimit = 1
+        }
+
+        // TODO: remove (testing only)
+        getAccessToken { token ->
+            Log.d(TAG, "Obtained token from TV: $token")
         }
     }
 
@@ -80,9 +92,17 @@ class MainActivity : FragmentActivity(), SwipePage {
         }
     }
 
-    override fun onDestroy() {
-        mainActivityScope.cancel()
-        super.onDestroy()
+    private fun getAccessToken(callback: (String?) -> Unit) {
+        lifecycleScope.launch {
+            val passportProviderSdk = PassportProviderSdk(this@MainActivity)
+            withContext(Dispatchers.Main) {
+                try {
+                    callback(passportProviderSdk.currentAccount?.token)
+                } catch (e: Exception) {
+                    Log.e(TAG, "Cannot get access token", e)
+                }
+            }
+        }
     }
 
     override fun swipeToNext() {
@@ -93,5 +113,9 @@ class MainActivity : FragmentActivity(), SwipePage {
     override fun swipeToPrevious() {
         if (binding.scrollBar.selectedPosition >= 1)
             binding.pager.setCurrentItem(binding.scrollBar.selectedPosition - 1, true)
+    }
+
+    companion object {
+        private val TAG = MainActivity::class.java.name
     }
 }

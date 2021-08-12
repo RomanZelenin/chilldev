@@ -13,18 +13,18 @@ import com.zelyder.chilldev.R
 class InterestView(context: Context, attrs: AttributeSet?) : LinearLayout(context, attrs),
     View.OnFocusChangeListener, View.OnClickListener {
 
-    var checked : Boolean = false
-    set(value) {
-        field = value
-        findViewById<ImageView>(R.id.check_image_view).isVisible = value
-        updateBackgroundAndTextColor(isFocused, value)
-    }
+    var checked: Boolean = false
+        set(value) {
+            field = value
+            findViewById<ImageView>(R.id.check_image_view).isVisible = value
+            updateBackgroundAndTextColor(isFocused, value)
+        }
 
-    var text : String = ""
-    set(value) {
-        field = value
-        findViewById<TextView>(R.id.interest_text).text = value
-    }
+    var text: String = ""
+        set(value) {
+            field = value
+            findViewById<TextView>(R.id.interest_text).text = value
+        }
 
     init {
         inflate(context, R.layout.interest_view, this)
@@ -46,8 +46,11 @@ class InterestView(context: Context, attrs: AttributeSet?) : LinearLayout(contex
         updateBackgroundAndTextColor(hasFocus, checked)
     }
 
+    var customOnClick: (() -> Unit)? = null
+
     override fun onClick(v: View?) {
         checked = !checked
+        customOnClick?.invoke()
     }
 
     private fun updateBackgroundAndTextColor(hasFocus: Boolean, checked: Boolean) {
@@ -67,7 +70,12 @@ class InterestView(context: Context, attrs: AttributeSet?) : LinearLayout(contex
             } else {
                 R.drawable.ic_unfocused_check_interest
             }
-            findViewById<ImageView>(R.id.check_image_view).setImageDrawable(ContextCompat.getDrawable(context, checkImageResource))
+            findViewById<ImageView>(R.id.check_image_view).setImageDrawable(
+                ContextCompat.getDrawable(
+                    context,
+                    checkImageResource
+                )
+            )
         }
 
         val textColor = ContextCompat.getColor(context, textColorId)

@@ -9,9 +9,10 @@
 
     <TextView
         android:id="@+id/birthday_title"
+        style="@style/Text.Title"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="150dp"
+        android:layout_marginTop="140dp"
         android:text="@string/and_birthday"
         android:textSize="34sp"
         app:layout_constraintEnd_toEndOf="parent"
@@ -25,10 +26,11 @@
         android:layout_marginTop="24dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/linearLayout" />
+        app:layout_constraintTop_toBottomOf="@+id/error_message" />
 
     <TextView
         android:id="@+id/next_screen_title"
+        style="@style/Text.NextTitle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginBottom="20dp"
@@ -42,7 +44,7 @@
         android:id="@+id/linearLayout"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
+        android:layout_marginTop="32dp"
         android:orientation="horizontal"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.502"
@@ -51,28 +53,34 @@
 
         <EditText
             android:id="@+id/day"
-            android:focusable="false"
             android:layout_width="65dp"
-            android:layout_height="53dp"
+            android:layout_height="match_parent"
+            android:background="@android:color/transparent"
             android:ems="10"
+            android:focusable="false"
             android:gravity="center"
             android:hint="@string/day"
             android:imeOptions="actionNext"
             android:inputType="numberDecimal"
             android:maxLength="2"
-            android:nextFocusRight="@id/month" />
+            android:minHeight="48dp"
+            android:nextFocusRight="@id/month"
+            android:textColorHint="@color/white"
+            android:textSize="34sp" />
 
         <TextView
             android:id="@+id/textView2"
             android:layout_width="wrap_content"
-            android:layout_height="53dp"
+            android:layout_height="match_parent"
             android:text="/"
+            android:textColor="@color/disabled"
             android:textSize="34sp" />
 
         <EditText
             android:id="@+id/month"
             android:layout_width="65dp"
-            android:layout_height="53dp"
+            android:layout_height="match_parent"
+            android:background="@color/transparent"
             android:ems="10"
             android:focusable="false"
             android:gravity="center"
@@ -80,25 +88,43 @@
             android:imeOptions="actionNext"
             android:inputType="numberDecimal"
             android:maxLength="2"
-            android:nextFocusRight="@id/year" />
+            android:minHeight="48dp"
+            android:nextFocusRight="@id/year"
+            android:textColorHint="@color/white"
+            android:textSize="34sp" />
 
         <TextView
             android:id="@+id/textView3"
             android:layout_width="wrap_content"
-            android:layout_height="53dp"
+            android:layout_height="match_parent"
             android:text="/"
+            android:textColor="@color/disabled"
             android:textSize="34sp" />
 
         <EditText
             android:id="@+id/year"
-            android:focusable="false"
-            android:layout_width="65dp"
-            android:layout_height="53dp"
+            android:layout_width="77dp"
+            android:layout_height="match_parent"
+            android:background="@color/transparent"
             android:ems="10"
+            android:focusable="false"
             android:gravity="center"
             android:hint="@string/year"
             android:inputType="numberDecimal"
-            android:maxLength="4" />
+            android:maxLength="4"
+            android:textColorHint="@color/white"
+            android:textSize="34sp" />
     </LinearLayout>
+
+    <TextView
+        android:id="@+id/error_message"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:textColor="@color/red"
+        android:visibility="invisible"
+        app:layout_constraintEnd_toEndOf="@+id/linearLayout"
+        app:layout_constraintStart_toStartOf="@+id/linearLayout"
+        app:layout_constraintTop_toBottomOf="@+id/linearLayout" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
