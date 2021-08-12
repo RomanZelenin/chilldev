@@ -49,6 +49,11 @@ class ApplicationAccessFragment : FragmentPage<ApplicationAccessPageBinding>() {
         }
     }
 
+    override fun onResume() {
+        super.onResume()
+        binding.createAccBtn.requestFocus()
+    }
+
     companion object {
         @JvmStatic
         fun newInstance() = ApplicationAccessFragment()
