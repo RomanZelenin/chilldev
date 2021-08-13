@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import com.zelyder.chilldev.R
 import com.zelyder.chilldev.databinding.PinCodePageBinding
 import com.zelyder.chilldev.domain.models.PinCodeStage
@@ -28,13 +29,32 @@ class PinCodeFragment : FragmentPage<PinCodePageBinding>() {
         }
         binding.numPad.setupKeyboard(binding.pinView, 4, object : KeyboardOutput {
             override fun onSizeIsReached() {
-                (activity as MainActivity).pageViewModel.setPinCode(binding.pinView.text.toString())
-                page.swipeToNext()
+                when (arguments?.getInt(PIN_CODE_STAGE)) {
+                    PinCodeStage.NEW.type -> {
+                        viewModel.setPinCode(binding.pinView.text.toString())
+                        page.swipeToNext()
+                    }
+                    PinCodeStage.CONFIRM.type -> {
+                        if (viewModel.kidInfo.value?.pin != binding.pinView.text.toString()) {
+                            Toast.makeText(
+                                requireContext(),
+                                resources.getString(R.string.screen_pin_error_text),
+                                Toast.LENGTH_LONG
+                            ).show()
+                        } else {
+                            page.swipeToNext()
+                        }
+                    }
+                    PinCodeStage.ENTER.type -> {
+
+                    }
+                }
+
             }
         })
 
         binding.description.text = resources.getText(
-            when(arguments?.getInt(PIN_CODE_STAGE)) {
+            when (arguments?.getInt(PIN_CODE_STAGE)) {
                 PinCodeStage.NEW.type -> R.string.screen_pin_description
                 PinCodeStage.CONFIRM.type -> R.string.screen_pin_confirm
                 PinCodeStage.ENTER.type -> R.string.screen_pin_enter
@@ -45,8 +65,9 @@ class PinCodeFragment : FragmentPage<PinCodePageBinding>() {
 
     companion object {
         private const val PIN_CODE_STAGE = "pin_code_stage"
+
         @JvmStatic
-        fun newInstance(pinCodeStage: PinCodeStage):PinCodeFragment {
+        fun newInstance(pinCodeStage: PinCodeStage): PinCodeFragment {
             val fragment = PinCodeFragment()
             val bundle = Bundle()
             bundle.putInt(PIN_CODE_STAGE, pinCodeStage.type)
