@@ -9,7 +9,7 @@ import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.RecyclerView
 import androidx.viewpager2.widget.ViewPager2
 import com.yandex.tv.services.passport.PassportProviderSdk
-import com.zelyder.chilldev.ScrollBarAdapter
+import com.zelyder.chilldev.PageAdapter
 import com.zelyder.chilldev.databinding.ActivityMainBinding
 import com.zelyder.chilldev.di.DaggerAppComponent
 import kotlinx.coroutines.*
@@ -50,18 +50,13 @@ class MainActivity : FragmentActivity(), SwipePage {
         recyclerView.isFocusable = false
 
         binding.pager.apply {
-            adapter = ScrollBarAdapter(this@MainActivity)
+            adapter = PageAdapter(this@MainActivity)
             initScrollBar(adapter!!.itemCount)
             registerOnPageChangeCallback(object : ViewPager2.OnPageChangeCallback() {
                 override fun onPageSelected(position: Int) {
                     binding.scrollBar.selectedPosition = position
                 }
             })
-        }
-
-        // TODO: remove (testing only)
-        getAccessToken { token ->
-            Log.d(TAG, "Obtained token from TV: $token")
         }
     }
 
