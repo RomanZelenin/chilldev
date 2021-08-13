@@ -5,9 +5,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import com.zelyder.chilldev.databinding.ApplicationAccessPageBinding
-import com.zelyder.chilldev.domain.models.parseToDate
 import com.zelyder.chilldev.ui.FragmentPage
-import java.util.*
 
 class ApplicationAccessFragment : FragmentPage<ApplicationAccessPageBinding>() {
 
@@ -45,7 +43,7 @@ class ApplicationAccessFragment : FragmentPage<ApplicationAccessPageBinding>() {
             binding.kidGender.text = it.gender*/
         }
         binding.createAccBtn.setOnClickListener {
-            viewModel.postKidInfo()
+            viewModel.saveKidInfo()
         }
     }
 

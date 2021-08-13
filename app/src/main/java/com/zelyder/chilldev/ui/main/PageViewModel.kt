@@ -10,29 +10,24 @@ class PageViewModel(private val remoteService: RemoteService) : ViewModel() {
     private val _kidInfo = MutableLiveData(KidInfo())
     val kidInfo: LiveData<KidInfo> = _kidInfo
 
-    private val _urlPosters = Transformations.switchMap(_kidInfo) {
-        val ageLimit = AgeLimit.values().first { ageLimit -> ageLimit.type == it.age_limit }
-        getPosters(ageLimit)
-    }
-    val urlPosters: LiveData<List<String>> = _urlPosters
-
-    var cachedCategories = listOf<Category>(Category(1,"Дружба"))
-    fun getCategories() = liveData {
-        emit(cachedCategories.map { it.title })
-        cachedCategories = remoteService.categories().body()?.message!!
-        emit(cachedCategories.map { it.title })
+    val categories = liveData {
+        remoteService.categories()
+            .body()
+            ?.message!!
+            .map { it.title }
+            .let { emit(it) }
     }
 
-    private fun getPosters(ageLimit: AgeLimit) = liveData {
+    suspend fun getPosters(ageLimit: AgeLimit): List<String> {
         val response = remoteService.posters(ageLimit)
-        if (response.isSuccessful) {
+        return if (response.isSuccessful) {
             val urls = response.body()!!.message
-            emit(urls)
+            urls
         } else {
             Log.d(TAG, response.errorBody()!!.string())
+            emptyList()
         }
     }
-
 
     fun setKidName(name: String) {
         _kidInfo.postValue(_kidInfo.value!!.copy(name = name))
@@ -40,12 +35,12 @@ class PageViewModel(private val remoteService: RemoteService) : ViewModel() {
     }
 
     fun setKidAgeLimit(ageLimit: AgeLimit) {
-        _kidInfo.postValue(_kidInfo.value!!.copy(age_limit = ageLimit.type))
+        _kidInfo.postValue(_kidInfo.value!!.copy(age_limit = ageLimit))
         Log.d(TAG, "Set age limit: $ageLimit")
     }
 
     fun setKidGender(gender: Gender) {
-        _kidInfo.postValue(_kidInfo.value!!.copy(gender = gender.type))
+        _kidInfo.postValue(_kidInfo.value!!.copy(gender = gender))
         Log.d(TAG, "Set gender: ${gender.name}")
     }
 
@@ -68,7 +63,7 @@ class PageViewModel(private val remoteService: RemoteService) : ViewModel() {
         Log.d(TAG, "Set pinCode: $pinCode")
     }
 
-    fun postKidInfo() {
+    fun saveKidInfo() {
         viewModelScope.launch {
             try {
                 remoteService.kidInfo(_kidInfo.value!!)

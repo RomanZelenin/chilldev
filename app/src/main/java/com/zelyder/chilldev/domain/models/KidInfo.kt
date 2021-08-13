@@ -5,9 +5,9 @@ import java.text.SimpleDateFormat
 import java.util.*
 
 data class KidInfo(
-    val name: String = "Anon",
-    val age_limit: Int = AgeLimit.ZERO_PLUS.type,
-    val gender: String = Gender.WHATEVER.type,
+    val name: String = "",
+    val age_limit: AgeLimit = AgeLimit.ZERO_PLUS,
+    val gender: Gender = Gender.WHATEVER,
     val birthdate: String = Date().formatToString(),
     val categories: List<Int> = emptyList(),
     val apps: JsonObject = JsonObject(),
