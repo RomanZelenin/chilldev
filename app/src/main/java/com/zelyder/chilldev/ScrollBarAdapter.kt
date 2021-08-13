@@ -3,6 +3,7 @@ package com.zelyder.chilldev
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentActivity
 import androidx.viewpager2.adapter.FragmentStateAdapter
+import com.zelyder.chilldev.domain.models.PinCodeStage
 import com.zelyder.chilldev.ui.addapp.AddAppScreenFragment
 import com.zelyder.chilldev.ui.applicationaccess.ApplicationAccessFragment
 import com.zelyder.chilldev.ui.birthday.BirthdayFragment
@@ -14,7 +15,7 @@ import com.zelyder.chilldev.ui.movieage.MovieAgeFragment
 import com.zelyder.chilldev.ui.pincode.PinCodeFragment
 
 class ScrollBarAdapter(fragment: FragmentActivity) : FragmentStateAdapter(fragment) {
-    override fun getItemCount(): Int = 9
+    override fun getItemCount(): Int = 10
 
     override fun createFragment(position: Int): Fragment {
         return when (position) {
@@ -25,7 +26,8 @@ class ScrollBarAdapter(fragment: FragmentActivity) : FragmentStateAdapter(fragme
             4 -> InterestsScreenFragment.newInstance()
             5 -> AddAppScreenFragment.newInstance()
             6 -> ApplicationAccessFragment.newInstance()
-            7 -> PinCodeFragment.newInstance()
+            7 -> PinCodeFragment.newInstance(PinCodeStage.NEW)
+            8 -> PinCodeFragment.newInstance(PinCodeStage.CONFIRM)
             else -> CongratulationFragment.newInstance()
         }
     }

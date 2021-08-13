@@ -15,7 +15,9 @@
     <string name="movie_age_next_view_label">Пол ребенка</string>
     <string name="last_screen_message">Поздравляем! Вы успешно создали детский аккаунт =)</string>
     <string name="screen_pin_title">ПИН-код</string>
-    <string name="screen_pin_description">Хотите защитить выход из детского режима?\nПридумайте ПИН-код из четырёх символов.</string>
+    <string name="screen_pin_description">Хотите защитить выход из детского профиля?\nПридумайте ПИН-код из четырёх символов.</string>
+    <string name="screen_pin_confirm">Повторите</string>
+    <string name="screen_pin_enter">Введите ПИН для выхода \nиз детского профиля</string>
     <string name="screen_pin_done">Не хочу задавать ПИН-код</string>
     <string name="screen_congratulation">Поздравляем, вы подключили детский режим!</string>
     <string name="next_fragment_text_view">Какое кино будем показывать?</string>
