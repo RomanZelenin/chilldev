@@ -12,7 +12,6 @@ import com.yandex.tv.services.passport.PassportProviderSdk
 import com.zelyder.chilldev.ScrollBarAdapter
 import com.zelyder.chilldev.databinding.ActivityMainBinding
 import com.zelyder.chilldev.di.DaggerAppComponent
-import com.zelyder.chilldev.domain.models.RemoteService
 import kotlinx.coroutines.*
 import javax.inject.Inject
 
@@ -25,10 +24,10 @@ interface SwipePage {
 class MainActivity : FragmentActivity(), SwipePage {
 
     private lateinit var binding: ActivityMainBinding
-    lateinit var pageViewModel: PageViewModel
 
     @Inject
-    lateinit var remoteService: RemoteService
+    lateinit var pageViewModelFactory: PageViewModelFactory
+    lateinit var pageViewModel: PageViewModel
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -41,7 +40,7 @@ class MainActivity : FragmentActivity(), SwipePage {
 
         pageViewModel = ViewModelProvider(
             viewModelStore,
-            PageViewModelFactory(remoteService)
+            GenericViewModelFactory(pageViewModelFactory)
         )[PageViewModel::class.java]
 
         // Hack to prevent ViewPager2 from grabbing focus
