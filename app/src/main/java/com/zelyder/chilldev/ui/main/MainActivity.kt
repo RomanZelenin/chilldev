@@ -49,9 +49,12 @@ class MainActivity : FragmentActivity(), SwipePage {
             .get(binding.pager) as RecyclerView
         recyclerView.isFocusable = false
 
+        val pageAdapter = PageAdapter(this@MainActivity)
+        val numItemsInScrollBar = pageAdapter.itemCount
+        initScrollBar(numItemsInScrollBar)
+
         binding.pager.apply {
-            adapter = PageAdapter(this@MainActivity)
-            initScrollBar(adapter!!.itemCount)
+            adapter = pageAdapter
             registerOnPageChangeCallback(object : ViewPager2.OnPageChangeCallback() {
                 override fun onPageSelected(position: Int) {
                     binding.scrollBar.selectedPosition = position
@@ -74,14 +77,10 @@ class MainActivity : FragmentActivity(), SwipePage {
 
 
     private fun initScrollBar(numItems: Int) {
-        with(binding) {
-            scrollBar.numItems = numItems
-            scrollBar.setOnScrollListenerToPreviousItem {
-                pager.setCurrentItem(pager.currentItem - 1, true)
-            }
-            scrollBar.setOnScrollListenerToNextItem {
-                pager.setCurrentItem(pager.currentItem + 1, true)
-            }
+        with(binding.scrollBar) {
+            this.numItems = numItems
+            setOnScrollListenerToPreviousItem { swipeToPrevious() }
+            setOnScrollListenerToNextItem { swipeToNext() }
         }
     }
 
