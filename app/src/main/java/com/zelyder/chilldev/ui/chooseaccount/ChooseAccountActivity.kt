@@ -47,6 +47,7 @@ class ChooseAccountActivity : FragmentActivity() {
         binding.rvAccounts.apply {
             adapter = accountsAdapter
             layoutManager = AccountsLinearLayoutManager(this@ChooseAccountActivity)
+            addItemDecoration(AccountsItemDecoration())
         }
 
         lifecycleScope.launch {
