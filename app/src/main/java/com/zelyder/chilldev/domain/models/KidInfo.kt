@@ -1,6 +1,7 @@
 package com.zelyder.chilldev.domain.models
 
 import com.google.gson.JsonObject
+import com.zelyder.chilldev.R
 import java.text.SimpleDateFormat
 import java.util.*
 
@@ -12,7 +13,8 @@ data class KidInfo(
     val categories: List<Int> = emptyList(),
     val apps: JsonObject = JsonObject(),
     val pin: String? = null,
-    var iconType: KidNameIconType = KidNameIconType.ONE
+    var iconType: KidNameIconType = KidNameIconType.ONE,
+    var avatar: Int = R.drawable.ic_avas1
 )
 
 data class Kid(

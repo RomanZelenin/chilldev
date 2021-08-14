@@ -19,7 +19,7 @@ object NetworkModule {
     @ApplicationScope
     fun provideOkHttpClient(): OkHttpClient {
         return OkHttpClient.Builder()
-            .addNetworkInterceptor(HttpLoggingInterceptor().apply { setLevel(HttpLoggingInterceptor.Level.BASIC) })
+            .addNetworkInterceptor(HttpLoggingInterceptor().apply { setLevel(HttpLoggingInterceptor.Level.BODY) })
             .addInterceptor { chain ->
                 val requestBuilder = chain.request().newBuilder()
                 requestBuilder.addHeader("Authorization", "OAuth AQAAAAAn24kQAAdMKtm-VDWEMkljrl20f4nKnEk")
