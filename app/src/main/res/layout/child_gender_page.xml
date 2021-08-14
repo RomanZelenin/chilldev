@@ -54,6 +54,7 @@
                 android:button="@null"
                 android:gravity="center"
                 android:text="@string/child_gender_skip"
+                style="@style/Text"
                 android:textColor="@color/rb_text_color" />
 
             <RadioButton
@@ -64,6 +65,7 @@
                 android:background="@drawable/rb_gender_bg"
                 android:button="@null"
                 android:gravity="center"
+                style="@style/Text"
                 android:text="@string/child_gender_female"
                 android:textColor="@color/rb_text_color" />
 
@@ -74,6 +76,7 @@
                 android:background="@drawable/rb_gender_bg"
                 android:button="@null"
                 android:gravity="center"
+                style="@style/Text"
                 android:text="@string/child_gender_male"
                 android:textColor="@color/rb_text_color" />
         </RadioGroup>
