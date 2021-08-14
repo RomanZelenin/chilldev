@@ -7,7 +7,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.zelyder.chilldev.customview.AppView
 import com.zelyder.chilldev.ui.main.SwipePage
 
-class AppLinearLayoutManager(context : Context, private val page: SwipePage) : LinearLayoutManager(context) {
+class AppLinearLayoutManager(context : Context, private val page: SwipePage) : LinearLayoutManager(context, RecyclerView.VERTICAL, false) {
 
     private var previousView: AppView? = null
     private var position : Int = -1

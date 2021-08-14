@@ -8,6 +8,7 @@ import androidx.lifecycle.lifecycleScope
 import com.zelyder.chilldev.R
 import com.zelyder.chilldev.databinding.ApplicationAccessPageBinding
 import com.zelyder.chilldev.domain.models.Gender
+import com.zelyder.chilldev.domain.models.parseToDate
 import com.zelyder.chilldev.ui.FragmentPage
 import kotlinx.coroutines.launch
 import java.util.*
@@ -46,10 +47,10 @@ class ApplicationAccessFragment : FragmentPage<ApplicationAccessPageBinding>() {
             }
         viewModel.kidInfo.observe(viewLifecycleOwner) { it ->
             str = it.name + ", "
-            val age = 10//getAge(it.birthdate.parseToDate()!!)
+            val ageFromView = it.birthdate.parseToDate() ?: Date()
+            val age = getAge(ageFromView)
             str += buildString {
                 append("$age ")
-                //val lastNum = age.toString().run { this.last().digitToInt() }
                 when (age) {
                     1 -> append("год")
                     in 2..4 -> append("года")
