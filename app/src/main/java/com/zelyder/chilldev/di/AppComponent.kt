@@ -1,5 +1,6 @@
 package com.zelyder.chilldev.di
 
+import com.zelyder.chilldev.ui.chooseaccount.ChooseAccountActivity
 import com.zelyder.chilldev.ui.main.MainActivity
 import dagger.Component
 import javax.inject.Scope
@@ -17,4 +18,6 @@ interface AppComponent {
     }
 
     fun inject(activity: MainActivity)
+
+    fun inject(activity: ChooseAccountActivity)
 }
