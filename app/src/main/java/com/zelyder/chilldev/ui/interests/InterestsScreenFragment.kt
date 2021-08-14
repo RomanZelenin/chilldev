@@ -1,6 +1,8 @@
 package com.zelyder.chilldev.ui.interests
 
 import android.os.Bundle
+import android.os.Handler
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -8,6 +10,10 @@ import androidx.recyclerview.widget.StaggeredGridLayoutManager
 import com.zelyder.chilldev.databinding.InterestsPageBinding
 import com.zelyder.chilldev.ui.FragmentPage
 import kotlin.math.ceil
+import android.os.Looper
+
+
+
 
 class InterestsScreenFragment : FragmentPage<InterestsPageBinding>() {
 
@@ -26,13 +32,11 @@ class InterestsScreenFragment : FragmentPage<InterestsPageBinding>() {
             adapter = InterestsRecyclerAdapter(context)
             addItemDecoration(InterestsItemDecoration())
         }
-    }
-
-    override fun onResume() {
-        super.onResume()
-            viewModel.categories.observe(viewLifecycleOwner) { items ->
-                setInterests(items)
-            }
+        viewModel.fetchCategories()
+        viewModel.categories.observe(viewLifecycleOwner) { items ->
+            Log.d("TEST_CHECK", "items : $items")
+            setInterests(items)
+        }
     }
 
     private fun setInterests(items: List<String>) {
@@ -42,6 +46,9 @@ class InterestsScreenFragment : FragmentPage<InterestsPageBinding>() {
                 StaggeredGridLayoutManager(spanCount, StaggeredGridLayoutManager.HORIZONTAL)
         }
         (binding.interestsRecycler.adapter as InterestsRecyclerAdapter).setItems(items)
+        Handler(Looper.getMainLooper()).post(Runnable {
+            binding.interestsRecycler.adapter?.notifyDataSetChanged()
+        })
     }
 
     override fun onPause() {

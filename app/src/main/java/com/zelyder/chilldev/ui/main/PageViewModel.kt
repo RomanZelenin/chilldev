@@ -1,22 +1,33 @@
 package com.zelyder.chilldev.ui.main
 
 import android.util.Log
-import androidx.lifecycle.*
+import androidx.lifecycle.LiveData
+import androidx.lifecycle.MutableLiveData
+import androidx.lifecycle.ViewModel
+import androidx.lifecycle.viewModelScope
 import com.zelyder.chilldev.domain.models.*
+import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 
 class PageViewModel(private val remoteService: RemoteService) : ViewModel() {
 
+    private val _categories = MutableLiveData<List<String>>()
+    val categories: LiveData<List<String>>
+        get() = _categories
+
+    fun fetchCategories() {
+        viewModelScope.launch {
+            val result = withContext(Dispatchers.IO) {
+                remoteService.categories().body()?.message!!.map { it.title }
+            }
+            withContext(Dispatchers.Main) {
+                _categories.value = result
+            }
+        }
+    }
     private val _kidInfo = MutableLiveData(KidInfo())
     val kidInfo: LiveData<KidInfo> = _kidInfo
-
-    val categories = liveData {
-        remoteService.categories()
-            .body()
-            ?.message!!
-            .map { it.title }
-            .let { emit(it) }
-    }
 
     suspend fun getPosters(ageLimit: AgeLimit): List<String> {
         val response = remoteService.posters(ageLimit)
@@ -28,6 +39,7 @@ class PageViewModel(private val remoteService: RemoteService) : ViewModel() {
             emptyList()
         }
     }
+
 
     fun setKidName(name: String) {
         _kidInfo.postValue(_kidInfo.value!!.copy(name = name))
