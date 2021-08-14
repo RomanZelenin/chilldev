@@ -26,7 +26,7 @@
         app:layout_constraintTop_toTopOf="parent"
         tools:text="Text" />
 
-    <androidx.appcompat.widget.SwitchCompat
+    <Switch
         android:id="@+id/switch_view"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
