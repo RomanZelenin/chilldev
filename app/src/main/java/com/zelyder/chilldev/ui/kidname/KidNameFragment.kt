@@ -23,6 +23,13 @@ class KidNameFragment : FragmentPage<KidNamePageBinding>() {
         _binding = KidNamePageBinding.inflate(inflater, container, attachToParent)
     }
 
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        binding.kidNameEditText.text.apply {
+            clear()
+            append(viewModel.kidInfo.value!!.name)
+        }
+    }
 
     override fun onPause() {
         super.onPause()

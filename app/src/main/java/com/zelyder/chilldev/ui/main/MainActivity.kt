@@ -9,10 +9,9 @@ import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.RecyclerView
 import androidx.viewpager2.widget.ViewPager2
 import com.yandex.tv.services.passport.PassportProviderSdk
-import com.zelyder.chilldev.ScrollBarAdapter
+import com.zelyder.chilldev.PageAdapter
 import com.zelyder.chilldev.databinding.ActivityMainBinding
 import com.zelyder.chilldev.di.DaggerAppComponent
-import com.zelyder.chilldev.domain.models.RemoteService
 import kotlinx.coroutines.*
 import javax.inject.Inject
 
@@ -25,10 +24,10 @@ interface SwipePage {
 class MainActivity : FragmentActivity(), SwipePage {
 
     private lateinit var binding: ActivityMainBinding
-    lateinit var pageViewModel: PageViewModel
 
     @Inject
-    lateinit var remoteService: RemoteService
+    lateinit var pageViewModelFactory: PageViewModelFactory
+    lateinit var pageViewModel: PageViewModel
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -41,7 +40,7 @@ class MainActivity : FragmentActivity(), SwipePage {
 
         pageViewModel = ViewModelProvider(
             viewModelStore,
-            PageViewModelFactory(remoteService)
+            GenericViewModelFactory(pageViewModelFactory)
         )[PageViewModel::class.java]
 
         // Hack to prevent ViewPager2 from grabbing focus
@@ -50,9 +49,12 @@ class MainActivity : FragmentActivity(), SwipePage {
             .get(binding.pager) as RecyclerView
         recyclerView.isFocusable = false
 
+        val pageAdapter = PageAdapter(this@MainActivity)
+        val numItemsInScrollBar = pageAdapter.itemCount
+        initScrollBar(numItemsInScrollBar)
+
         binding.pager.apply {
-            adapter = ScrollBarAdapter(this@MainActivity)
-            initScrollBar(adapter!!.itemCount)
+            adapter = pageAdapter
             registerOnPageChangeCallback(object : ViewPager2.OnPageChangeCallback() {
                 override fun onPageSelected(position: Int) {
                     binding.scrollBar.selectedPosition = position
@@ -60,20 +62,22 @@ class MainActivity : FragmentActivity(), SwipePage {
             })
             offscreenPageLimit = 1
         }
-
-        // TODO: remove (testing only)
-        getAccessToken { token ->
-            Log.d(TAG, "Obtained token from TV: $token")
-        }
     }
 
     override fun onKeyDown(keyCode: Int, event: KeyEvent): Boolean {
+        val currentPosition = binding.scrollBar.selectedPosition
         when (event.keyCode) {
             KeyEvent.KEYCODE_DPAD_UP -> {
-                swipeToPrevious()
+                when (currentPosition) {
+                    4, 5 -> {}
+                    else -> swipeToPrevious()
+                }
             }
             KeyEvent.KEYCODE_DPAD_DOWN -> {
-                swipeToNext()
+                when (currentPosition) {
+                    4, 5 -> {}
+                    else -> swipeToNext()
+                }
             }
         }
         return super.onKeyDown(keyCode, event)
@@ -81,14 +85,10 @@ class MainActivity : FragmentActivity(), SwipePage {
 
 
     private fun initScrollBar(numItems: Int) {
-        with(binding) {
-            scrollBar.numItems = numItems
-            scrollBar.setOnScrollListenerToPreviousItem {
-                pager.setCurrentItem(pager.currentItem - 1, true)
-            }
-            scrollBar.setOnScrollListenerToNextItem {
-                pager.setCurrentItem(pager.currentItem + 1, true)
-            }
+        with(binding.scrollBar) {
+            this.numItems = numItems
+            setOnScrollListenerToPreviousItem { swipeToPrevious() }
+            setOnScrollListenerToNextItem { swipeToNext() }
         }
     }
 

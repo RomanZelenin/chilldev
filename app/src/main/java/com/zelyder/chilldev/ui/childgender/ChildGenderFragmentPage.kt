@@ -24,6 +24,7 @@ class ChildGenderFragmentPage : FragmentPage<ChildGenderPageBinding>() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
         binding.rbSkip.setOnClickListener {
             handleOnGenderClick(it as RadioButton)
         }
@@ -65,24 +66,21 @@ class ChildGenderFragmentPage : FragmentPage<ChildGenderPageBinding>() {
     }
 
     private fun setDefaultFocus() {
-        viewModel.kidInfo.value?.build()?.gender?.let {
-            when (it) {
-                Gender.MALE.type -> binding.rbMale.requestFocus()
-                Gender.FEMALE.type -> binding.rbFemale.requestFocus()
-                else -> binding.rbSkip.requestFocus()
+        viewModel.kidInfo.observe(viewLifecycleOwner) {
+            when (it.gender) {
+                Gender.MALE -> binding.rbMale.requestFocus()
+                Gender.FEMALE -> binding.rbFemale.requestFocus()
+                Gender.WHATEVER -> binding.rbSkip.requestFocus()
             }
         }
     }
 
     private fun handleOnGenderClick(radioButton: RadioButton) {
         radioButton.isEnabled = false
-        Handler(Looper.getMainLooper()).postDelayed(
-            {
-                page.swipeToNext()
-                radioButton.isEnabled = true
-            },
-            1000
-        )
+        radioButton.postDelayed({
+            page.swipeToNext()
+            radioButton.isEnabled = true
+        }, 1000)
     }
 
     companion object {

@@ -27,7 +27,7 @@ class AppView(context: Context, attrs: AttributeSet?) : ConstraintLayout(context
             findViewById<TextView>(R.id.app_text).text = value
         }
 
-    private var checked : Boolean = false
+    var checked : Boolean = false
     set(value) {
         field = value
         findViewById<Switch>(R.id.switch_view).isChecked = value

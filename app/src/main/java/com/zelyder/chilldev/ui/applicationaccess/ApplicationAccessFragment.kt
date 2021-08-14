@@ -19,8 +19,31 @@ class ApplicationAccessFragment : FragmentPage<ApplicationAccessPageBinding>() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        viewModel.kidInfo.observe(viewLifecycleOwner) {
+            /*binding.kidNameTextView.text = it.name
+            val age = (Date().year - it.birthdate.parseToDate()!!.year)
+            binding.kidAge.text = buildString {
+                append("$age ")
+                val lastNum = age.toString().run { this.last().digitToInt() }
+                when (age) {
+                    1 -> append("год")
+                    in 2..4 -> append("года")
+                    in 5..20 -> append("лет")
+                    else -> append("")
+                }
+                append(", ")
+            }
+            binding.kidInterests.text = buildString {
+                it.categories.forEachIndexed { index, i ->
+                    val category = viewModel.cachedCategories.first { it.id == i }
+                    append(category.title)
+                    if (index < it.categories.size - 1) append(", ")
+                }
+            }
+            binding.kidGender.text = it.gender*/
+        }
         binding.createAccBtn.setOnClickListener {
-            viewModel.postKidInfo()
+            viewModel.saveKidInfo()
         }
     }
 

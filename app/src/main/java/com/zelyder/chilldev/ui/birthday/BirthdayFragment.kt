@@ -102,9 +102,5 @@ class BirthdayFragment : FragmentPage<BirthdayPageBinding>() {
             binding.numPad.setupKeyboard(binding.month, 2, KeyboardOutputMonth())
         }
 
-        override fun onFieldIsEmpty() {
-
-        }
-
     }
 }
