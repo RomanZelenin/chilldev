@@ -3,6 +3,7 @@
     <color name="disabled">#333333</color>
     <color name="white">#FFFFFF</color>
     <color name="dark">#151517</color>
+    <color name="dark_opacity">#80151517</color>
     <color name="orange">#F36D12</color>
     <color name="red">#FF1F44</color>
     <color name="blue">#59A5FF</color>

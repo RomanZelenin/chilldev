@@ -7,6 +7,10 @@
         <attr name="android:text"/>
         <attr name="android:checked"/>
     </declare-styleable>
+    <declare-styleable name="AccountView">
+        <attr name="android:text"/>
+        <attr name="android:checked"/>
+    </declare-styleable>
     <declare-styleable name="AppView">
         <attr name="android:color"/>
         <attr name="android:text"/>

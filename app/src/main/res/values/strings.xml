@@ -60,4 +60,8 @@
     <string name="create_profile_text">Создать профиль</string>
     <string name="day_message_error">Day is not existed :(</string>
     <string name="month_message_error">Month is not exsisted :(</string>
+    <string name="choose_account_label">Кто будет смотреть?</string>
+    <string name="choose_account_logout_label">Выйти из аккаунта</string>
+    <string name="choose_account_configure_mode_label">Настройки детского режима</string>
+    <string name="choose_account_add_profile_label">Добавить профиль</string>
 </resources>

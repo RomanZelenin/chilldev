@@ -1,5 +1,7 @@
 package com.zelyder.chilldev.ui.main
 
+import android.content.Context
+import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import android.view.KeyEvent
@@ -117,5 +119,10 @@ class MainActivity : FragmentActivity(), SwipePage {
 
     companion object {
         private val TAG = MainActivity::class.java.name
+
+        fun startActivity(context: Context) {
+            val intent = Intent(context, MainActivity::class.java)
+            context.startActivity(intent)
+        }
     }
 }
