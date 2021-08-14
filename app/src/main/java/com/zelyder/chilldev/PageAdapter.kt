@@ -3,6 +3,7 @@ package com.zelyder.chilldev
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentActivity
 import androidx.viewpager2.adapter.FragmentStateAdapter
+import com.zelyder.chilldev.domain.models.PinCodeStage
 import com.zelyder.chilldev.ui.FragmentPage
 import com.zelyder.chilldev.ui.addapp.AddAppScreenFragment
 import com.zelyder.chilldev.ui.applicationaccess.ApplicationAccessFragment
@@ -28,7 +29,7 @@ class PageAdapter(fragment: FragmentActivity) : FragmentStateAdapter(fragment) {
         5 to lazy { InterestsScreenFragment.newInstance() },
         6 to lazy { AddAppScreenFragment.newInstance() },
         7 to lazy { ApplicationAccessFragment.newInstance() },
-        8 to lazy { PinCodeFragment.newInstance() },
+        8 to lazy { PinCodeFragment.newInstance(PinCodeStage.NEW) },
         9 to lazy { CongratulationFragment.newInstance() },
     )
 

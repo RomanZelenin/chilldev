@@ -47,6 +47,9 @@ class PinCodeFragment : FragmentPage<PinCodePageBinding>() {
                                 resources.getString(R.string.screen_pin_error_text),
                                 Toast.LENGTH_LONG
                             ).show()
+                            firstPassword = ""
+                            binding.description.text = resources.getText(R.string.screen_pin_description)
+                            binding.pinView.setText("")
                         }
                     }
                     PinCodeStage.ENTER.type -> {
