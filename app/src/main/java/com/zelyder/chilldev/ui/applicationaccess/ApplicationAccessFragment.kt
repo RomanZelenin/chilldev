@@ -5,6 +5,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.lifecycle.lifecycleScope
+import com.zelyder.chilldev.R
 import com.zelyder.chilldev.databinding.ApplicationAccessPageBinding
 import com.zelyder.chilldev.domain.models.Gender
 import com.zelyder.chilldev.ui.FragmentPage
@@ -35,7 +36,14 @@ class ApplicationAccessFragment : FragmentPage<ApplicationAccessPageBinding>() {
         binding.kidAge.text = ""
         val list = arrayListOf<String>()
         viewModel.categories.observe(viewLifecycleOwner) { it -> list.addAll(it)}
-
+        binding.createAccBtn.onFocusChangeListener =
+            View.OnFocusChangeListener { v, hasFocus ->
+                if (hasFocus){
+                    binding.createAccBtn.setTextColor(resources.getColor(R.color.text_black))
+                }else{
+                    binding.createAccBtn.setTextColor(resources.getColor(R.color.white))
+                }
+            }
         viewModel.kidInfo.observe(viewLifecycleOwner) { it ->
             str = it.name + ", "
             val age = 10//getAge(it.birthdate.parseToDate()!!)
