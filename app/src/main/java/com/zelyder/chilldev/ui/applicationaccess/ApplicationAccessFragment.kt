@@ -8,6 +8,7 @@ import androidx.lifecycle.lifecycleScope
 import com.zelyder.chilldev.R
 import com.zelyder.chilldev.databinding.ApplicationAccessPageBinding
 import com.zelyder.chilldev.domain.models.Gender
+import com.zelyder.chilldev.domain.models.parseToDate
 import com.zelyder.chilldev.ui.FragmentPage
 import kotlinx.coroutines.launch
 import java.util.*
