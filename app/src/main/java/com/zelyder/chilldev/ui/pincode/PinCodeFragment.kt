@@ -80,14 +80,18 @@ class PinCodeFragment : FragmentPage<PinCodePageBinding>() {
     fun transferData() {
         val uri: Uri = PolicyContract.buildPolicySettingsUri()
         val updateValues = ContentValues().apply {
-//            put(PolicyContract.NAME_KIDS_AGE_LIMIT, viewModel.kidInfo.value?.age_limit?.age ?: 0)
 //            put(PolicyContract.COLUMN_NAME, PolicyContract.NAME_KIDS_AGE_LIMIT)
 //            put(PolicyContract.COLUMN_VALUE, viewModel.kidInfo.value?.age_limit?.age.toString())
 
             put(PolicyContract.COLUMN_NAME, PolicyContract.NAME_POLICY_LEVEL_INDEX)
             put(PolicyContract.COLUMN_VALUE, "2")
 //            put(PolicyContract.NAME_LIMITED_AGE_LIMIT, 18)
+//            put(PolicyContract.COLUMN_NAME, PolicyContract.NAME_LIMITED_AGE_LIMIT)
+//            put(PolicyContract.COLUMN_VALUE, "18")
+
 //            put(PolicyContract.NAME_SEARCH_MODE_INDEX, 3)
+//            put(PolicyContract.NAME_SEARCH_MODE_INDEX, PolicyContract.NAME_LIMITED_AGE_LIMIT)
+//            put(PolicyContract.COLUMN_VALUE, "3")
         }
 
 
