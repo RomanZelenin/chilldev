@@ -6,7 +6,7 @@ import java.util.*
 
 data class KidInfo(
     val name: String = "",
-    val age_limit: Int = AgeLimit.ZERO_PLUS.age,
+    val age_limit:  Int= AgeLimit.ZERO_PLUS.age,
     val gender: Gender = Gender.WHATEVER,
     val birthdate: String = "",
     val categories: List<Int> = emptyList(),

@@ -11,7 +11,7 @@
         android:id="@+id/ivAvatar"
         android:layout_width="100dp"
         android:layout_height="100dp"
-        android:src="@drawable/avas1"
+        android:src="@drawable/ic_avas1"
         app:civ_border_color="@color/white"
         app:civ_border_width="2dp"
         app:layout_constraintEnd_toEndOf="parent"

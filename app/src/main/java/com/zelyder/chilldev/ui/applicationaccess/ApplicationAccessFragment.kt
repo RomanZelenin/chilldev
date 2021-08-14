@@ -42,7 +42,7 @@ class ApplicationAccessFragment : FragmentPage<ApplicationAccessPageBinding>() {
             val age = getAge(it.birthdate.parseToDate()!!)
             str += buildString {
                 append("$age ")
-                val lastNum = age.toString().run { this.last().digitToInt() }
+                //val lastNum = age.toString().run { this.last().digitToInt() }
                 when (age) {
                     1 -> append("год")
                     in 2..4 -> append("года")
@@ -58,7 +58,7 @@ class ApplicationAccessFragment : FragmentPage<ApplicationAccessPageBinding>() {
                 Gender.WHATEVER -> ""
             }
 
-            binding.savedLimitationAge.text = it.age_limit.toUIString()
+            binding.savedLimitationAge.text = "+${it.age_limit}"
 
             binding.descriptionKidInterests.text =
                 it.categories.joinToString { index -> list[index-1] }

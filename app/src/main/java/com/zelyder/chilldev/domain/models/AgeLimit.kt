@@ -17,8 +17,4 @@ enum class AgeLimit(val age: Int) {
     override fun toString(): String {
         return age.toString()
     }
-
-    fun toUIString(): String {
-        return "+$age"
-    }
 }
