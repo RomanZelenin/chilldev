@@ -16,28 +16,48 @@ class PageViewModel(private val remoteService: RemoteService) : ViewModel() {
     val categories: LiveData<List<String>>
         get() = _categories
 
-    fun fetchCategories() {
-        viewModelScope.launch {
-            val result = withContext(Dispatchers.IO) {
-                remoteService.categories().body()?.message!!.map { it.title }
-            }
-            withContext(Dispatchers.Main) {
-                _categories.value = result
-            }
-        }
-    }
     private val _kidInfo = MutableLiveData(KidInfo())
     val kidInfo: LiveData<KidInfo> = _kidInfo
 
-    suspend fun getPosters(ageLimit: AgeLimit): List<String> {
-        val response = remoteService.posters(ageLimit)
-        return if (response.isSuccessful) {
-            val urls = response.body()!!.message
-            urls
-        } else {
-            Log.d(TAG, response.errorBody()!!.string())
-            emptyList()
+    private val cachedCategories = mutableListOf<String>()
+    private val cachedPosters = mutableMapOf<AgeLimit, List<String>>()
+
+    fun fetchCategories() {
+        viewModelScope.launch {
+            try {
+                val result = withContext(Dispatchers.IO) {
+                    remoteService.categories().body()?.message!!.map { it.title }
+                }
+                cachedCategories.apply {
+                    clear()
+                    addAll(result)
+                }
+                withContext(Dispatchers.Main) {
+                    _categories.value = result
+                }
+            } catch (e: Throwable) {
+                Log.d(TAG, "categories: ${e.message}")
+            } finally {
+                _categories.value = cachedCategories
+            }
         }
+    }
+
+    suspend fun getPosters(ageLimit: AgeLimit): List<String> {
+        try {
+            val response = remoteService.posters(ageLimit)
+            return if (response.isSuccessful) {
+                val urls = response.body()!!.message
+                cachedPosters[ageLimit] = urls
+                urls
+            } else {
+                Log.d(TAG, response.errorBody()!!.string())
+                emptyList()
+            }
+        } catch (e: Throwable) {
+            Log.d(TAG, "posters: ${e.message}")
+        }
+        return cachedPosters[ageLimit] ?: emptyList()
     }
 
 
@@ -47,7 +67,7 @@ class PageViewModel(private val remoteService: RemoteService) : ViewModel() {
     }
 
     fun setKidAgeLimit(ageLimit: AgeLimit) {
-        _kidInfo.postValue(_kidInfo.value!!.copy(age_limit = ageLimit))
+        _kidInfo.postValue(_kidInfo.value!!.copy(age_limit = ageLimit.age))
         Log.d(TAG, "Set age limit: $ageLimit")
     }
 
@@ -73,6 +93,11 @@ class PageViewModel(private val remoteService: RemoteService) : ViewModel() {
     fun setPinCode(pinCode: String) {
         _kidInfo.postValue(_kidInfo.value!!.copy(pin = pinCode))
         Log.d(TAG, "Set pinCode: $pinCode")
+    }
+
+    fun setIcon(iconType: KidNameIconType) {
+        _kidInfo.postValue(_kidInfo.value!!.copy(iconType = iconType))
+        Log.d(TAG, "Added icon: $iconType")
     }
 
     fun saveKidInfo() {

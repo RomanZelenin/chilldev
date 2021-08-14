@@ -7,6 +7,7 @@
 
     <TextView
         android:id="@+id/kid_name_text_view"
+        style="@style/Text.Title"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="50dp"
@@ -18,17 +19,24 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <androidx.constraintlayout.utils.widget.ImageFilterView
-        android:id="@+id/kid_icon"
-        android:layout_width="90dp"
-        android:layout_height="90dp"
-        android:layout_marginTop="40dp"
-        android:src="@drawable/avas1"
+    <FrameLayout
+        android:id="@+id/item_list_layout"
+        android:layout_width="500dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
         app:layout_constraintLeft_toLeftOf="parent"
+        android:focusable="true"
         app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/kid_name_text_view"
-        app:roundPercent="1"
-        tools:ignore="ContentDescription" />
+        app:layout_constraintTop_toBottomOf="@id/kid_name_text_view">
+
+        <com.zelyder.chilldev.HorizontalCarouselRecyclerView
+            android:id="@+id/item_list"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:focusable="true"
+            android:clipToPadding="false"
+            android:overScrollMode="never"/>
+    </FrameLayout>
 
     <EditText
         android:id="@+id/kid_name_edit_text"
@@ -36,15 +44,31 @@
         android:layout_height="wrap_content"
         android:autofillHints="username"
         android:background="@null"
-        android:focusable="true"
-        android:clickable="true"
         android:hint="@string/name_hint"
         android:imeOptions="actionNext"
-        android:textSize="40sp"
+
+        android:inputType="textPersonName"
+        android:privateImeOptions="horizontalAlignment=center"
+        android:textSize="32sp"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/kid_icon"
-        android:inputType="textPersonName" />
+        app:layout_constraintTop_toBottomOf="@id/item_list_layout" />
+
+    <com.zelyder.chilldev.ui.kidname.KeyboardView
+        android:id="@+id/keyboard_view"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:descendantFocusability="afterDescendants"
+        android:focusableInTouchMode="true"
+        app:columnCount="@integer/search_keyboard_column_count"
+        app:keyAnimator="@animator/keyboard_list_animator"
+        app:keyBackgroundSelector="@drawable/keyboard_text_button_background"
+        app:keyColorSelector="@drawable/keyboard_text_button_color"
+        app:keyTextSize="@dimen/search_keyboard_text_size"
+        app:languages="ru|en|num"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent" />
 
     <ImageView
         android:layout_width="80dp"
@@ -57,13 +81,13 @@
 
     <TextView
         android:id="@+id/next_fragment"
+        style="@style/Text.NextTitle"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="10dp"
+        android:layout_marginBottom="20dp"
         android:gravity="center"
         android:text="@string/next_fragment_text_view"
         android:textSize="20sp"
         app:layout_constraintBottom_toBottomOf="parent" />
-
 
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -1,5 +1,42 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+    <declare-styleable name="KeyboardView">
+        <attr name="keyBackgroundSelector" format="reference|color" />
+        <attr name="keyColorSelector" format="reference|color" />
+        <attr name="keyAnimator" format="reference" />
+        <attr name="keyboardBackground" format="reference|color" />
+        <attr name="keyTextSize" format="dimension" />
+        <attr name="columnCount" format="integer" />
+        <attr name="languages" format="flags">
+            <flag name="ru" value="1" />
+            <flag name="en" value="2" />
+            <flag name="uk" value="4" />
+            <flag name="tr" value="8" />
+            <flag name="num" value="16" />
+        </attr>
+    </declare-styleable>
+
+    <declare-styleable name="ServiceButton">
+        <attr name="serviceMainTextColor" format="reference" />
+        <attr name="serviceSecondaryTextColor" format="reference" />
+        <attr name="serviceMainText" format="string|reference" />
+        <attr name="serviceSecondaryText" format="string|reference" />
+        <attr name="serviceCentralText" format="string|reference" />
+        <attr name="serviceIcon" format="reference" />
+        <attr name="serviceButtonCorners" format="dimension|reference" />
+        <attr name="android:enabled" />
+    </declare-styleable>
+
+    <declare-styleable name="GridStubView">
+        <attr name="stubItemWidth" format="dimension|reference" />
+        <attr name="stubItemHeight" format="dimension|reference" />
+        <attr name="stubItemSpacingX" format="dimension|reference" />
+        <attr name="stubItemSpacingY" format="dimension|reference" />
+        <attr name="stubItemDrawable" format="reference" />
+        <attr name="stubsOutOfScreenX" format="boolean" />
+        <attr name="stubsOutOfScreenY" format="boolean" />
+    </declare-styleable>
+
     <declare-styleable name="ScrollBarView">
         <attr name="numItems" format="integer"/>
     </declare-styleable>
@@ -15,4 +52,5 @@
         <attr name="android:color"/>
         <attr name="android:text"/>
     </declare-styleable>
+    <attr name="homeBackgroundColor" format="color" />
 </resources>

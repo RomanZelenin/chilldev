@@ -15,8 +15,11 @@
     <string name="movie_age_next_view_label">Пол ребенка</string>
     <string name="last_screen_message">Поздравляем! Вы успешно создали детский аккаунт =)</string>
     <string name="screen_pin_title">ПИН-код</string>
-    <string name="screen_pin_description">Хотите защитить выход из детского режима?\nПридумайте ПИН-код из четырёх символов.</string>
+    <string name="screen_pin_description">Хотите защитить выход из детского профиля?\nПридумайте ПИН-код из четырёх символов.</string>
+    <string name="screen_pin_confirm">Повторите</string>
+    <string name="screen_pin_enter">Введите ПИН для выхода \nиз детского профиля</string>
     <string name="screen_pin_done">Не хочу задавать ПИН-код</string>
+    <string name="screen_pin_error_text">ПИН коды не совпадают!</string>
     <string name="screen_congratulation">Поздравляем, вы подключили детский режим!</string>
     <string name="next_fragment_text_view">Какое кино будем показывать?</string>
     <string name="kid_name_text_view">Как зовут ребёнка?</string>
@@ -44,6 +47,7 @@
     <string name="create_profile_text">Создать профиль</string>
     <string name="day_message_error">Такого дня не существует :(</string>
     <string name="month_message_error">Такого месяца не существует :(</string>
+    <string name="app_access_hint">Доступ к сайтам и приложениям</string>
     <string name="choose_account_label">Кто будет смотреть?</string>
     <string name="choose_account_logout_label">Выйти из аккаунта</string>
     <string name="choose_account_configure_mode_label">Настройки детского режима</string>

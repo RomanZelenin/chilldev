@@ -1,12 +1,13 @@
 <resources>
     <string name="app_name">Chilldev</string>
-    <string name="child_gender_label">Пол ребенка</string>
+    <string name="child_gender_label">Пол ребёнка</string>
     <string name="child_gender_description">Это поможет нам сделать рекомендации точнее</string>
     <string name="child_gender_skip">Неважно</string>
     <string name="child_gender_female">Девочка</string>
     <string name="child_gender_male">Мальчик</string>
     <string name="child_gender_next_view_label">…и дата рождения</string>
     <string name="movie_age_label" translatable="false">Какое кино будем показывать?</string>
+    <string name="kid_interests_text_hint" translatable="false">Что ребёнку интересно</string>
     <string name="movie_age_zero" translatable="false">0+</string>
     <string name="movie_age_six" translatable="false">6+</string>
     <string name="movie_age_twelve" translatable="false">12+</string>
@@ -30,11 +31,15 @@
     <string name="zero" translatable="false">0</string>
     <string name="access_to_applications_and_sites">Access to applications and sites</string>
     <string name="screen_pin_title">ПИН-код</string>
-    <string name="screen_pin_description">Хотите защитить выход из детского режима?\nПридумайте ПИН-код из четырёх символов.</string>
+    <string name="screen_pin_description">Хотите защитить выход из детского профиля?\nПридумайте ПИН-код из четырёх символов.</string>
+    <string name="screen_pin_confirm">Повторите</string>
+    <string name="screen_pin_enter">Введите ПИН для выхода \nиз детского профиля</string>
     <string name="screen_pin_done">Не хочу задавать ПИН-код</string>
+    <string name="screen_pin_error_text">ПИН-коды не совпадают!</string>
     <string name="screen_congratulation">Поздравляем, вы подключили детский режим!</string>
     <string name="next_fragment_text_view">Какое кино будем показывать?</string>
     <string name="kid_name_text_view">Как зовут ребёнка?</string>
+    <string name="app_access_hint">Доступ к сайтам и приложениям</string>
     <string name="create_account">Создать профиль</string>
     <string name="check_information">Проверим?</string>
     <string name="limitation">Ограничение</string>
@@ -55,7 +60,7 @@
     <string name="check_confirm_sites">Кинопоиск HD, YouTube</string>
     <string name="create_account_btn">Создать профиль ребёнка</string>
     <string name="cancel">Отмена</string>
-    <string name="fragment_title_5">Что ребенку интересно?</string>
+    <string name="fragment_title_5">Что ребёнку интересно?</string>
     <string name="fragment_title_6">Выберите к каким сайтам и приложениям дать доступ</string>
     <string name="create_profile_text">Создать профиль</string>
     <string name="day_message_error">Day is not existed :(</string>
