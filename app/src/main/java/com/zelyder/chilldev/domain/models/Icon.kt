@@ -3,7 +3,7 @@ package com.zelyder.chilldev.domain.models
 import androidx.annotation.IntegerRes
 import com.zelyder.chilldev.R
 
-enum class KidNameIconType(val rank: Int, @IntegerRes val resId: Int) {
+enum class KidNameIconType(val rank: Int, val resId: Int) {
     ONE(1, R.drawable.ic_avas1),
     ICON_TWO(2, R.drawable.ic_avas2),
     ICON_THREE(3, R.drawable.ic_avas3),

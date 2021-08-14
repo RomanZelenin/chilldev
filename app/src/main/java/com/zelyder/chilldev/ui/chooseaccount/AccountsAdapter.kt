@@ -2,10 +2,14 @@ package com.zelyder.chilldev.ui.chooseaccount
 
 import android.content.Context
 import android.view.ViewGroup
+import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.RecyclerView
+import com.zelyder.chilldev.R
 import com.zelyder.chilldev.customview.AccountView
 import com.zelyder.chilldev.customview.AddProfileView
 import com.zelyder.chilldev.domain.models.Account
+import com.zelyder.chilldev.domain.models.KidNameIconType
+import de.hdodenhof.circleimageview.CircleImageView
 
 class AccountsAdapter(
     private val context: Context,
@@ -62,6 +66,13 @@ class AccountsAdapter(
             val view = itemView as AccountView
             view.text = account.name
             view.checked = account.checked
+            val civAvatar = view.findViewById<CircleImageView>(R.id.ivAvatar)
+            if (account.avatar == 0) {
+                civAvatar.setImageDrawable(ContextCompat.getDrawable(itemView.context, R.drawable.ic_adult))
+            } else {
+                civAvatar.setImageDrawable(ContextCompat.getDrawable(itemView.context,
+                    KidNameIconType.getForPosition(account.avatar - 1).resId))
+            }
         }
     }
 
