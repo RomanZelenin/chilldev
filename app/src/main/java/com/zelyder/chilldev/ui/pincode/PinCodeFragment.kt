@@ -27,22 +27,26 @@ class PinCodeFragment : FragmentPage<PinCodePageBinding>() {
         binding.buttonWithoutPin.setOnClickListener {
             page.swipeToNext()
         }
+
+        var firstPassword = ""
         binding.numPad.setupKeyboard(binding.pinView, 4, object : KeyboardOutput {
             override fun onSizeIsReached() {
                 when (arguments?.getInt(PIN_CODE_STAGE)) {
                     PinCodeStage.NEW.type -> {
-                        viewModel.setPinCode(binding.pinView.text.toString())
-                        page.swipeToNext()
-                    }
-                    PinCodeStage.CONFIRM.type -> {
-                        if (viewModel.kidInfo.value?.pin != binding.pinView.text.toString()) {
+                        if (firstPassword == "") {
+                            firstPassword = binding.pinView.text.toString()
+                            binding.description.text =
+                                resources.getText(R.string.screen_pin_confirm)
+                            binding.pinView.setText("")
+                        } else if (firstPassword == binding.pinView.text.toString()) {
+                            viewModel.setPinCode(firstPassword)
+                            page.swipeToNext()
+                        } else {
                             Toast.makeText(
                                 requireContext(),
                                 resources.getString(R.string.screen_pin_error_text),
                                 Toast.LENGTH_LONG
                             ).show()
-                        } else {
-                            page.swipeToNext()
                         }
                     }
                     PinCodeStage.ENTER.type -> {
@@ -56,13 +60,12 @@ class PinCodeFragment : FragmentPage<PinCodePageBinding>() {
         binding.description.text = resources.getText(
             when (arguments?.getInt(PIN_CODE_STAGE)) {
                 PinCodeStage.NEW.type -> R.string.screen_pin_description
-                PinCodeStage.CONFIRM.type -> R.string.screen_pin_confirm
                 PinCodeStage.ENTER.type -> R.string.screen_pin_enter
                 else -> R.string.screen_pin_description
             }
         )
     }
-// some
+
     companion object {
         private const val PIN_CODE_STAGE = "pin_code_stage"
 

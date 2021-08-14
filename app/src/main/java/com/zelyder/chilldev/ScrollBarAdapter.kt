@@ -15,7 +15,7 @@ import com.zelyder.chilldev.ui.movieage.MovieAgeFragment
 import com.zelyder.chilldev.ui.pincode.PinCodeFragment
 
 class ScrollBarAdapter(fragment: FragmentActivity) : FragmentStateAdapter(fragment) {
-    override fun getItemCount(): Int = 10
+    override fun getItemCount(): Int = 9
 
     override fun createFragment(position: Int): Fragment {
         return when (position) {
@@ -27,7 +27,6 @@ class ScrollBarAdapter(fragment: FragmentActivity) : FragmentStateAdapter(fragme
             5 -> AddAppScreenFragment.newInstance()
             6 -> ApplicationAccessFragment.newInstance()
             7 -> PinCodeFragment.newInstance(PinCodeStage.NEW)
-            8 -> PinCodeFragment.newInstance(PinCodeStage.CONFIRM)
             else -> CongratulationFragment.newInstance()
         }
     }
