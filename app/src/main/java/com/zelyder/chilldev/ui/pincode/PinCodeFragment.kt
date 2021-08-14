@@ -1,12 +1,18 @@
 package com.zelyder.chilldev.ui.pincode
 
+import android.content.ContentResolver
+import android.content.ContentValues
+import android.net.Uri
 import android.os.Bundle
+import android.provider.UserDictionary
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import com.zelyder.chilldev.R
 import com.zelyder.chilldev.databinding.PinCodePageBinding
+import com.zelyder.chilldev.domain.PolicyContract
 import com.zelyder.chilldev.domain.models.PinCodeStage
 import com.zelyder.chilldev.ui.FragmentPage
 import com.zelyder.chilldev.ui.customkeyboard.KeyboardOutput
@@ -40,7 +46,9 @@ class PinCodeFragment : FragmentPage<PinCodePageBinding>() {
                             binding.pinView.setText("")
                         } else if (firstPassword == binding.pinView.text.toString()) {
                             viewModel.setPinCode(firstPassword)
-                            page.swipeToNext()
+                            //page.swipeToNext()
+                            transferData()
+
                         } else {
                             Toast.makeText(
                                 requireContext(),
@@ -67,6 +75,34 @@ class PinCodeFragment : FragmentPage<PinCodePageBinding>() {
                 else -> R.string.screen_pin_description
             }
         )
+    }
+
+    fun transferData() {
+        val uri: Uri = PolicyContract.buildPolicySettingsUri()
+        val updateValues = ContentValues().apply {
+//            put(PolicyContract.COLUMN_NAME, PolicyContract.NAME_KIDS_AGE_LIMIT)
+//            put(PolicyContract.COLUMN_VALUE, viewModel.kidInfo.value?.age_limit?.age.toString())
+
+            put(PolicyContract.COLUMN_NAME, PolicyContract.NAME_POLICY_LEVEL_INDEX)
+            put(PolicyContract.COLUMN_VALUE, "2")
+//            put(PolicyContract.NAME_LIMITED_AGE_LIMIT, 18)
+//            put(PolicyContract.COLUMN_NAME, PolicyContract.NAME_LIMITED_AGE_LIMIT)
+//            put(PolicyContract.COLUMN_VALUE, "18")
+
+//            put(PolicyContract.NAME_SEARCH_MODE_INDEX, 3)
+//            put(PolicyContract.NAME_SEARCH_MODE_INDEX, PolicyContract.NAME_LIMITED_AGE_LIMIT)
+//            put(PolicyContract.COLUMN_VALUE, "3")
+        }
+
+
+
+
+        val rowsUpdated = requireContext().contentResolver.insert(
+            uri,   // the user dictionary content URI
+            updateValues
+        )
+        Log.d(this::class.simpleName, "rowsUpdated:$rowsUpdated")
+        requireActivity().finish()
     }
 
     companion object {
