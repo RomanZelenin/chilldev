@@ -49,6 +49,7 @@ class AddAppScreenFragment : FragmentPage<AppAccessPageBinding>() {
         super.onResume()
         binding.recycler.smoothScrollToPosition(0)
         requestFocusOnFirstItem()
+        viewModel.setKidServices(emptyList()) //For testing!!
     }
 
     private fun requestFocusOnFirstItem() {

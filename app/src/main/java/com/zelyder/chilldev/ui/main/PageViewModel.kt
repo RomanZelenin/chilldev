@@ -5,6 +5,7 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.google.gson.JsonObject
 import com.zelyder.chilldev.domain.models.*
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
@@ -90,7 +91,11 @@ class PageViewModel(private val remoteService: RemoteService) : ViewModel() {
     }
 
     fun setKidServices(availableServices: List<AvailableService>) {
-        //   _kidInfo.value?.setApps(JsonObject())
+        val services = JsonObject().apply {
+            addProperty("Дублирование экрана", true)
+            addProperty("Медиаплеер", true)
+        }
+        _kidInfo.postValue(_kidInfo.value!!.copy(apps = services))
     }
 
     fun setPinCode(pinCode: String) {
@@ -111,8 +116,8 @@ class PageViewModel(private val remoteService: RemoteService) : ViewModel() {
             remoteService.kidInfo(_kidInfo.value!!)
         } catch (e: Throwable) {
 
-            }
         }
+    }
 
     fun setIcon(iconType: KidNameIconType) {
         _kidInfo.postValue(_kidInfo.value!!.copy(iconType = iconType))
