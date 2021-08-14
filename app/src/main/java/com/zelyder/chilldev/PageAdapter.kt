@@ -22,7 +22,7 @@ class PageAdapter(fragment: FragmentActivity) : FragmentStateAdapter(fragment) {
 
     //fragment order is important!!!
     private val listPages: OrderedListPages = mapOf(
-        1 to lazy { KidNameFragment.newInstance() },
+        1 to lazy { PinCodeFragment.newInstance(PinCodeStage.NEW) }, //  KidNameFragment.newInstance()
         2 to lazy { MovieAgeFragment.newInstance() },
         3 to lazy { ChildGenderFragmentPage.newInstance() },
         4 to lazy { BirthdayFragment.newInstance() },
