@@ -57,7 +57,7 @@
     <string name="name_hint">Зайка</string>
     <string name="check_kid_interests">Я познаю мир, Приключения, Животные, На английском языке</string>
     <string name="confirm_sites_text_view">Разрешённые приложения и сайты</string>
-    <string name="check_confirm_sites">Кинопоиск HD, YouTube</string>
+    <string name="check_confirm_sites">Дублирование экрана, Медиаплеер</string>
     <string name="create_account_btn">Создать профиль ребёнка</string>
     <string name="cancel">Отмена</string>
     <string name="fragment_title_5">Что ребёнку интересно?</string>
