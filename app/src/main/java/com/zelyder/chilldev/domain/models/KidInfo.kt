@@ -11,7 +11,8 @@ data class KidInfo(
     val birthdate: String = "",
     val categories: List<Int> = emptyList(),
     val apps: JsonObject = JsonObject(),
-    val pin: String? = null
+    val pin: String? = null,
+    var iconType: KidNameIconType = KidNameIconType.ONE
 )
 
 fun Date.formatToString(pattern: String = "yyyy-MM-dd"): String {

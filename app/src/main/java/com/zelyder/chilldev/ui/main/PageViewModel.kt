@@ -95,6 +95,11 @@ class PageViewModel(private val remoteService: RemoteService) : ViewModel() {
         Log.d(TAG, "Set pinCode: $pinCode")
     }
 
+    fun setIcon(iconType: KidNameIconType) {
+        _kidInfo.postValue(_kidInfo.value!!.copy(iconType = iconType))
+        Log.d(TAG, "Added icon: $iconType")
+    }
+
     fun saveKidInfo() {
         viewModelScope.launch {
             try {

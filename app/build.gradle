@@ -45,6 +45,8 @@ dependencies {
     def coroutine_version = "1.5.1"
 
     implementation fileTree(dir: "libs", include: ["*.aar"])
+    implementation 'androidx.navigation:navigation-fragment-ktx:2.3.5'
+    implementation "androidx.lifecycle:lifecycle-livedata-ktx:2.4.0-alpha02"
 
     //OkHttp
     implementation("com.squareup.okhttp3:logging-interceptor:4.9.1")
@@ -80,6 +82,8 @@ dependencies {
     implementation 'androidx.viewpager2:viewpager2:1.0.0'
     implementation 'androidx.legacy:legacy-support-v4:1.0.0'
     implementation 'androidx.fragment:fragment-ktx:1.3.6'
+    implementation 'com.google.android.material:material:1.0.0'
+
     implementation 'androidx.cardview:cardview:1.0.0'
 
 
