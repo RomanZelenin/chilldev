@@ -64,12 +64,19 @@ class MainActivity : FragmentActivity(), SwipePage {
     }
 
     override fun onKeyDown(keyCode: Int, event: KeyEvent): Boolean {
+        val currentPosition = binding.scrollBar.selectedPosition
         when (event.keyCode) {
             KeyEvent.KEYCODE_DPAD_UP -> {
-                swipeToPrevious()
+                when (currentPosition) {
+                    4, 5 -> {}
+                    else -> swipeToPrevious()
+                }
             }
             KeyEvent.KEYCODE_DPAD_DOWN -> {
-                swipeToNext()
+                when (currentPosition) {
+                    4, 5 -> {}
+                    else -> swipeToNext()
+                }
             }
         }
         return super.onKeyDown(keyCode, event)

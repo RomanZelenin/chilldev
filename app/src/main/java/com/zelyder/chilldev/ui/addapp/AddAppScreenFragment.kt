@@ -4,7 +4,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.recyclerview.widget.LinearLayoutManager
+import android.view.accessibility.AccessibilityEvent
 import com.zelyder.chilldev.R
 import com.zelyder.chilldev.databinding.AppAccessPageBinding
 import com.zelyder.chilldev.ui.FragmentPage
@@ -30,7 +30,7 @@ class AddAppScreenFragment : FragmentPage<AppAccessPageBinding>() {
         super.onViewCreated(view, savedInstanceState)
 
         binding.recycler.apply {
-            layoutManager = LinearLayoutManager(requireContext())
+            layoutManager = AppLinearLayoutManager(requireContext(), page)
             adapter = AppRecyclerAdapter()
         }
 
@@ -48,13 +48,15 @@ class AddAppScreenFragment : FragmentPage<AppAccessPageBinding>() {
     override fun onResume() {
         super.onResume()
         binding.recycler.smoothScrollToPosition(0)
+        requestFocusOnFirstItem()
     }
-/*
-    override fun onPause() {
-        super.onPause()
 
-        viewModel.setKidServices()
-    }*/
+    private fun requestFocusOnFirstItem() {
+        binding.recycler.getChildAt(0)?.apply {
+            requestFocus()
+            sendAccessibilityEvent(AccessibilityEvent.TYPE_VIEW_FOCUSED)
+        }
+    }
 
     companion object {
         @JvmStatic
