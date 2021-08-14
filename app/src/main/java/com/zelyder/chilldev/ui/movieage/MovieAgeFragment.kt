@@ -30,7 +30,8 @@ class MovieAgeFragment : FragmentPage<MovieAgePageBinding>() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         with(binding) {
-            layoutAgeRating.selectedPosition = viewModel.kidInfo.value!!.age_limit.ordinal
+            layoutAgeRating.selectedPosition =
+                AgeLimit.values().indexOfFirst { it.age == viewModel.kidInfo.value!!.age_limit }
             layoutAgeRating.setOnKeyListener { v, keyCode, event ->
                 if (event.action == KeyEvent.ACTION_DOWN) {
                     when (keyCode) {
