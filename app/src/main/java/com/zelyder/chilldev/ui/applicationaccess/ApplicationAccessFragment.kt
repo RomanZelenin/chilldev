@@ -1,15 +1,14 @@
 package com.zelyder.chilldev.ui.applicationaccess
 
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.lifecycle.map
+import androidx.lifecycle.lifecycleScope
 import com.zelyder.chilldev.databinding.ApplicationAccessPageBinding
 import com.zelyder.chilldev.domain.models.Gender
-import com.zelyder.chilldev.domain.models.parseToDate
 import com.zelyder.chilldev.ui.FragmentPage
+import kotlinx.coroutines.launch
 import java.util.*
 
 class ApplicationAccessFragment : FragmentPage<ApplicationAccessPageBinding>() {
@@ -64,7 +63,7 @@ class ApplicationAccessFragment : FragmentPage<ApplicationAccessPageBinding>() {
                 it.categories.joinToString { index -> list[index-1] }
         }
         binding.createAccBtn.setOnClickListener {
-            viewModel.saveKidInfo()
+            lifecycleScope.launch {  viewModel.saveKidInfo() }
         }
     }
 

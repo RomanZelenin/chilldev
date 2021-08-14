@@ -15,6 +15,12 @@ data class KidInfo(
     var iconType: KidNameIconType = KidNameIconType.ONE
 )
 
+data class Kid(
+    val id: Int,
+    val avatar: Int,
+    val name: String
+)
+
 fun Date.formatToString(pattern: String = "yyyy-MM-dd"): String {
     val jdf = SimpleDateFormat(pattern, Locale.getDefault())
     return jdf.format(this)

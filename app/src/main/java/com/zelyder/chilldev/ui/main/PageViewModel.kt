@@ -19,7 +19,10 @@ class PageViewModel(private val remoteService: RemoteService) : ViewModel() {
     private val _kidInfo = MutableLiveData(KidInfo())
     val kidInfo: LiveData<KidInfo> = _kidInfo
 
-    private val cachedCategories = mutableListOf<String>()
+    private val cachedCategories = mutableListOf<String>().apply {
+        add("Я познаю мир")
+        add("Спорт")
+    }
     private val cachedPosters = mutableMapOf<AgeLimit, List<String>>()
 
     fun fetchCategories() {
@@ -95,19 +98,25 @@ class PageViewModel(private val remoteService: RemoteService) : ViewModel() {
         Log.d(TAG, "Set pinCode: $pinCode")
     }
 
-    fun setIcon(iconType: KidNameIconType) {
-        _kidInfo.postValue(_kidInfo.value!!.copy(iconType = iconType))
-        Log.d(TAG, "Added icon: $iconType")
+    suspend fun getAllKids(): List<Kid> {
+        return try {
+            remoteService.kids().body()?.message!!
+        } catch (e: Throwable) {
+            emptyList()
+        }
     }
 
-    fun saveKidInfo() {
-        viewModelScope.launch {
-            try {
-                remoteService.kidInfo(_kidInfo.value!!)
-            } catch (e: Throwable) {
+    suspend fun saveKidInfo() {
+        try {
+            remoteService.kidInfo(_kidInfo.value!!)
+        } catch (e: Throwable) {
 
             }
         }
+
+    fun setIcon(iconType: KidNameIconType) {
+        _kidInfo.postValue(_kidInfo.value!!.copy(iconType = iconType))
+        Log.d(TAG, "Added icon: $iconType")
     }
 
     companion object {
