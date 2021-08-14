@@ -48,4 +48,8 @@
     <string name="day_message_error">Такого дня не существует :(</string>
     <string name="month_message_error">Такого месяца не существует :(</string>
     <string name="app_access_hint">Доступ к сайтам и приложениям</string>
+    <string name="choose_account_label">Кто будет смотреть?</string>
+    <string name="choose_account_logout_label">Выйти из аккаунта</string>
+    <string name="choose_account_configure_mode_label">Настройки детского режима</string>
+    <string name="choose_account_add_profile_label">Добавить профиль</string>
 </resources>
