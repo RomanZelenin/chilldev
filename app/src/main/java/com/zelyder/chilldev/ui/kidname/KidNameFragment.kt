@@ -86,6 +86,11 @@ class KidNameFragment : FragmentPage<KidNamePageBinding>() {
         itemAdapter.setItems(iconItems)
         return binding.root
     }
+
+    override fun onResume() {
+        binding.kidNameEditText.requestFocus()
+        super.onResume()
+    }
 }
 
 data class Item(

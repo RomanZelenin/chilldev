@@ -39,7 +39,7 @@ class ApplicationAccessFragment : FragmentPage<ApplicationAccessPageBinding>() {
 
         viewModel.kidInfo.observe(viewLifecycleOwner) { it ->
             str = it.name + ", "
-            val age = getAge(it.birthdate.parseToDate()!!)
+            val age = 10//getAge(it.birthdate.parseToDate()!!)
             str += buildString {
                 append("$age ")
                 //val lastNum = age.toString().run { this.last().digitToInt() }
