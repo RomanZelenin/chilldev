@@ -5,7 +5,6 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.lifecycle.map
 import com.zelyder.chilldev.databinding.ApplicationAccessPageBinding
 import com.zelyder.chilldev.domain.models.Gender
 import com.zelyder.chilldev.domain.models.parseToDate
@@ -39,10 +38,10 @@ class ApplicationAccessFragment : FragmentPage<ApplicationAccessPageBinding>() {
 
         viewModel.kidInfo.observe(viewLifecycleOwner) { it ->
             str = it.name + ", "
-            val age = 10//getAge(it.birthdate.parseToDate()!!)
+            val ageFromView = it.birthdate.parseToDate() ?: Date()
+            val age = getAge(ageFromView)
             str += buildString {
                 append("$age ")
-                //val lastNum = age.toString().run { this.last().digitToInt() }
                 when (age) {
                     1 -> append("год")
                     in 2..4 -> append("года")

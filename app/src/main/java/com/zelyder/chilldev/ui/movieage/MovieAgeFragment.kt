@@ -29,6 +29,7 @@ class MovieAgeFragment : FragmentPage<MovieAgePageBinding>() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        binding.layoutAgeRating.requestFocus()
         with(binding) {
             layoutAgeRating.selectedPosition =
                 AgeLimit.values().indexOfFirst { it.age == viewModel.kidInfo.value!!.age_limit }
@@ -64,6 +65,11 @@ class MovieAgeFragment : FragmentPage<MovieAgePageBinding>() {
             }
         }
         insertPosters()
+    }
+
+    override fun onResume() {
+        super.onResume()
+        binding.layoutAgeRating.requestFocus()
     }
 
     private fun insertPosters() {
