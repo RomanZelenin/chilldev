@@ -5,6 +5,8 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.lifecycle.lifecycleScope
+import com.zelyder.chilldev.R
 import com.zelyder.chilldev.databinding.ApplicationAccessPageBinding
 import com.zelyder.chilldev.domain.models.Gender
 import com.zelyder.chilldev.domain.models.parseToDate
