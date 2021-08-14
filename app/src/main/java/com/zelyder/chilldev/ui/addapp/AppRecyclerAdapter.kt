@@ -25,7 +25,7 @@ class AppRecyclerAdapter :
         val view = AppView(parent.context, null).apply {
             layoutParams = ViewGroup.LayoutParams(
                 ViewGroup.LayoutParams.MATCH_PARENT,
-                124.dpToPx()
+                70.dpToPx()
             )
         }
         return MyViewHolder(view)
