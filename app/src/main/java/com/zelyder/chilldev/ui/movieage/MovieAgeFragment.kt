@@ -81,8 +81,6 @@ class MovieAgeFragment : FragmentPage<MovieAgePageBinding>() {
                 with(binding) {
                     for (i in posters.indices) {
                         Picasso.get().load(posters[i])
-                            .fit()
-                            .centerCrop()
                             .into(((clPosterContainer[i]) as CardView).getChildAt(0) as ImageView)
                     }
                 }
