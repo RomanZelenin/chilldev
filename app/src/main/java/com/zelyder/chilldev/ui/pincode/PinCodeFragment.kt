@@ -62,7 +62,7 @@ class PinCodeFragment : FragmentPage<PinCodePageBinding>() {
             }
         )
     }
-
+// some
     companion object {
         private const val PIN_CODE_STAGE = "pin_code_stage"
 
