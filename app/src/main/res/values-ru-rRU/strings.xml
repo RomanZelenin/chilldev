@@ -47,4 +47,5 @@
     <string name="create_profile_text">Создать профиль</string>
     <string name="day_message_error">Такого дня не существует :(</string>
     <string name="month_message_error">Такого месяца не существует :(</string>
+    <string name="app_access_hint">Доступ к сайтам и приложениям</string>
 </resources>
