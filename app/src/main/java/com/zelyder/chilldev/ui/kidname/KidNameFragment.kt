@@ -4,10 +4,12 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Toast
 import androidx.annotation.DrawableRes
+import androidx.recyclerview.widget.RecyclerView
+import androidx.recyclerview.widget.RecyclerView.SCROLL_STATE_IDLE
 import com.zelyder.chilldev.R
 import com.zelyder.chilldev.databinding.KidNamePageBinding
+import com.zelyder.chilldev.domain.models.KidNameIconType
 import com.zelyder.chilldev.ui.CarouselItemAdapter
 import com.zelyder.chilldev.ui.FragmentPage
 
@@ -34,10 +36,10 @@ class KidNameFragment : FragmentPage<KidNamePageBinding>() {
 
     private val itemAdapter by lazy {
         CarouselItemAdapter { position: Int, _: Item ->
-            Toast.makeText(requireContext(), "Pos $position", Toast.LENGTH_LONG).show()
             binding.itemList.smoothScrollToPosition(position)
         }
     }
+
     private val iconItems = listOf(
         Item(R.drawable.ic_avas1),
         Item(R.drawable.ic_avas2),
@@ -51,7 +53,6 @@ class KidNameFragment : FragmentPage<KidNamePageBinding>() {
         Item(R.drawable.ic_avas10)
     )
 
-
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
@@ -61,17 +62,23 @@ class KidNameFragment : FragmentPage<KidNamePageBinding>() {
         inflater.inflate(R.layout.kid_name_page, container, false)
 
         binding.itemList.initialize(itemAdapter)
-        binding.itemList.setViewsToChangeColor(listOf(R.id.list_item_background))
-        itemAdapter.setItems(iconItems)
+        binding.itemList.addOnScrollListener(object : RecyclerView.OnScrollListener() {
 
+            override fun onScrollStateChanged(recyclerView: RecyclerView, newState: Int) {
+                super.onScrollStateChanged(recyclerView, newState)
+                if (newState == SCROLL_STATE_IDLE ) {
+                    (0 until binding.itemList.childCount).forEach { position ->
+                        val item = binding.itemList.getChildAt(position)
+                        if (item?.tag != null && item.tag as Boolean) {
+                            viewModel.setIcon(KidNameIconType.getForPosition(position))
+                        }
+                    }
+                }
+            }
+        })
+        itemAdapter.setItems(iconItems)
         return binding.root
     }
-
-//    private fun getLargeListOfItems(): List<Item> {
-//        val items = mutableListOf<Item>()
-//        (0..40).map { items.add(iconItems.random()) }
-//        return items
-//    }
 }
 
 data class Item(

@@ -1,13 +1,7 @@
 package com.zelyder.chilldev
 
-import android.animation.ArgbEvaluator
 import android.content.Context
-import android.graphics.ColorMatrix
-import android.graphics.ColorMatrixColorFilter
 import android.util.AttributeSet
-import android.view.View
-import android.widget.ImageView
-import android.widget.TextView
 import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -16,12 +10,6 @@ class HorizontalCarouselRecyclerView(
     context: Context,
     attrs: AttributeSet
 ) : RecyclerView(context, attrs){
-
-    private val activeColor
-            by lazy { ContextCompat.getColor(context, R.color.blue) }
-    private val inactiveColor
-            by lazy { ContextCompat.getColor(context, R.color.white) }
-    private var viewsToChangeColor = listOf<Int>()
 
     fun <T : ViewHolder> initialize(newAdapter: Adapter<T>) {
         layoutManager = LinearLayoutManager(context, HORIZONTAL, false)
@@ -48,10 +36,10 @@ class HorizontalCarouselRecyclerView(
             (0 until childCount).forEach { position ->
                 val child = getChildAt(position)
                 val childCenterX = (child.left + child.right) / 2
-                val scaleValue = getGaussianScale(childCenterX, 1f, 1f, 150.toDouble())
+                val scaleValue = getGaussianScale(childCenterX, 1f, SELECTED_ICON_SCALE_FACTOR - 1f, 150.toDouble())
                 child.scaleX = scaleValue
                 child.scaleY = scaleValue
-                colorView(child, scaleValue)
+                child.tag = Math.abs(scaleValue - SELECTED_ICON_SCALE_FACTOR) < 0.001
             }
         }
     }
@@ -72,24 +60,7 @@ class HorizontalCarouselRecyclerView(
         ) * scaleFactor + minScaleOffest).toFloat()
     }
 
-    fun setViewsToChangeColor(viewIds: List<Int>) {
-        viewsToChangeColor = viewIds
-    }
-
-    private fun colorView(child: View, scaleValue: Float) {
-        val saturationPercent = (scaleValue - 1) / 1f
-        val alphaPercent = scaleValue / 2f
-        val matrix = ColorMatrix()
-        matrix.setSaturation(saturationPercent)
-
-        viewsToChangeColor.forEach { viewId ->
-            val viewToChangeColor = child.findViewById<View>(viewId)
-            when (viewToChangeColor) {
-                is ImageView -> {
-                    viewToChangeColor.colorFilter = ColorMatrixColorFilter(matrix)
-                    viewToChangeColor.imageAlpha = (255 * alphaPercent).toInt()
-                }
-            }
-        }
+    companion object {
+        const val SELECTED_ICON_SCALE_FACTOR = 2f
     }
 }

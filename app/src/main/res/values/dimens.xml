@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <dimen name="keyboard_button_corner_radius">3dp</dimen>
+    <dimen name="search_key_width">40dp</dimen>
+    <dimen name="search_key_height">30dp</dimen>
+    <dimen name="search_keyboard_text_size">18sp</dimen>
+</resources>

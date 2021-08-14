@@ -9,7 +9,8 @@ data class KidInfo(
     var birthdate: String? = null,
     var categories: List<Int> = emptyList(),
     var apps: JsonObject = JsonObject(),
-    var pin: String? = null
+    var pin: String? = null,
+    var iconType: KidNameIconType = KidNameIconType.ONE
 ) {
     inner class Builder {
 
@@ -45,6 +46,11 @@ data class KidInfo(
 
         fun setPin(pin: String):Builder{
             this@KidInfo.pin = pin
+            return this
+        }
+
+        fun setIcon(iconType: KidNameIconType):Builder {
+            this@KidInfo.iconType = iconType
             return this
         }
 

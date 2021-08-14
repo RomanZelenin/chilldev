@@ -72,6 +72,11 @@ class PageViewModel(private val remoteService: RemoteService) : ViewModel() {
         Log.d(TAG, "Added pinCode: $pinCode")
     }
 
+    fun setIcon(iconType: KidNameIconType) {
+        _kidInfo.value!!.setIcon(iconType)
+        Log.d(TAG, "Added icon: $iconType")
+    }
+
     fun postKidInfo() {
         viewModelScope.launch {
             try {
