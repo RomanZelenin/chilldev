@@ -15,13 +15,19 @@
         style="@style/Text.Title"
         android:text="@string/fragment_title_5"/>
 
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/interests_recycler"
+    <androidx.leanback.widget.BrowseFrameLayout
+        android:id="@+id/browse_layout"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center_horizontal"
-        android:layout_marginHorizontal="80dp"
-        tools:listitem="@layout/interest_view"
-        tools:itemCount="3"/>
+        android:layout_height="wrap_content">
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/interests_recycler"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginHorizontal="80dp"
+            tools:listitem="@layout/interest_view"
+            tools:itemCount="3"/>
+    </androidx.leanback.widget.BrowseFrameLayout>
 
 </LinearLayout>

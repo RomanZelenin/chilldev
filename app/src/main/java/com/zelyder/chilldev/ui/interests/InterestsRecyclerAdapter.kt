@@ -24,10 +24,10 @@ class InterestsRecyclerAdapter(
     override fun onBindViewHolder(holder: MyViewHolder, position: Int) {
         val view = holder.itemView as InterestView
         view.customOnClick = {
-            if (view.checked){
-                checkedCategories.add(Category(position+1,view.text))
-            }else{
-                checkedCategories.remove(Category(position+1,view.text))
+            if (view.checked) {
+                checkedCategories.add(Category(position + 1, view.text))
+            } else {
+                checkedCategories.remove(Category(position + 1, view.text))
             }
         }
         holder.bind(interests[position])
@@ -39,8 +39,8 @@ class InterestsRecyclerAdapter(
 
     fun setItems(items: List<String>) {
         interests.clear()
+        checkedCategories.clear()
         interests.addAll(items)
-        notifyDataSetChanged()
     }
 
     class MyViewHolder(

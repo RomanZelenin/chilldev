@@ -6,6 +6,7 @@ import com.zelyder.chilldev.domain.models.RemoteService
 import dagger.Module
 import dagger.Provides
 import okhttp3.OkHttpClient
+import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 
@@ -18,7 +19,7 @@ object NetworkModule {
     @ApplicationScope
     fun provideOkHttpClient(): OkHttpClient {
         return OkHttpClient.Builder()
-            //.connectTimeout(30, TimeUnit.SECONDS)
+            .addNetworkInterceptor(HttpLoggingInterceptor().apply { setLevel(HttpLoggingInterceptor.Level.BASIC) })
             .addInterceptor { chain ->
                 val requestBuilder = chain.request().newBuilder()
                 requestBuilder.addHeader("Authorization", "OAuth AQAAAAAn24kQAAdMKtm-VDWEMkljrl20f4nKnEk")

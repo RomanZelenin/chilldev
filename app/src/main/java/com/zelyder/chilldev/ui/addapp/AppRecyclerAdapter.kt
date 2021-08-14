@@ -35,13 +35,6 @@ class AppRecyclerAdapter :
         holder.bind(items[position])
     }
 
-    override fun onViewAttachedToWindow(holder: MyViewHolder) {
-        super.onViewAttachedToWindow(holder)
-        if (holder.bindingAdapterPosition == 0) {
-            holder.itemView.requestFocus()
-        }
-    }
-
     override fun getItemCount() = items.size
 
 
