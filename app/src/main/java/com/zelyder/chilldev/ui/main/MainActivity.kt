@@ -60,6 +60,7 @@ class MainActivity : FragmentActivity(), SwipePage {
                     binding.scrollBar.selectedPosition = position
                 }
             })
+            offscreenPageLimit = 1
         }
     }
 

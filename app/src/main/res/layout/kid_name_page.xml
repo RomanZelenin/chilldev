@@ -6,21 +6,22 @@
     android:layout_height="match_parent">
 
     <TextView
-        style="@style/Text.Title"
         android:id="@+id/kid_name_text_view"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="50dp"
         android:gravity="center"
         android:text="@string/kid_name_text_view"
+        android:textSize="50sp"
+        android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
     <androidx.constraintlayout.utils.widget.ImageFilterView
         android:id="@+id/kid_icon"
-        android:layout_width="100dp"
-        android:layout_height="100dp"
+        android:layout_width="90dp"
+        android:layout_height="90dp"
         android:layout_marginTop="40dp"
         android:src="@drawable/avas1"
         app:layout_constraintLeft_toLeftOf="parent"
@@ -33,16 +34,17 @@
         android:id="@+id/kid_name_edit_text"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:autofillHints="username"
         android:background="@null"
+        android:focusable="true"
+        android:clickable="true"
         android:hint="@string/name_hint"
         android:imeOptions="actionNext"
-        android:minHeight="48dp"
-        android:privateImeOptions="horizontalAlignment=center"
-        android:textSize="32sp"
+        android:textSize="40sp"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toBottomOf="@id/kid_icon"
-        tools:ignore="Autofill,LabelFor,TextFields" />
+        android:inputType="textPersonName" />
 
     <ImageView
         android:layout_width="80dp"
@@ -54,13 +56,13 @@
         tools:ignore="ContentDescription" />
 
     <TextView
-        style="@style/Text.NextTitle"
         android:id="@+id/next_fragment"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginBottom="10dp"
         android:gravity="center"
         android:text="@string/next_fragment_text_view"
+        android:textSize="20sp"
         app:layout_constraintBottom_toBottomOf="parent" />
 
 
