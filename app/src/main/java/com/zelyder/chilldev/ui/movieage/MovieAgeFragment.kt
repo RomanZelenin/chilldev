@@ -35,14 +35,18 @@ class MovieAgeFragment : FragmentPage<MovieAgePageBinding>() {
                 AgeLimit.values().indexOfFirst { it.age == viewModel.kidInfo.value!!.age_limit }
             layoutAgeRating.setOnKeyListener { v, keyCode, event ->
                 if (event.action == KeyEvent.ACTION_DOWN) {
+                    val selectedAgeLimit =
+                        AgeLimit.values()[binding.layoutAgeRating.selectedPosition]
                     when (keyCode) {
                         KeyEvent.KEYCODE_DPAD_RIGHT -> {
                             (v as AgeRatingLayout).moveToNext()
+                            viewModel.setKidAgeLimit(selectedAgeLimit)
                             insertPosters()
                             true
                         }
                         KeyEvent.KEYCODE_DPAD_LEFT -> {
                             (v as AgeRatingLayout).moveToPrevious()
+                            viewModel.setKidAgeLimit(selectedAgeLimit)
                             insertPosters()
                             true
                         }
@@ -73,17 +77,13 @@ class MovieAgeFragment : FragmentPage<MovieAgePageBinding>() {
     }
 
     private fun insertPosters() {
-        with(binding.layoutAgeRating) {
-            lifecycleScope.launch {
-                val selectedAgeLimit = AgeLimit.values()[selectedPosition]
-                viewModel.setKidAgeLimit(selectedAgeLimit)
-                val posters = viewModel.getPosters(selectedAgeLimit)
-                with(binding) {
-                    for (i in posters.indices) {
-                        Picasso.get().load(posters[i])
-                            .into(((clPosterContainer[i]) as CardView).getChildAt(0) as ImageView)
-                    }
-                }
+        lifecycleScope.launch {
+            val selectedAgeLimit = AgeLimit.values()[binding.layoutAgeRating.selectedPosition]
+            val posters = viewModel.getPosters(selectedAgeLimit)
+            posters.forEachIndexed { index, uri ->
+                Picasso.get()
+                    .load(uri)
+                    .into(((binding.clPosterContainer[index]) as CardView).getChildAt(0) as ImageView)
             }
         }
     }

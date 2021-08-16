@@ -2,29 +2,28 @@ package com.zelyder.chilldev.di
 
 import com.google.gson.Gson
 import com.google.gson.GsonBuilder
-import com.zelyder.chilldev.domain.models.RemoteService
+import com.zelyder.chilldev.domain.repository.datasource.RemoteService
 import dagger.Module
 import dagger.Provides
+import okhttp3.Interceptor
 import okhttp3.OkHttpClient
-import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 
 @Module
 object NetworkModule {
 
-    val baseUrl = "https://mywebflaskapp.com/"
-
+    private const val baseUrl = "https://mywebflaskapp.com/"
     @Provides
     @ApplicationScope
-    fun provideOkHttpClient(): OkHttpClient {
+    fun provideOkHttpClient(
+        @LocalInterceptor interceptors: List<@JvmSuppressWildcards Interceptor>,
+        @NetworkInterceptor networkInterceptors: List<@JvmSuppressWildcards Interceptor>
+    ): OkHttpClient {
         return OkHttpClient.Builder()
-            .addNetworkInterceptor(HttpLoggingInterceptor().apply { setLevel(HttpLoggingInterceptor.Level.BODY) })
-            .addInterceptor { chain ->
-                val requestBuilder = chain.request().newBuilder()
-                requestBuilder.addHeader("Authorization", "OAuth AQAAAAAn24kQAAdMKtm-VDWEMkljrl20f4nKnEk")
-                chain.proceed(requestBuilder.build())
-            }.build()
+            .addInterceptors(interceptors, false)
+            .addInterceptors(networkInterceptors, true)
+            .build()
     }
 
     @Provides
@@ -49,3 +48,5 @@ object NetworkModule {
         return retrofit.create(RemoteService::class.java)
     }
 }
+
+
