@@ -8,7 +8,7 @@ import javax.inject.Scope
 @Scope
 annotation class ApplicationScope
 
-@Component(modules = [NetworkModule::class, InterceptorsModule::class])
+@Component(modules = [NetworkModule::class, InterceptorsModule::class, DataSources::class])
 @ApplicationScope
 interface AppComponent {
 

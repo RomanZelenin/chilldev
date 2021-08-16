@@ -1,67 +1,33 @@
 package com.zelyder.chilldev.ui.main
 
+import android.net.Uri
 import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.google.gson.JsonObject
+import com.zelyder.chilldev.domain.repository.Repository
 import com.zelyder.chilldev.domain.models.*
-import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
-import kotlinx.coroutines.withContext
 
-class PageViewModel(private val remoteService: RemoteService) : ViewModel() {
+class PageViewModel(private val repository: Repository) :
+    ViewModel() {
 
     private val _categories = MutableLiveData<List<String>>()
-    val categories: LiveData<List<String>>
-        get() = _categories
-
     private val _kidInfo = MutableLiveData(KidInfo())
     val kidInfo: LiveData<KidInfo> = _kidInfo
 
-    private val cachedCategories = mutableListOf<String>().apply {
-        add("Я познаю мир")
-        add("Спорт")
-    }
-    private val cachedPosters = mutableMapOf<AgeLimit, List<String>>()
-
-    fun fetchCategories() {
+    fun getCategories(): LiveData<List<String>> {
         viewModelScope.launch {
-            try {
-                val result = withContext(Dispatchers.IO) {
-                    remoteService.categories().body()?.message!!.map { it.title }
-                }
-                cachedCategories.apply {
-                    clear()
-                    addAll(result)
-                }
-                withContext(Dispatchers.Main) {
-                    _categories.value = result
-                }
-            } catch (e: Throwable) {
-                Log.d(TAG, "categories: ${e.message}")
-            } finally {
-                _categories.value = cachedCategories
-            }
+            val categories = repository.getCategories()
+            _categories.postValue(categories)
         }
+        return _categories
     }
 
-    suspend fun getPosters(ageLimit: AgeLimit): List<String> {
-        try {
-            val response = remoteService.posters(ageLimit)
-            return if (response.isSuccessful) {
-                val urls = response.body()!!.message
-                cachedPosters[ageLimit] = urls
-                urls
-            } else {
-                Log.d(TAG, response.errorBody()!!.string())
-                emptyList()
-            }
-        } catch (e: Throwable) {
-            Log.d(TAG, "posters: ${e.message}")
-        }
-        return cachedPosters[ageLimit] ?: emptyList()
+    suspend fun getPosters(ageLimit: AgeLimit): List<Uri> {
+        return repository.getPosters(ageLimit)
     }
 
 
@@ -104,19 +70,11 @@ class PageViewModel(private val remoteService: RemoteService) : ViewModel() {
     }
 
     suspend fun getAllKids(): List<Kid> {
-        return try {
-            remoteService.kids().body()?.message!!
-        } catch (e: Throwable) {
-            emptyList()
-        }
+        return repository.getAllKids()
     }
 
     suspend fun saveKidInfo() {
-        try {
-            remoteService.kidInfo(_kidInfo.value!!)
-        } catch (e: Throwable) {
-
-        }
+        repository.saveKid(kidInfo.value!!)
     }
 
     fun setIcon(iconType: KidNameIconType) {

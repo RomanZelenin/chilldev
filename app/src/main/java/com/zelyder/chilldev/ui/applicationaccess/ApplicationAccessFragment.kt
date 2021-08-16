@@ -36,7 +36,7 @@ class ApplicationAccessFragment : FragmentPage<ApplicationAccessPageBinding>() {
         var str : String = ""
         binding.kidAge.text = ""
         val list = arrayListOf<String>()
-        viewModel.categories.observe(viewLifecycleOwner) { it -> list.addAll(it)}
+        viewModel.getCategories().observe(viewLifecycleOwner) { it -> list.addAll(it)}
         binding.createAccBtn.onFocusChangeListener =
             View.OnFocusChangeListener { v, hasFocus ->
                 if (hasFocus){
