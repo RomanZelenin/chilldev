@@ -10,6 +10,7 @@ import com.google.gson.JsonObject
 import com.zelyder.chilldev.domain.repository.Repository
 import com.zelyder.chilldev.domain.models.*
 import kotlinx.coroutines.launch
+import timber.log.Timber
 
 class PageViewModel(private val repository: Repository) :
     ViewModel() {
@@ -33,27 +34,27 @@ class PageViewModel(private val repository: Repository) :
 
     fun setKidName(name: String) {
         _kidInfo.postValue(_kidInfo.value!!.copy(name = name))
-        Log.d(TAG, "Set name: $name")
+        Timber.d("Set name: $name")
     }
 
     fun setKidAgeLimit(ageLimit: AgeLimit) {
         _kidInfo.postValue(_kidInfo.value!!.copy(age_limit = ageLimit.age))
-        Log.d(TAG, "Set age limit: $ageLimit")
+        Timber.d("Set age limit: $ageLimit")
     }
 
     fun setKidGender(gender: Gender) {
         _kidInfo.postValue(_kidInfo.value!!.copy(gender = gender))
-        Log.d(TAG, "Set gender: ${gender.name}")
+        Timber.d("Set gender: ${gender.name}")
     }
 
     fun setKidBirthday(birthday: String) {
         _kidInfo.postValue(_kidInfo.value!!.copy(birthdate = birthday))
-        Log.d(TAG, "Set age birthday: $birthday")
+        Timber.d("Set age birthday: $birthday")
     }
 
     fun setKidCategories(categories: List<Category>) {
         _kidInfo.postValue(_kidInfo.value!!.copy(categories = categories.map { it.id }))
-        Log.d(TAG, "Set categories: $categories")
+        Timber.d("Set categories: $categories")
     }
 
     fun setKidServices(availableServices: List<AvailableService>) {
@@ -66,7 +67,7 @@ class PageViewModel(private val repository: Repository) :
 
     fun setPinCode(pinCode: String) {
         _kidInfo.postValue(_kidInfo.value!!.copy(pin = pinCode))
-        Log.d(TAG, "Set pinCode: $pinCode")
+        Timber.d("Set pinCode: $pinCode")
     }
 
     suspend fun getAllKids(): List<Kid> {
@@ -79,10 +80,6 @@ class PageViewModel(private val repository: Repository) :
 
     fun setIcon(iconType: KidNameIconType) {
         _kidInfo.postValue(_kidInfo.value!!.copy(iconType = iconType))
-        Log.d(TAG, "Added icon: $iconType")
-    }
-
-    companion object {
-        val TAG = PageViewModel::class.java.canonicalName
+        Timber.d("Added icon: $iconType")
     }
 }
