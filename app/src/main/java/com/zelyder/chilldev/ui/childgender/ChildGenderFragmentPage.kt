@@ -23,14 +23,10 @@ class ChildGenderFragmentPage : FragmentPage<ChildGenderPageBinding>() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        binding.rbSkip.setOnClickListener {
-            handleOnGenderClick(it as RadioButton)
-        }
-        binding.rbMale.setOnClickListener {
-            handleOnGenderClick(it as RadioButton)
-        }
-        binding.rbFemale.setOnClickListener {
-            handleOnGenderClick(it as RadioButton)
+        for (idx in 0 until binding.rgGender.childCount) {
+            binding.rgGender.getChildAt(idx).setOnClickListener {
+                page.swipeToNext()
+            }
         }
         binding.browseContainer.setOnFocusSearchListener { focused, direction ->
             when {
@@ -51,7 +47,7 @@ class ChildGenderFragmentPage : FragmentPage<ChildGenderPageBinding>() {
                     binding.rbSkip
                 }
                 focused.id == R.id.rbSkip && direction == View.FOCUS_LEFT -> {
-                    null
+                    binding.rbSkip
                 }
                 else -> focused
             }
@@ -60,25 +56,28 @@ class ChildGenderFragmentPage : FragmentPage<ChildGenderPageBinding>() {
 
     override fun onResume() {
         super.onResume()
-        setDefaultFocus()
-    }
-
-    private fun setDefaultFocus() {
         viewModel.kidInfo.observe(viewLifecycleOwner) {
-            when (it.gender) {
-                Gender.MALE -> binding.rbMale.requestFocus()
-                Gender.FEMALE -> binding.rbFemale.requestFocus()
-                Gender.WHATEVER -> binding.rbSkip.requestFocus()
-            }
+            setGenderFocus(it.gender)
         }
     }
 
-    private fun handleOnGenderClick(radioButton: RadioButton) {
-        radioButton.isEnabled = false
-        radioButton.postDelayed({
-            page.swipeToNext()
-            radioButton.isEnabled = true
-        }, 1000)
+    override fun onPause() {
+        viewModel.kidInfo.removeObservers(viewLifecycleOwner)
+        super.onPause()
+    }
+
+    private fun setGenderFocus(gender: Gender) {
+        when (gender) {
+            Gender.MALE -> {
+                binding.rbMale.requestFocus()
+            }
+            Gender.FEMALE -> {
+                binding.rbFemale.requestFocus()
+            }
+            Gender.WHATEVER -> {
+                binding.rbSkip.requestFocus()
+            }
+        }
     }
 
     companion object {
