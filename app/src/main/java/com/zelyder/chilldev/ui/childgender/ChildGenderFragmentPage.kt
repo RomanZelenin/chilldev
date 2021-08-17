@@ -66,12 +66,10 @@ class ChildGenderFragmentPage : FragmentPage<ChildGenderPageBinding>() {
     }
 
     private fun setDefaultFocus() {
-        viewModel.kidInfo.observe(viewLifecycleOwner) {
-            when (it.gender) {
-                Gender.MALE -> binding.rbMale.requestFocus()
-                Gender.FEMALE -> binding.rbFemale.requestFocus()
-                Gender.WHATEVER -> binding.rbSkip.requestFocus()
-            }
+        when (viewModel.kidInfo.value!!.gender) {
+            Gender.MALE -> binding.rbMale.requestFocus()
+            Gender.FEMALE -> binding.rbFemale.requestFocus()
+            Gender.WHATEVER -> binding.rbSkip.requestFocus()
         }
     }
 
