@@ -1,6 +1,5 @@
 package com.zelyder.chilldev.domain.models
 
-import androidx.annotation.IntegerRes
 import com.zelyder.chilldev.R
 
 enum class KidNameIconType(val rank: Int, val resId: Int) {
