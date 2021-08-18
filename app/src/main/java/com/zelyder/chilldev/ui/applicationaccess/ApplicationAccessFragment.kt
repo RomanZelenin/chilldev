@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.content.res.ResourcesCompat
 import androidx.lifecycle.lifecycleScope
 import com.zelyder.chilldev.R
 import com.zelyder.chilldev.databinding.ApplicationAccessPageBinding
@@ -51,6 +52,7 @@ class ApplicationAccessFragment : FragmentPage<ApplicationAccessPageBinding>() {
                 }
             }
             binding.apply {
+                imageView.setImageDrawable(ResourcesCompat.getDrawable(resources,viewModel.kidInfo.value!!.iconType.resId, null))
                 createAccBtn.onFocusChangeListener =
                     View.OnFocusChangeListener { _, hasFocus ->
                         if (hasFocus) {
