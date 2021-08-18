@@ -18,7 +18,7 @@ class CustomNumKeyboard(
     var textSize = 9 * scale
     var editText: EditText? = null
     var keyboardOutput: KeyboardOutput? = null
-    var requiredLength: Int = - 1
+    var requiredLength: Int = -1
 
     fun setupKeyboard(
         editText: EditText,
@@ -56,6 +56,33 @@ class CustomNumKeyboard(
         findViewById<ImageButton>(R.id.pin_btn_del).setOnClickListener(ClickLister())
     }
 
+    fun setOnlyDeleteIsClickable(isClickable:Boolean){
+        if (isClickable){
+            findViewById<Button>(R.id.pin_btn_2).isClickable = false
+            findViewById<Button>(R.id.pin_btn_3).isClickable = false
+            findViewById<Button>(R.id.pin_btn_4).isClickable = false
+            findViewById<Button>(R.id.pin_btn_5).isClickable = false
+            findViewById<Button>(R.id.pin_btn_6).isClickable = false
+            findViewById<Button>(R.id.pin_btn_7).isClickable = false
+            findViewById<Button>(R.id.pin_btn_8).isClickable = false
+            findViewById<Button>(R.id.pin_btn_9).isClickable = false
+            findViewById<Button>(R.id.pin_btn_0).isClickable = false
+            findViewById<ImageButton>(R.id.pin_btn_del).requestFocus()
+        }else{
+            findViewById<Button>(R.id.pin_btn_2).isClickable = true
+            findViewById<Button>(R.id.pin_btn_3).isClickable = true
+            findViewById<Button>(R.id.pin_btn_4).isClickable = true
+            findViewById<Button>(R.id.pin_btn_5).isClickable = true
+            findViewById<Button>(R.id.pin_btn_6).isClickable = true
+            findViewById<Button>(R.id.pin_btn_7).isClickable = true
+            findViewById<Button>(R.id.pin_btn_8).isClickable = true
+            findViewById<Button>(R.id.pin_btn_9).isClickable = true
+            findViewById<Button>(R.id.pin_btn_0).isClickable = true
+            //findViewById<Button>(R.id.pin_btn_0).requestFocus()
+        }
+
+    }
+
     inner class ClickLister : OnClickListener {
         override fun onClick(view: View?) {
             editText?.let {
@@ -75,7 +102,7 @@ class CustomNumKeyboard(
                         if (len > 0) {
                             it.text?.delete(len - 1, len)
                         }
-                        if (len <= 1 ) {
+                        if (len <= 1) {
                             keyboardOutput?.onFieldIsEmpty()
                         }
                     }
@@ -85,8 +112,6 @@ class CustomNumKeyboard(
                     keyboardOutput?.onSizeIsReached()
                 }
             }
-
         }
-
     }
 }

@@ -3,7 +3,6 @@ package com.zelyder.chilldev.ui.main
 import android.content.Context
 import android.content.Intent
 import android.os.Bundle
-import android.util.Log
 import android.view.KeyEvent
 import androidx.fragment.app.FragmentActivity
 import androidx.lifecycle.ViewModelProvider
@@ -15,6 +14,7 @@ import com.zelyder.chilldev.PageAdapter
 import com.zelyder.chilldev.databinding.ActivityMainBinding
 import com.zelyder.chilldev.di.DaggerAppComponent
 import kotlinx.coroutines.*
+import timber.log.Timber
 import javax.inject.Inject
 
 
@@ -71,21 +71,21 @@ class MainActivity : FragmentActivity(), SwipePage {
         when (event.keyCode) {
             KeyEvent.KEYCODE_DPAD_UP -> {
                 when (currentPosition) {
-                    4, 5 -> {}
+                    4, 5 -> {
+                    }
                     else -> swipeToPrevious()
                 }
             }
             KeyEvent.KEYCODE_DPAD_DOWN -> {
                 when (currentPosition) {
-                    4, 5 -> {}
+                    4, 5 -> {
+                    }
                     else -> swipeToNext()
                 }
             }
         }
         return super.onKeyDown(keyCode, event)
     }
-
-
     private fun initScrollBar(numItems: Int) {
         with(binding.scrollBar) {
             this.numItems = numItems
@@ -101,20 +101,22 @@ class MainActivity : FragmentActivity(), SwipePage {
                 try {
                     callback(passportProviderSdk.currentAccount?.token)
                 } catch (e: Exception) {
-                    Log.e(TAG, "Cannot get access token", e)
+                    Timber.e(e, "Cannot get access token")
                 }
             }
         }
     }
 
     override fun swipeToNext() {
-        if (binding.scrollBar.selectedPosition <= binding.scrollBar.numItems)
+        if (binding.scrollBar.selectedPosition <= binding.scrollBar.numItems) {
             binding.pager.setCurrentItem(binding.scrollBar.selectedPosition + 1, true)
+        }
     }
 
     override fun swipeToPrevious() {
-        if (binding.scrollBar.selectedPosition >= 1)
+        if (binding.scrollBar.selectedPosition >= 1) {
             binding.pager.setCurrentItem(binding.scrollBar.selectedPosition - 1, true)
+        }
     }
 
     companion object {

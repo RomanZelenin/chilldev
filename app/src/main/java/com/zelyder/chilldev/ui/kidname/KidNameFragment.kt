@@ -67,23 +67,20 @@ class KidNameFragment : FragmentPage<KidNamePageBinding>() {
     ): View {
         super.onCreateView(inflater, container, savedInstanceState)
         inflater.inflate(R.layout.kid_name_page, container, false)
+        viewModel.setIcon(KidNameIconType.getForPosition(1))
 
         binding.itemList.initialize(itemAdapter)
+        itemAdapter.setItems(iconItems)
         binding.itemList.addOnScrollListener(object : RecyclerView.OnScrollListener() {
-
             override fun onScrollStateChanged(recyclerView: RecyclerView, newState: Int) {
                 super.onScrollStateChanged(recyclerView, newState)
-                if (newState == SCROLL_STATE_IDLE ) {
-                    (0 until binding.itemList.childCount).forEach { position ->
-                        val item = binding.itemList.getChildAt(position)
-                        if (item?.tag != null && item.tag as Boolean) {
-                            viewModel.setIcon(KidNameIconType.getForPosition(position))
-                        }
-                    }
+                if (newState == SCROLL_STATE_IDLE) {
+                    val position =
+                        binding.itemList.getChildAdapterPosition(binding.itemList.focusedChild)+1
+                    viewModel.setIcon(KidNameIconType.getForPosition(position))
                 }
             }
         })
-        itemAdapter.setItems(iconItems)
         return binding.root
     }
 

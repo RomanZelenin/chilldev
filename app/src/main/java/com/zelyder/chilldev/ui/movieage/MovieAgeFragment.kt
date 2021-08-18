@@ -3,10 +3,7 @@ package com.zelyder.chilldev.ui.movieage
 import android.os.Bundle
 import android.os.Handler
 import android.os.Looper
-import android.view.KeyEvent
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
+import android.view.*
 import android.widget.ImageView
 import androidx.cardview.widget.CardView
 import androidx.core.view.get
@@ -35,30 +32,25 @@ class MovieAgeFragment : FragmentPage<MovieAgePageBinding>() {
                 AgeLimit.values().indexOfFirst { it.age == viewModel.kidInfo.value!!.age_limit }
             layoutAgeRating.setOnKeyListener { v, keyCode, event ->
                 if (event.action == KeyEvent.ACTION_DOWN) {
-                    val selectedAgeLimit =
-                        AgeLimit.values()[binding.layoutAgeRating.selectedPosition]
                     when (keyCode) {
                         KeyEvent.KEYCODE_DPAD_RIGHT -> {
                             (v as AgeRatingLayout).moveToNext()
-                            viewModel.setKidAgeLimit(selectedAgeLimit)
+                            updateAgeLimit()
                             insertPosters()
                             true
                         }
                         KeyEvent.KEYCODE_DPAD_LEFT -> {
                             (v as AgeRatingLayout).moveToPrevious()
-                            viewModel.setKidAgeLimit(selectedAgeLimit)
+                            updateAgeLimit()
                             insertPosters()
                             true
                         }
                         KeyEvent.KEYCODE_DPAD_CENTER -> {
                             layoutAgeRating.isEnabled = false
-                            Handler(Looper.getMainLooper()).postDelayed(
-                                {
-                                    page.swipeToNext()
-                                    layoutAgeRating.isEnabled = true
-                                },
-                                500
-                            )
+                            Handler(Looper.getMainLooper()).post {
+                                page.swipeToNext()
+                                layoutAgeRating.isEnabled = true
+                            }
                             true
                         }
                         else -> false
@@ -74,6 +66,12 @@ class MovieAgeFragment : FragmentPage<MovieAgePageBinding>() {
     override fun onResume() {
         super.onResume()
         binding.layoutAgeRating.requestFocus()
+    }
+
+    private fun updateAgeLimit() {
+        val selectedAgeLimit =
+            AgeLimit.values()[binding.layoutAgeRating.selectedPosition]
+        viewModel.setKidAgeLimit(selectedAgeLimit)
     }
 
     private fun insertPosters() {

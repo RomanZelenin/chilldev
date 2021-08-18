@@ -34,7 +34,7 @@ class BirthdayFragment : FragmentPage<BirthdayPageBinding>() {
                 } else {
                     hideErrorMessage(binding.month)
                 }
-            }else{
+            } else {
                 hideErrorMessage(binding.month)
             }
         }
@@ -45,10 +45,15 @@ class BirthdayFragment : FragmentPage<BirthdayPageBinding>() {
                 } else {
                     hideErrorMessage(binding.day)
                 }
-            }else{
+            } else {
                 hideErrorMessage(binding.day)
             }
         }
+    }
+
+    override fun onResume() {
+        super.onResume()
+        binding.numPad.requestFocus()
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -61,11 +66,13 @@ class BirthdayFragment : FragmentPage<BirthdayPageBinding>() {
         text.setTextColor(resources.getColor(R.color.red))
         binding.errorMessage.text = mess
         binding.errorMessage.visibility = View.VISIBLE
+        binding.numPad.setOnlyDeleteIsClickable(true)
     }
 
     private fun hideErrorMessage(text: EditText) {
         text.setTextColor(resources.getColor(R.color.white))
         binding.errorMessage.visibility = View.INVISIBLE
+        binding.numPad.setOnlyDeleteIsClickable(false)
     }
 
     companion object {
