@@ -1,0 +1,162 @@
+<?xml version="1.0" encoding="utf-8"?>
+<input-methods>
+    <input lang="ru">
+        <item type="0">А</item>
+        <item type="0">Б</item>
+        <item type="0">В</item>
+        <item type="0">Г</item>
+        <item type="0">Д</item>
+        <item type="0">Е</item>
+        <item type="0">Ж</item>
+        <item type="0">З</item>
+        <item type="0">И</item>
+        <item type="0">Й</item>
+        <item type="0">К</item>
+        <item type="0">Л</item>
+        <item type="1">DEL</item>
+        <item type="0">М</item>
+        <item type="0">Н</item>
+        <item type="0">О</item>
+        <item type="0">П</item>
+        <item type="0">Р</item>
+        <item type="0">С</item>
+        <item type="0">Т</item>
+        <item type="0">У</item>
+        <item type="0">Ф</item>
+        <item type="0">Х</item>
+        <item type="0">Ц</item>
+        <item type="0">Ч</item>
+        <item type="3">ABC</item>
+        <item type="0">Ш</item>
+        <item type="0">Щ</item>
+        <item type="0">Ъ</item>
+        <item type="0">Ы</item>
+        <item type="0">Ь</item>
+        <item type="0">Э</item>
+        <item type="0">Ю</item>
+        <item type="0">Я</item>
+        <item type="5" size="2">\\_/</item>
+        <item type="2" size="2">НАЙТИ</item>
+        <item type="4">&amp;123</item>
+    </input>
+
+    <input lang="en">
+        <item type="0">A</item>
+        <item type="0">B</item>
+        <item type="0">C</item>
+        <item type="0">D</item>
+        <item type="0">E</item>
+        <item type="0">F</item>
+        <item type="0">G</item>
+        <item type="0">H</item>
+        <item type="0">I</item>
+        <item type="0">J</item>
+        <item type="0">K</item>
+        <item type="0">L</item>
+        <item type="1">DEL</item>
+        <item type="0">M</item>
+        <item type="0">N</item>
+        <item type="0">O</item>
+        <item type="0">P</item>
+        <item type="0">Q</item>
+        <item type="0">R</item>
+        <item type="0">S</item>
+        <item type="0">T</item>
+        <item type="0">U</item>
+        <item type="0">V</item>
+        <item type="0">W</item>
+        <item type="0">X</item>
+        <item type="3">AБВ</item>
+        <item type="0">Y</item>
+        <item type="0">Z</item>
+        <item type="0">'</item>
+        <item type="0">.</item>
+        <item type="0">,</item>
+        <item type="6"/>
+        <item type="6"/>
+        <item type="6"/>
+        <item type="5" size="2">\\_/</item>
+        <item type="2" size="2">НАЙТИ</item>
+        <item type="4">&amp;123</item>
+    </input>
+
+    <input lang="uk">
+        <item type="0">А</item>
+        <item type="0">Б</item>
+        <item type="0">В</item>
+        <item type="0">Г</item>
+        <item type="0">Д</item>
+        <item type="0">Е</item>
+        <item type="0">Є</item>
+        <item type="0">Ж</item>
+        <item type="0">З</item>
+        <item type="0">И</item>
+        <item type="0">І</item>
+        <item type="0">Ї</item>
+        <item type="0">Й</item>
+        <item type="0">К</item>
+        <item type="0">Л</item>
+        <item type="0">М</item>
+        <item type="0">Н</item>
+        <item type="0">О</item>
+        <item type="0">П</item>
+        <item type="0">Р</item>
+        <item type="0">С</item>
+        <item type="0">Т</item>
+        <item type="0">У</item>
+        <item type="0">Ф</item>
+        <item type="0">Х</item>
+        <item type="0">Ц</item>
+        <item type="0">Ч</item>
+        <item type="0">Ш</item>
+        <item type="0">Щ</item>
+        <item type="0">Ь</item>
+        <item type="0">Ю</item>
+        <item type="0">Я</item>
+        <item type="5">\\_/</item>
+        <item type="1">DEL</item>
+        <item type="4">&amp;123</item>
+        <item type="3">ABC</item>
+        <item type="2">ШУКАТИ</item>
+    </input>
+
+    <input lang="num">
+        <item type="0">1</item>
+        <item type="0">2</item>
+        <item type="0">3</item>
+        <item type="0">4</item>
+        <item type="0">5</item>
+        <item type="0">6</item>
+        <item type="0">7</item>
+        <item type="0">8</item>
+        <item type="0">9</item>
+        <item type="0">0</item>
+        <item type="0">(</item>
+        <item type="0">)</item>
+        <item type="1">DEL</item>
+        <item type="0">@</item>
+        <item type="0">:</item>
+        <item type="0">;</item>
+        <item type="0">?</item>
+        <item type="0">!</item>
+        <item type="0">-</item>
+        <item type="0">'</item>
+        <item type="0">"</item>
+        <item type="0">&amp;</item>
+        <item type="0">/</item>
+        <item type="0">.</item>
+        <item type="0">,</item>
+        <item type="3">ABC</item>
+        <item type="0">+</item>
+        <item type="0">$</item>
+        <item type="0">*</item>
+        <item type="0">#</item>
+        <item type="0">^</item>
+        <item type="0">%</item>
+        <item type="6" />
+        <item type="6" />
+        <item type="5" size="2">\\_/</item>
+        <item type="2" size="2">НАЙТИ</item>
+        <item type="4">АБВ</item>
+    </input>
+</input-methods>

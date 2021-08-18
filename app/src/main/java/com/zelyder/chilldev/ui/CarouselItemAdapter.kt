@@ -7,10 +7,12 @@ import android.widget.ImageView
 import androidx.recyclerview.widget.RecyclerView
 import com.zelyder.chilldev.R
 import com.zelyder.chilldev.ui.kidname.Item
+import com.zelyder.chilldev.ui.kidname.KidNameFragment
+import java.lang.Integer.MAX_VALUE
 
 class CarouselItemAdapter(
     val itemClick: (Int, Item) -> Unit
-    ) : RecyclerView.Adapter<CarouselItemAdapter.ItemViewHolder>() {
+) : RecyclerView.Adapter<CarouselItemAdapter.ItemViewHolder>() {
     private var items: List<Item> = listOf()
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ItemViewHolder =
@@ -23,11 +25,20 @@ class CarouselItemAdapter(
     override fun onBindViewHolder(holder: ItemViewHolder, position: Int) {
         holder.bind(items[position])
         holder.itemView.setOnClickListener {
-            itemClick(position, items[position])
+            val positionInList: Int = position % items.size
+            itemClick(position, items[positionInList])
         }
     }
 
-    override fun getItemCount() = items.size
+    override fun getItemCount(): Int {
+        return MAX_VALUE;
+    }
+
+    override fun getItemId(position: Int): Item {
+        val positionInList: Int = position % items.size
+        return items.get(positionInList)
+    }
+
 
     fun setItems(newItems: List<Item>) {
         items = newItems

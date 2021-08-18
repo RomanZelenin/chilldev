@@ -1,17 +1,23 @@
 package com.zelyder.chilldev.ui.kidname
 
+import android.content.res.XmlResourceParser
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.annotation.DrawableRes
+import androidx.appcompat.content.res.AppCompatResources
 import androidx.recyclerview.widget.RecyclerView
 import androidx.recyclerview.widget.RecyclerView.SCROLL_STATE_IDLE
 import com.zelyder.chilldev.R
 import com.zelyder.chilldev.databinding.KidNamePageBinding
+import com.zelyder.chilldev.domain.models.Gender
 import com.zelyder.chilldev.domain.models.KidNameIconType
 import com.zelyder.chilldev.ui.CarouselItemAdapter
 import com.zelyder.chilldev.ui.FragmentPage
+import com.zelyder.chilldev.ui.childgender.UIGender
+
 
 class KidNameFragment : FragmentPage<KidNamePageBinding>() {
 
@@ -59,7 +65,7 @@ class KidNameFragment : FragmentPage<KidNamePageBinding>() {
         Item(R.drawable.ic_avas9),
         Item(R.drawable.ic_avas10)
     )
-
+    private var keyboardView: KeyboardView? = null
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
@@ -68,12 +74,29 @@ class KidNameFragment : FragmentPage<KidNamePageBinding>() {
         super.onCreateView(inflater, container, savedInstanceState)
         inflater.inflate(R.layout.kid_name_page, container, false)
 
+        keyboardView = binding.keyboardView
         binding.itemList.initialize(itemAdapter)
+        binding.itemList.requestFocus()
+        binding.itemList.setOnFocusChangeListener { focused, direction ->
+           Log.wtf("helloy", "$direction, $focused")
+            focused.requestFocus()
+        }
+        val parser: XmlResourceParser? = context?.resources?.getXml(R.xml.input)
+        val icon = AppCompatResources.getDrawable(requireContext(), R.drawable.circle_item);
+        binding.keyboardView.setInputXml(parser)
+        binding.keyboardView.setKeySelector(icon)
+
+        keyboardView?.apply {
+            setInputXml(resources.getXml(R.xml.input))
+            bindInput(KeyboardListenerWrapper(searchViewModel.keyboardListener))
+            setKeyboardNextFocusListener(keyboardNextFocusListener)
+        }
+
         binding.itemList.addOnScrollListener(object : RecyclerView.OnScrollListener() {
 
             override fun onScrollStateChanged(recyclerView: RecyclerView, newState: Int) {
                 super.onScrollStateChanged(recyclerView, newState)
-                if (newState == SCROLL_STATE_IDLE ) {
+                if (newState == SCROLL_STATE_IDLE) {
                     (0 until binding.itemList.childCount).forEach { position ->
                         val item = binding.itemList.getChildAt(position)
                         if (item?.tag != null && item.tag as Boolean) {
@@ -88,10 +111,13 @@ class KidNameFragment : FragmentPage<KidNamePageBinding>() {
     }
 
     override fun onResume() {
-        binding.kidNameEditText.requestFocus()
+//        binding.kidNameEditText.requestFocus()
         super.onResume()
+//        setDefaultFocus()
+
     }
 }
+
 
 data class Item(
     @DrawableRes val icon: Int

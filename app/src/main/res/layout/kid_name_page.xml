@@ -56,10 +56,11 @@
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toBottomOf="@id/item_list_layout" />
 
+
     <com.zelyder.chilldev.ui.kidname.KeyboardView
         android:id="@+id/keyboard_view"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_width="500dp"
+        android:layout_height="200dp"
         android:descendantFocusability="afterDescendants"
         android:focusableInTouchMode="true"
         app:columnCount="@integer/search_keyboard_column_count"
@@ -68,6 +69,7 @@
         app:keyColorSelector="@drawable/keyboard_text_button_color"
         app:keyTextSize="@dimen/search_keyboard_text_size"
         app:languages="ru|en|num"
+        android:background="@color/blue"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintBottom_toBottomOf="parent" />
