@@ -65,7 +65,7 @@ class PageViewModel(private val repository: Repository) :
             services.remove(title)
         }
         _kidInfo.postValue(_kidInfo.value!!.copy(apps = services))
-        Log.d(TAG, "Update services: $services")
+        Timber.d("Update services: $services")
     }
 
     fun setPinCode(pinCode: String) {
