@@ -11,8 +11,11 @@ import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.core.content.ContextCompat
 import com.zelyder.chilldev.R
 
-class AppView(context: Context, attrs: AttributeSet?) : ConstraintLayout(context, attrs),
-    View.OnFocusChangeListener, View.OnClickListener {
+class AppView(
+    context: Context,
+    attrs: AttributeSet?
+) : ConstraintLayout(context, attrs),
+    View.OnFocusChangeListener {
 
     @ColorInt
     var color : Int =  ContextCompat.getColor(context, R.color.disabled)
@@ -37,10 +40,6 @@ class AppView(context: Context, attrs: AttributeSet?) : ConstraintLayout(context
         updateBackgroundAndTextColor(hasFocus)
     }
 
-    override fun onClick(v: View?) {
-        checked = !checked
-    }
-
     init {
         inflate(context, R.layout.app_item_page, this)
         context.obtainStyledAttributes(attrs, R.styleable.AppView).apply {
@@ -56,8 +55,6 @@ class AppView(context: Context, attrs: AttributeSet?) : ConstraintLayout(context
         }
         isClickable = true
         isFocusable = true
-
-        setOnClickListener(this)
 
         findViewById<Switch>(R.id.switch_view).setOnCheckedChangeListener { buttonView, isChecked ->
             checked = isChecked

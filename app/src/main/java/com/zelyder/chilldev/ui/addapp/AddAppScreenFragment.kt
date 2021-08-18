@@ -31,7 +31,11 @@ class AddAppScreenFragment : FragmentPage<AppAccessPageBinding>() {
         super.onViewCreated(view, savedInstanceState)
         binding.recycler.apply {
             layoutManager = AppLinearLayoutManager(requireContext(), page)
-            adapter = AppRecyclerAdapter()
+            adapter = AppRecyclerAdapter(object : AppClickListener {
+                override fun onAppClick(title: String, checked: Boolean) {
+
+                }
+            })
         }
 
         binding.recycler.smoothScrollToPosition(0)
