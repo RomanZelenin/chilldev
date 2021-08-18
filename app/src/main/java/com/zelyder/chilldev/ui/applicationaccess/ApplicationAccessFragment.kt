@@ -33,19 +33,19 @@ class ApplicationAccessFragment : FragmentPage<ApplicationAccessPageBinding>() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        var str : String = ""
+        var str: String
         binding.kidAge.text = ""
         val list = arrayListOf<String>()
-        viewModel.getCategories().observe(viewLifecycleOwner) { it -> list.addAll(it)}
+        viewModel.getCategories().observe(viewLifecycleOwner) { list.addAll(it) }
         binding.createAccBtn.onFocusChangeListener =
-            View.OnFocusChangeListener { v, hasFocus ->
+            View.OnFocusChangeListener { _, hasFocus ->
                 if (hasFocus){
                     binding.createAccBtn.setTextColor(resources.getColor(R.color.text_black))
                 }else{
                     binding.createAccBtn.setTextColor(resources.getColor(R.color.white))
                 }
             }
-        viewModel.kidInfo.observe(viewLifecycleOwner) { it ->
+        viewModel.kidInfo.observe(viewLifecycleOwner) {
             str = it.name + ", "
             val ageFromView = it.birthdate.parseToDate() ?: Date()
             val age = getAge(ageFromView)
@@ -66,10 +66,16 @@ class ApplicationAccessFragment : FragmentPage<ApplicationAccessPageBinding>() {
                 Gender.WHATEVER -> ""
             }
 
-            binding.savedLimitationAge.text = "+${it.age_limit}"
+            binding.savedLimitationAge.text = getString(R.string.check_kid_age, it.age_limit)
 
             binding.descriptionKidInterests.text =
                 it.categories.joinToString { index -> list[index-1] }
+
+            binding.savedConfirmSites.text = if (it.apps.keySet().isEmpty()) {
+                getString(R.string.check_no_info)
+            } else {
+                it.apps.keySet().joinToString(", ")
+            }
         }
         binding.createAccBtn.setOnClickListener {
             lifecycleScope.launch {  viewModel.saveKidInfo() }

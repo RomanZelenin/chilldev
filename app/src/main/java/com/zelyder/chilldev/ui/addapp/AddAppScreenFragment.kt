@@ -33,7 +33,7 @@ class AddAppScreenFragment : FragmentPage<AppAccessPageBinding>() {
             layoutManager = AppLinearLayoutManager(requireContext(), page)
             adapter = AppRecyclerAdapter(object : AppClickListener {
                 override fun onAppClick(title: String, checked: Boolean) {
-
+                    viewModel.updateServices(title, checked)
                 }
             })
         }
@@ -43,7 +43,8 @@ class AddAppScreenFragment : FragmentPage<AppAccessPageBinding>() {
         val installedAppsList = installedAppsProvider.provide()
 
         val appItems = installedAppsList.map {
-            AppItem(it.name, R.color.orange)
+            AppItem(it.name, R.color.orange,
+                viewModel.kidInfo.value!!.apps.keySet().contains(it.name))
         }
 
         (binding.recycler.adapter as AppRecyclerAdapter).setItems(appItems)
@@ -53,7 +54,6 @@ class AddAppScreenFragment : FragmentPage<AppAccessPageBinding>() {
         super.onResume()
         binding.recycler.smoothScrollToPosition(0)
         requestFocusOnFirstItem()
-        viewModel.setKidServices(emptyList()) //For testing!!
     }
 
     private fun requestFocusOnFirstItem() {

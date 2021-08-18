@@ -56,12 +56,15 @@ class PageViewModel(private val repository: Repository) :
         Log.d(TAG, "Set categories: $categories")
     }
 
-    fun setKidServices(availableServices: List<AvailableService>) {
-        val services = JsonObject().apply {
-            addProperty("Дублирование экрана", true)
-            addProperty("Медиаплеер", true)
+    fun updateServices(title: String, checked: Boolean) {
+        val services = _kidInfo.value!!.apps
+        if (checked) {
+            services.addProperty(title, checked)
+        } else {
+            services.remove(title)
         }
         _kidInfo.postValue(_kidInfo.value!!.copy(apps = services))
+        Log.d(TAG, "Update services: $services")
     }
 
     fun setPinCode(pinCode: String) {

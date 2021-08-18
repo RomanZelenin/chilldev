@@ -6,5 +6,6 @@ import androidx.annotation.ColorRes
 data class AppItem(
     val name: String,
     @ColorRes
-    val color: Int
+    val color: Int,
+    val checked: Boolean
 )
