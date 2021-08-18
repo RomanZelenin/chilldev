@@ -67,26 +67,29 @@ class ApplicationAccessFragment : FragmentPage<ApplicationAccessPageBinding>() {
                     Gender.MALE -> ", ${getString(R.string.child_gender_male).lowercase()}"
                     Gender.WHATEVER -> ""
                 }
-                savedLimitationAge.text = "+${it.age_limit}"
+                savedLimitationAge.text = getString(R.string.check_kid_age, it.age_limit)
+                savedConfirmSites.text = if (it.apps.keySet().isEmpty()) {
+                    getString(R.string.check_no_info)
+                } else {
+                    it.apps.keySet().joinToString(", ")
+                }
+
+                createAccBtn.setOnClickListener {
+                    lifecycleScope.launch {
+                        viewModel.saveKidInfo()
+                        page.swipeToNext()
+                    }
+                }
             }
 
-
-            /*  viewModel.getCategories().apply {
-                        val observerCategories = { categories: List<String> ->
-                            binding.descriptionKidInterests.text =
-                                it.categories.joinToString { index -> categories[index - 1] }
-                        }
-                        observe(viewLifecycleOwner, observerCategories)
-                        removeObserver(observerCategories)
-                    }*/
-
-
-        }
-        binding.createAccBtn.setOnClickListener {
-            lifecycleScope.launch {
-                viewModel.saveKidInfo()
-                page.swipeToNext()
-            }
+//            viewModel.getCategories().apply {
+//                val observerCategories = { categories: List<String> ->
+//                    binding.descriptionKidInterests.text =
+//                        it.categories.joinToString { index -> categories[index - 1] }
+//                }
+//                observe(viewLifecycleOwner, observerCategories)
+//                removeObserver(observerCategories)
+//            }
         }
     }
 

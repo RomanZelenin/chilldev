@@ -57,12 +57,15 @@ class PageViewModel(private val repository: Repository) :
         Timber.d("Set categories: $categories")
     }
 
-    fun setKidServices(availableServices: List<AvailableService>) {
-        val services = JsonObject().apply {
-            addProperty("Дублирование экрана", true)
-            addProperty("Медиаплеер", true)
+    fun updateServices(title: String, checked: Boolean) {
+        val services = _kidInfo.value!!.apps
+        if (checked) {
+            services.addProperty(title, checked)
+        } else {
+            services.remove(title)
         }
         _kidInfo.postValue(_kidInfo.value!!.copy(apps = services))
+        Timber.d("Update services: $services")
     }
 
     fun setPinCode(pinCode: String) {
