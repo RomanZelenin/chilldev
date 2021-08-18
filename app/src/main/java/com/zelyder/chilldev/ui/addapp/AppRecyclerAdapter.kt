@@ -19,6 +19,7 @@ class AppRecyclerAdapter(
         fun bind(item: AppItem, listener: AppClickListener) {
             appView.text = item.name
             appView.color = ContextCompat.getColor(appView.context, item.color)
+            appView.setIcon(item.icon)
             appView.checked = item.checked
             appView.setOnClickListener {
                 appView.checked = !appView.checked

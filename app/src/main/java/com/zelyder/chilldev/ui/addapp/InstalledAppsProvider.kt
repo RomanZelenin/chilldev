@@ -2,8 +2,7 @@ package com.zelyder.chilldev.ui.addapp
 
 import android.content.Intent
 import android.content.pm.PackageManager
-import android.os.Parcelable
-import kotlinx.parcelize.Parcelize
+import android.graphics.drawable.Drawable
 
 
 class InstalledAppsProvider(private val packageManager: PackageManager) {
@@ -17,7 +16,8 @@ class InstalledAppsProvider(private val packageManager: PackageManager) {
             .map {
                 InstalledApp(
                     it.activityInfo.packageName,
-                    it.activityInfo.loadLabel(packageManager).toString()
+                    it.activityInfo.loadLabel(packageManager).toString(),
+                    it.activityInfo.loadIcon(packageManager)
                 )
             }
             .filterNot { installedApp ->
@@ -25,6 +25,6 @@ class InstalledAppsProvider(private val packageManager: PackageManager) {
             }
     }
 
-    @Parcelize
-    data class InstalledApp(val packageName: String, val name: String) : Parcelable
+
+    data class InstalledApp(val packageName: String, val name: String, val icon:Drawable)
 }

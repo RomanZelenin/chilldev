@@ -1,6 +1,7 @@
 package com.zelyder.chilldev.customview
 
 import android.content.Context
+import android.graphics.drawable.Drawable
 import android.util.AttributeSet
 import android.view.View
 import android.widget.Switch
@@ -16,6 +17,10 @@ class AppView(
     attrs: AttributeSet?
 ) : ConstraintLayout(context, attrs),
     View.OnFocusChangeListener {
+
+    fun setIcon(icon: Drawable){
+        findViewById<AppCompatImageView>(R.id.app_icon).setImageDrawable(icon)
+    }
 
     @ColorInt
     var color : Int =  ContextCompat.getColor(context, R.color.disabled)
