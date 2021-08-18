@@ -33,18 +33,10 @@ class ApplicationAccessFragment : FragmentPage<ApplicationAccessPageBinding>() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        var str : String = ""
+        var str: String = ""
         binding.kidAge.text = ""
         val list = arrayListOf<String>()
-        viewModel.getCategories().observe(viewLifecycleOwner) { it -> list.addAll(it)}
-        binding.createAccBtn.onFocusChangeListener =
-            View.OnFocusChangeListener { v, hasFocus ->
-                if (hasFocus){
-                    binding.createAccBtn.setTextColor(resources.getColor(R.color.text_black))
-                }else{
-                    binding.createAccBtn.setTextColor(resources.getColor(R.color.white))
-                }
-            }
+
         viewModel.kidInfo.observe(viewLifecycleOwner) { it ->
             str = it.name + ", "
             val ageFromView = it.birthdate.parseToDate() ?: Date()
@@ -58,21 +50,41 @@ class ApplicationAccessFragment : FragmentPage<ApplicationAccessPageBinding>() {
                     else -> append("")
                 }
             }
-
-            binding.kidNameTextView.text = str
-            binding.kidGender.text = when (it.gender) {
-                Gender.FEMALE -> ", девочка"
-                Gender.MALE -> ", мальчик"
-                Gender.WHATEVER -> ""
+            binding.apply {
+                createAccBtn.onFocusChangeListener =
+                    View.OnFocusChangeListener { _, hasFocus ->
+                        if (hasFocus) {
+                            binding.createAccBtn.setTextColor(resources.getColor(R.color.text_black))
+                        } else {
+                            binding.createAccBtn.setTextColor(resources.getColor(R.color.white))
+                        }
+                    }
+                kidNameTextView.text = str
+                kidGender.text = when (it.gender) {
+                    Gender.FEMALE -> ", ${getString(R.string.child_gender_female).lowercase()}"
+                    Gender.MALE -> ", ${getString(R.string.child_gender_male).lowercase()}"
+                    Gender.WHATEVER -> ""
+                }
+                savedLimitationAge.text = "+${it.age_limit}"
             }
 
-            binding.savedLimitationAge.text = "+${it.age_limit}"
 
-            binding.descriptionKidInterests.text =
-                it.categories.joinToString { index -> list[index-1] }
+            /*  viewModel.getCategories().apply {
+                        val observerCategories = { categories: List<String> ->
+                            binding.descriptionKidInterests.text =
+                                it.categories.joinToString { index -> categories[index - 1] }
+                        }
+                        observe(viewLifecycleOwner, observerCategories)
+                        removeObserver(observerCategories)
+                    }*/
+
+
         }
         binding.createAccBtn.setOnClickListener {
-            lifecycleScope.launch {  viewModel.saveKidInfo() }
+            lifecycleScope.launch {
+                viewModel.saveKidInfo()
+                page.swipeToNext()
+            }
         }
     }
 

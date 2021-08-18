@@ -51,11 +51,7 @@ class ChooseAccountActivity : FragmentActivity() {
         }
 
         lifecycleScope.launch {
-            val accounts = mutableListOf<Account>()
-            pageViewModel.getAllKids().forEach {
-                 accounts.add(Account(it.name, it.avatar))
-            }
-
+            val accounts = pageViewModel.getAllKids().map { Account(it.name, it.avatar) }
             accountsAdapter.accounts = accounts
         }
 
