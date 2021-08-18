@@ -20,7 +20,7 @@ enum class KidNameIconType(val rank: Int, val resId: Int) {
 
     companion object {
         fun getForPosition(position: Int) : KidNameIconType {
-            return values().find { it.rank == position + 1 } ?: ONE
+            return values().find { it.rank == position} ?: ONE
         }
     }
 }
