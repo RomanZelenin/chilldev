@@ -1,5 +1,6 @@
 package com.zelyder.chilldev.di
 
+import com.zelyder.chilldev.BuildConfig
 import dagger.Module
 import dagger.Provides
 import okhttp3.Interceptor
@@ -39,8 +40,12 @@ object InterceptorsModule {
     @ApplicationScope
     fun provideNetworkInterceptors(): List<Interceptor> {
         val interceptors = mutableListOf<Interceptor>()
-        return interceptors.apply {
-            add(HttpLoggingInterceptor().apply { setLevel(HttpLoggingInterceptor.Level.BODY) })
+        return if (BuildConfig.DEBUG) {
+            return interceptors.apply {
+                add(HttpLoggingInterceptor().apply { setLevel(HttpLoggingInterceptor.Level.BODY) })
+            }
+        } else {
+            interceptors
         }
     }
 }

@@ -73,6 +73,7 @@ class KidNameFragment : FragmentPage<KidNamePageBinding>() {
     ): View {
         super.onCreateView(inflater, container, savedInstanceState)
         inflater.inflate(R.layout.kid_name_page, container, false)
+        viewModel.setIcon(KidNameIconType.getForPosition(1))
 
         keyboardView = binding.keyboardView
         binding.itemList.initialize(itemAdapter)
@@ -85,28 +86,31 @@ class KidNameFragment : FragmentPage<KidNamePageBinding>() {
         val icon = AppCompatResources.getDrawable(requireContext(), R.drawable.circle_item);
         binding.keyboardView.setInputXml(parser)
         binding.keyboardView.setKeySelector(icon)
+        itemAdapter.setItems(iconItems)
 
-        keyboardView?.apply {
-            setInputXml(resources.getXml(R.xml.input))
-            bindInput(KeyboardListenerWrapper(searchViewModel.keyboardListener))
-            setKeyboardNextFocusListener(keyboardNextFocusListener)
-        }
+//        keyboardView?.apply {
+//            setInputXml(resources.getXml(R.xml.input))
+//            bindInput(KeyboardListenerWrapper(searchViewModel.keyboardListener))
+//            setKeyboardNextFocusListener(keyboardNextFocusListener)
+//        }
 
         binding.itemList.addOnScrollListener(object : RecyclerView.OnScrollListener() {
-
             override fun onScrollStateChanged(recyclerView: RecyclerView, newState: Int) {
                 super.onScrollStateChanged(recyclerView, newState)
                 if (newState == SCROLL_STATE_IDLE) {
-                    (0 until binding.itemList.childCount).forEach { position ->
-                        val item = binding.itemList.getChildAt(position)
-                        if (item?.tag != null && item.tag as Boolean) {
-                            viewModel.setIcon(KidNameIconType.getForPosition(position))
-                        }
+                    val position =
+                        binding.itemList.getChildAdapterPosition(binding.itemList.focusedChild)+1
+                    viewModel.setIcon(KidNameIconType.getForPosition(position))
+                }
+
+                (0 until binding.itemList.childCount).forEach { position ->
+                    val item = binding.itemList.getChildAt(position)
+                    if (item?.tag != null && item.tag as Boolean) {
+                        viewModel.setIcon(KidNameIconType.getForPosition(position))
                     }
                 }
             }
         })
-        itemAdapter.setItems(iconItems)
         return binding.root
     }
 

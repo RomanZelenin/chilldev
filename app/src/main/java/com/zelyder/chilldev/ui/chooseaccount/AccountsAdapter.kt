@@ -71,7 +71,7 @@ class AccountsAdapter(
                 civAvatar.setImageDrawable(ContextCompat.getDrawable(itemView.context, R.drawable.ic_adult))
             } else {
                 civAvatar.setImageDrawable(ContextCompat.getDrawable(itemView.context,
-                    KidNameIconType.getForPosition(account.avatar - 1).resId))
+                    KidNameIconType.getForPosition(account.avatar).resId))
             }
         }
     }

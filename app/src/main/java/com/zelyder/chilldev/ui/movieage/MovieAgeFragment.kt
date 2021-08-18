@@ -3,10 +3,7 @@ package com.zelyder.chilldev.ui.movieage
 import android.os.Bundle
 import android.os.Handler
 import android.os.Looper
-import android.view.KeyEvent
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
+import android.view.*
 import android.widget.ImageView
 import androidx.cardview.widget.CardView
 import androidx.core.view.get
@@ -50,13 +47,10 @@ class MovieAgeFragment : FragmentPage<MovieAgePageBinding>() {
                         }
                         KeyEvent.KEYCODE_DPAD_CENTER -> {
                             layoutAgeRating.isEnabled = false
-                            Handler(Looper.getMainLooper()).postDelayed(
-                                {
-                                    page.swipeToNext()
-                                    layoutAgeRating.isEnabled = true
-                                },
-                                500
-                            )
+                            Handler(Looper.getMainLooper()).post {
+                                page.swipeToNext()
+                                layoutAgeRating.isEnabled = true
+                            }
                             true
                         }
                         else -> false
