@@ -16,8 +16,8 @@
         tools:ignore="ContentDescription" />
 
     <TextView
-        style="@style/Text.Title"
         android:id="@+id/check_information"
+        style="@style/Text.Title"
         android:layout_width="490dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="50dp"
@@ -30,20 +30,20 @@
 
 
     <TextView
-        style="@style/Text"
         android:id="@+id/kid_name_text_view"
+        style="@style/Text"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="30dp"
         android:paddingStart="15dp"
-        tools:text="Вовочка, "
         android:textColor="@color/lb_browse_header_color"
         android:textSize="30sp"
         app:layout_constraintEnd_toStartOf="@+id/kid_age"
         app:layout_constraintHorizontal_chainStyle="packed"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/check_information"
-        tools:ignore="RtlSymmetry" />
+        tools:ignore="RtlSymmetry"
+        tools:text="Вовочка, " />
 
     <TextView
         android:id="@+id/kid_age"
@@ -53,11 +53,11 @@
         android:layout_marginTop="30dp"
         android:textColor="@color/lb_browse_header_color"
         android:textSize="30sp"
-        tools:text="4 года, "
         app:layout_constraintEnd_toStartOf="@+id/kid_gender"
         app:layout_constraintHorizontal_chainStyle="packed"
         app:layout_constraintStart_toEndOf="@+id/kid_name_text_view"
-        app:layout_constraintTop_toBottomOf="@id/check_information" />
+        app:layout_constraintTop_toBottomOf="@id/check_information"
+        tools:text="4 года, " />
 
     <TextView
         android:id="@+id/kid_gender"
@@ -65,13 +65,13 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="30dp"
-        tools:text="мальчик"
         android:textColor="@color/lb_browse_header_color"
         android:textSize="30sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_chainStyle="packed"
         app:layout_constraintStart_toEndOf="@+id/kid_age"
-        app:layout_constraintTop_toBottomOf="@id/check_information" />
+        app:layout_constraintTop_toBottomOf="@id/check_information"
+        tools:text="мальчик" />
 
     <TextView
         android:id="@+id/saved_limitation_text_view"
@@ -92,18 +92,18 @@
         style="@style/Text"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:paddingStart="5dp"
         android:paddingBottom="25dp"
-        tools:text="@string/check_limitation_text_view"
         android:textColor="@color/lb_browse_header_color"
         android:textSize="25sp"
-        android:paddingStart="5dp"
         app:layout_constraintHorizontal_chainStyle="packed"
         app:layout_constraintStart_toEndOf="@id/saved_limitation_text_view"
-        app:layout_constraintTop_toBottomOf="@id/kid_age" />
+        app:layout_constraintTop_toBottomOf="@id/kid_age"
+        tools:text="@string/check_limitation_text_view" />
 
     <TextView
-        style="@style/Text.H4"
         android:id="@+id/kid_interests"
+        style="@style/Text.H4"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/kid_interests_text_view"
@@ -116,36 +116,39 @@
         style="@style/Text"
         android:layout_width="367dp"
         android:layout_height="77dp"
-        android:gravity="center"
-        android:paddingBottom="25dp"
-        tools:text="@string/check_kid_interests"
+        android:ellipsize="end"
+        android:gravity="center_horizontal"
+        android:maxLines="2"
         android:textColor="@color/lb_browse_header_color"
-        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/kid_interests" />
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/kid_interests"
+        tools:text="@string/check_kid_interests" />
 
     <TextView
-        style="@style/Text.H4"
         android:id="@+id/confirm_sites"
+        style="@style/Text.H4"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:ellipsize="end"
         android:gravity="center"
+        android:maxLines="2"
         android:text="@string/confirm_sites_text_view"
-        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/description_kid_interests" />
 
     <TextView
-        style="@style/Text"
         android:id="@+id/saved_confirm_sites"
+        style="@style/Text"
         android:layout_width="400dp"
         android:layout_height="wrap_content"
         android:gravity="center"
         android:paddingBottom="15dp"
         android:text="@string/check_confirm_sites"
         android:textColor="@color/lb_browse_header_color"
-        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/confirm_sites" />
 
     <Button
@@ -154,8 +157,8 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="40dp"
         android:text="@string/create_account_btn"
-        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/saved_confirm_sites" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
