@@ -7,6 +7,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.annotation.DrawableRes
 import androidx.appcompat.content.res.AppCompatResources
+import androidx.core.view.size
 import androidx.recyclerview.widget.RecyclerView
 import androidx.recyclerview.widget.RecyclerView.SCROLL_STATE_IDLE
 import com.zelyder.chilldev.R
@@ -30,9 +31,8 @@ class KidNameFragment : FragmentPage<KidNamePageBinding>() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         binding.kidNameText.apply {
-            text = viewModel.kidInfo.value!!.name
+            setText(viewModel.kidInfo.value!!.name)
         }
-        binding.itemList.layoutManager!!.scrollToPosition(Integer.MAX_VALUE / 2)
     }
 
     override fun onPause() {
@@ -47,7 +47,7 @@ class KidNameFragment : FragmentPage<KidNamePageBinding>() {
 
     private val itemAdapter by lazy {
         CarouselItemAdapter(requireContext()) { position: Int, _: Item ->
-            binding.itemList.smoothScrollToPosition(position)
+            binding.itemList.scrollToPosition(position)
         }
     }
 
@@ -73,50 +73,52 @@ class KidNameFragment : FragmentPage<KidNamePageBinding>() {
         inflater.inflate(R.layout.kid_name_page, container, false)
         viewModel.setIcon(KidNameIconType.getForPosition(1))
 
-        keyboardView = binding.keyboardView
+//        keyboardView = binding.keyboardView
         binding.itemList.initialize(itemAdapter)
         binding.itemList.requestFocus()
         binding.itemList.layoutManager = AccountsLinearLayoutManager(requireContext())
         binding.itemList.requestFocus()
+
 
         binding.itemList.setOnFocusChangeListener { focused, direction ->
            Log.wtf("helloy", "$direction, $focused")
             focused.requestFocus()
         }
         val icon = AppCompatResources.getDrawable(requireContext(), R.drawable.circle_item)
-        binding.keyboardView.setKeySelector(icon)
+//        binding.keyboardView.setKeySelector(icon)
         itemAdapter.setItems(iconItems)
 
-        keyboardView?.apply {
-            setInputXml(resources.getXml(R.xml.input))
-            bindInput(KeyboardListenerWrapper(object : KeyboardView.KeyboardListener {
-                override fun onInput(symbol: Char?) {
-                    val textView = binding.kidNameText
-                    textView.text = textView.text.toString() + symbol.toString()
-                }
 
-                override fun onDelete() {
-                    val textView = binding.kidNameText
-                    if (textView.text.isNotEmpty()) {
-                        textView.text = textView.text.substring(0, textView.text.length - 1)
-                    }
-                }
-
-                override fun onDeleteAll() {
-                    Log.wtf("button", "deleteAll")
-
-                }
-
-                override fun onEnter() {
-                    val textView = binding.kidNameText
-                    textView.text = textView.text.toString().replace("\\s+".toRegex(), " ")
-                    if (textView.text.isNotEmpty()) {
-//                        textView.text = "21"
-                    }
-                }
-            }))
-            setKeyboardNextFocusListener(keyboardNextFocusListener)
-        }
+//        keyboardView?.apply {
+//            setInputXml(resources.getXml(R.xml.input))
+//            bindInput(KeyboardListenerWrapper(object : KeyboardView.KeyboardListener {
+//                override fun onInput(symbol: Char?) {
+//                    val textView = binding.kidNameText
+//                    textView.append(symbol.toString())
+//                }
+//
+//                override fun onDelete() {
+//                    val textView = binding.kidNameText
+//                    if (textView.text.isNotEmpty()) {
+//                        textView.text = textView.text.substring(0, textView.text.length - 1)
+//                    }
+//                }
+//
+//                override fun onDeleteAll() {
+//                    Log.wtf("button", "deleteAll")
+//
+//                }
+//
+//                override fun onEnter() {
+//                    val textView = binding.kidNameText
+//                    textView.text = textView.text.toString().replace("\\s+".toRegex(), " ")
+//                    if (textView.text.isNotEmpty()) {
+////                        textView.text = "21"
+//                    }
+//                }
+//            }))
+//            setKeyboardNextFocusListener(keyboardNextFocusListener)
+//        }
 
         val kidNameEditText = binding.kidNameText
 
