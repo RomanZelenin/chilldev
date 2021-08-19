@@ -1,13 +1,14 @@
 package com.zelyder.chilldev.ui.kidname
 
+import android.content.Context
 import android.os.Bundle
 import android.util.Log
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
+import android.view.*
+import android.view.inputmethod.EditorInfo
+import android.view.inputmethod.InputMethodManager
 import androidx.annotation.DrawableRes
 import androidx.appcompat.content.res.AppCompatResources
-import androidx.core.view.size
+import androidx.core.content.ContextCompat.getSystemService
 import androidx.recyclerview.widget.RecyclerView
 import androidx.recyclerview.widget.RecyclerView.SCROLL_STATE_IDLE
 import com.zelyder.chilldev.R
@@ -16,6 +17,7 @@ import com.zelyder.chilldev.domain.models.KidNameIconType
 import com.zelyder.chilldev.ui.CarouselItemAdapter
 import com.zelyder.chilldev.ui.FragmentPage
 import com.zelyder.chilldev.ui.chooseaccount.AccountsLinearLayoutManager
+import java.lang.Exception
 
 
 class KidNameFragment : FragmentPage<KidNamePageBinding>() {
@@ -84,7 +86,7 @@ class KidNameFragment : FragmentPage<KidNamePageBinding>() {
            Log.wtf("helloy", "$direction, $focused")
             focused.requestFocus()
         }
-        val icon = AppCompatResources.getDrawable(requireContext(), R.drawable.circle_item)
+//        val icon = AppCompatResources.getDrawable(requireContext(), R.drawable.circle_item)
 //        binding.keyboardView.setKeySelector(icon)
         itemAdapter.setItems(iconItems)
 
@@ -120,7 +122,22 @@ class KidNameFragment : FragmentPage<KidNamePageBinding>() {
 //            setKeyboardNextFocusListener(keyboardNextFocusListener)
 //        }
 
-        val kidNameEditText = binding.kidNameText
+//        val kidNameEditText = binding.kidNameText
+
+        binding.kidNameText.setOnEditorActionListener { _, actionId, _ ->
+            if (actionId == EditorInfo.IME_ACTION_DONE || actionId == EditorInfo.IME_ACTION_NEXT) {
+                binding.kidNameText.clearFocus()
+                try {
+                    val imm: InputMethodManager? =
+                        requireActivity().getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager?
+                    imm?.hideSoftInputFromWindow(requireActivity().currentFocus?.windowToken, 0)
+                } catch (e: Exception) {
+                    Log.e(this::class.simpleName, "Hide keyboard failed")
+                }
+                page.swipeToNext()
+            }
+            false
+        }
 
         binding.itemList.addOnScrollListener(object : RecyclerView.OnScrollListener() {
             override fun onScrollStateChanged(recyclerView: RecyclerView, newState: Int) {
@@ -132,8 +149,13 @@ class KidNameFragment : FragmentPage<KidNamePageBinding>() {
                 }
             }
         })
-        binding.itemList.layoutManager?.scrollToPosition(5)
+//        binding.itemList.layoutManager?.scrollToPosition(5)
         return binding.root
+    }
+
+    override fun onResume() {
+        super.onResume()
+        binding.kidNameText.requestFocus()
     }
 
     override fun onDestroyView() {
