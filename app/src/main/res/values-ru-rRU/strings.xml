@@ -54,4 +54,5 @@
     <string name="choose_account_logout_label">Выйти из аккаунта</string>
     <string name="choose_account_configure_mode_label">Настройки детского режима</string>
     <string name="choose_account_add_profile_label">Добавить профиль</string>
+    <string name="all">Всё</string>
 </resources>

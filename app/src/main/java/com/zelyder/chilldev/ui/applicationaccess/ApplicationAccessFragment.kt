@@ -52,7 +52,13 @@ class ApplicationAccessFragment : FragmentPage<ApplicationAccessPageBinding>() {
                 }
             }
             binding.apply {
-                imageView.setImageDrawable(ResourcesCompat.getDrawable(resources,viewModel.kidInfo.value!!.iconType.resId, null))
+                imageView.setImageDrawable(
+                    ResourcesCompat.getDrawable(
+                        resources,
+                        viewModel.kidInfo.value!!.iconType.resId,
+                        null
+                    )
+                )
                 createAccBtn.onFocusChangeListener =
                     View.OnFocusChangeListener { _, hasFocus ->
                         if (hasFocus) {
@@ -82,9 +88,13 @@ class ApplicationAccessFragment : FragmentPage<ApplicationAccessPageBinding>() {
                 }
             }
 
-            viewModel.categories.observe(viewLifecycleOwner){ listCat->
+            viewModel.categories.observe(viewLifecycleOwner) { listCat ->
                 binding.descriptionKidInterests.text =
+                    if (it.categories.isEmpty()) {
+                        resources.getString(R.string.all)
+                    } else {
                         it.categories.joinToString { index -> listCat[index - 1] }
+                    }
             }
         }
     }
