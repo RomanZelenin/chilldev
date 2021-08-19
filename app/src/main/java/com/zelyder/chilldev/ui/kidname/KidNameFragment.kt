@@ -54,6 +54,10 @@ class KidNameFragment : FragmentPage<KidNamePageBinding>() {
         CarouselItemAdapter(requireContext()) { position: Int, _: Item ->
             binding.itemList.scrollToPosition(position)
             binding.kidNameText.requestFocus()
+            (requireActivity().getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager).toggleSoftInput(
+                InputMethodManager.SHOW_FORCED,
+                InputMethodManager.HIDE_IMPLICIT_ONLY
+            )
         }
     }
 
