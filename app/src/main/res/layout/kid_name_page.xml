@@ -15,8 +15,6 @@
         android:layout_marginTop="50dp"
         android:gravity="center"
         android:text="@string/kid_name_text_view"
-        android:textSize="50sp"
-        android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />

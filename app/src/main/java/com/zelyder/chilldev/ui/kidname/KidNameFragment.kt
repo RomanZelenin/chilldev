@@ -132,6 +132,7 @@ class KidNameFragment : FragmentPage<KidNamePageBinding>() {
                 }
             }
         })
+        binding.itemList.layoutManager?.scrollToPosition(5)
         return binding.root
     }
 
