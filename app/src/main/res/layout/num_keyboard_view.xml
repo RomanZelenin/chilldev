@@ -82,6 +82,6 @@
         style="@style/KeyButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:src="@drawable/ic_clear"
+        android:src="@drawable/ic_clear_selector"
         tools:ignore="ContentDescription" />
 </LinearLayout>
