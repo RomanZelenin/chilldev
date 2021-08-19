@@ -35,6 +35,7 @@ class CustomNumKeyboard(
     init {
         inflate(context, R.layout.num_keyboard_view, this)
     }
+
     private val listIdButtons = arrayOf(
         R.id.pin_btn_0,
         R.id.pin_btn_1,
@@ -48,6 +49,7 @@ class CustomNumKeyboard(
         R.id.pin_btn_9,
         R.id.pin_btn_del
     )
+
     override fun onAttachedToWindow() {
         super.onAttachedToWindow()
         listIdButtons.forEachIndexed { index, i ->
@@ -55,12 +57,12 @@ class CustomNumKeyboard(
             button.apply {
                 setOnClickListener(ClickLister())
                 nextFocusUpId = this.id
+                if (R.id.pin_btn_del == this.id) {
+                    nextFocusRightId = this.id
+                }
             }
             if (R.id.pin_btn_1 == this.id) {
                 button.requestFocus()
-            }
-            if (R.id.pin_btn_del == this.id){
-                nextFocusRightId = this.id
             }
         }
     }
@@ -71,7 +73,7 @@ class CustomNumKeyboard(
                 val button = findViewById<View>(i)
                 if (R.id.pin_btn_del != button.id) {
                     button.isClickable = false
-                }else{
+                } else {
                     button.requestFocus()
                 }
             }
