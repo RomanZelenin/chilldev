@@ -82,14 +82,10 @@ class ApplicationAccessFragment : FragmentPage<ApplicationAccessPageBinding>() {
                 }
             }
 
-//            viewModel.getCategories().apply {
-//                val observerCategories = { categories: List<String> ->
-//                    binding.descriptionKidInterests.text =
-//                        it.categories.joinToString { index -> categories[index - 1] }
-//                }
-//                observe(viewLifecycleOwner, observerCategories)
-//                removeObserver(observerCategories)
-//            }
+            viewModel.categories.observe(viewLifecycleOwner){ listCat->
+                binding.descriptionKidInterests.text =
+                        it.categories.joinToString { index -> listCat[index - 1] }
+            }
         }
     }
 

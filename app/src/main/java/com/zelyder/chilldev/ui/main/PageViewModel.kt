@@ -1,30 +1,23 @@
 package com.zelyder.chilldev.ui.main
 
 import android.net.Uri
-import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import androidx.lifecycle.viewModelScope
-import com.google.gson.JsonObject
-import com.zelyder.chilldev.domain.repository.Repository
+import androidx.lifecycle.liveData
 import com.zelyder.chilldev.domain.models.*
-import kotlinx.coroutines.launch
+import com.zelyder.chilldev.domain.repository.Repository
 import timber.log.Timber
 
 class PageViewModel(private val repository: Repository) :
     ViewModel() {
 
-    private val _categories = MutableLiveData<List<String>>()
     private val _kidInfo = MutableLiveData(KidInfo())
     val kidInfo: LiveData<KidInfo> = _kidInfo
 
-    fun getCategories(): LiveData<List<String>> {
-        viewModelScope.launch {
+    val categories = liveData {
             val categories = repository.getCategories()
-            _categories.postValue(categories)
-        }
-        return _categories
+            emit(categories)
     }
 
     suspend fun getPosters(ageLimit: AgeLimit): List<Uri> {
