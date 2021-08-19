@@ -2,6 +2,8 @@ package com.zelyder.chilldev.ui.kidname
 
 import android.content.Context
 import android.os.Bundle
+import android.os.Handler
+import android.os.Looper
 import android.util.Log
 import android.view.*
 import android.view.inputmethod.EditorInfo
@@ -17,6 +19,7 @@ import com.zelyder.chilldev.domain.models.KidNameIconType
 import com.zelyder.chilldev.ui.CarouselItemAdapter
 import com.zelyder.chilldev.ui.FragmentPage
 import com.zelyder.chilldev.ui.chooseaccount.AccountsLinearLayoutManager
+import com.zelyder.chilldev.ui.movieage.AgeRatingLayout
 import java.lang.Exception
 
 
@@ -50,6 +53,7 @@ class KidNameFragment : FragmentPage<KidNamePageBinding>() {
     private val itemAdapter by lazy {
         CarouselItemAdapter(requireContext()) { position: Int, _: Item ->
             binding.itemList.scrollToPosition(position)
+            binding.kidNameText.requestFocus()
         }
     }
 
@@ -83,7 +87,7 @@ class KidNameFragment : FragmentPage<KidNamePageBinding>() {
 
 
         binding.itemList.setOnFocusChangeListener { focused, direction ->
-           Log.wtf("helloy", "$direction, $focused")
+            Log.wtf("helloy", "$direction, $focused")
             focused.requestFocus()
         }
 //        val icon = AppCompatResources.getDrawable(requireContext(), R.drawable.circle_item)
@@ -149,13 +153,29 @@ class KidNameFragment : FragmentPage<KidNamePageBinding>() {
                 }
             }
         })
+
+//        binding.itemList.setOnKeyListener { v, keyCode, event ->
+//            if (event.action == KeyEvent.ACTION_DOWN) {
+//                when (keyCode) {
+//                    KeyEvent.KEYCODE_DPAD_CENTER -> {
+//                        Handler(Looper.getMainLooper()).post {
+//                            binding.kidNameText.requestFocus()
+//                        }
+//                        true
+//                    }
+//                    else -> false
+//                }
+//            } else {
+//                false
+//            }
+//        }
+
 //        binding.itemList.layoutManager?.scrollToPosition(5)
         return binding.root
     }
 
     override fun onResume() {
         super.onResume()
-        binding.kidNameText.requestFocus()
     }
 
     override fun onDestroyView() {
@@ -165,7 +185,8 @@ class KidNameFragment : FragmentPage<KidNamePageBinding>() {
         super.onDestroyView()
     }
 
-    private inner class KeyboardListenerWrapper(private val listener: KeyboardView.KeyboardListener) : KeyboardView.KeyboardListener {
+    private inner class KeyboardListenerWrapper(private val listener: KeyboardView.KeyboardListener) :
+        KeyboardView.KeyboardListener {
         override fun onInput(symbol: Char?) {
             listener.onInput(symbol)
         }
