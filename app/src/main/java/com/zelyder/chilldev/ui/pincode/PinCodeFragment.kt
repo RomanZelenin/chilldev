@@ -1,10 +1,8 @@
 package com.zelyder.chilldev.ui.pincode
 
-import android.content.ContentResolver
 import android.content.ContentValues
 import android.net.Uri
 import android.os.Bundle
-import android.provider.UserDictionary
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
@@ -16,7 +14,6 @@ import com.zelyder.chilldev.domain.PolicyContract
 import com.zelyder.chilldev.domain.models.PinCodeStage
 import com.zelyder.chilldev.ui.FragmentPage
 import com.zelyder.chilldev.ui.customkeyboard.KeyboardOutput
-import com.zelyder.chilldev.ui.main.MainActivity
 
 class PinCodeFragment : FragmentPage<PinCodePageBinding>() {
 
@@ -56,7 +53,8 @@ class PinCodeFragment : FragmentPage<PinCodePageBinding>() {
                                 Toast.LENGTH_LONG
                             ).show()
                             firstPassword = ""
-                            binding.description.text = resources.getText(R.string.screen_pin_description)
+                            binding.description.text =
+                                resources.getText(R.string.screen_pin_description)
                             binding.pinView.setText("")
                         }
                     }
@@ -77,6 +75,12 @@ class PinCodeFragment : FragmentPage<PinCodePageBinding>() {
         )
     }
 
+
+    override fun onResume() {
+        super.onResume()
+        binding.numPad.requestFocus()
+    }
+
     fun transferData() {
         val uri: Uri = PolicyContract.buildPolicySettingsUri()
         val updateValues = ContentValues().apply {
@@ -93,8 +97,6 @@ class PinCodeFragment : FragmentPage<PinCodePageBinding>() {
 //            put(PolicyContract.NAME_SEARCH_MODE_INDEX, PolicyContract.NAME_LIMITED_AGE_LIMIT)
 //            put(PolicyContract.COLUMN_VALUE, "3")
         }
-
-
 
 
         val rowsUpdated = requireContext().contentResolver.insert(
