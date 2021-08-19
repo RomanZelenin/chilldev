@@ -13,6 +13,8 @@ import com.yandex.tv.services.passport.PassportProviderSdk
 import com.zelyder.chilldev.PageAdapter
 import com.zelyder.chilldev.databinding.ActivityMainBinding
 import com.zelyder.chilldev.di.DaggerAppComponent
+import com.zelyder.chilldev.extensions.getFragmentAtPosition
+import com.zelyder.chilldev.ui.FragmentPage
 import kotlinx.coroutines.*
 import timber.log.Timber
 import javax.inject.Inject
@@ -68,6 +70,12 @@ class MainActivity : FragmentActivity(), SwipePage {
 
     override fun onKeyDown(keyCode: Int, event: KeyEvent): Boolean {
         val currentPosition = binding.scrollBar.selectedPosition
+        val fragment = binding.pager.getFragmentAtPosition(supportFragmentManager,
+            binding.pager.currentItem)
+        (fragment as? FragmentPage<*>)?.let {
+            if (it.handleKey(keyCode))
+                return true
+        }
         when (event.keyCode) {
             KeyEvent.KEYCODE_DPAD_UP -> {
                 when (currentPosition) {

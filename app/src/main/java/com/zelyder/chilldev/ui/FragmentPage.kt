@@ -46,4 +46,8 @@ abstract class FragmentPage<T : ViewBinding> : Fragment() {
         container: ViewGroup?,
         attachToParent: Boolean
     )
+
+    open fun handleKey(keyCode: Int): Boolean {
+        return false
+    }
 }

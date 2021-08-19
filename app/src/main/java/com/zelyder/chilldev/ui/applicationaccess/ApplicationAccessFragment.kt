@@ -1,6 +1,7 @@
 package com.zelyder.chilldev.ui.applicationaccess
 
 import android.os.Bundle
+import android.view.KeyEvent
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -115,6 +116,16 @@ class ApplicationAccessFragment : FragmentPage<ApplicationAccessPageBinding>() {
     override fun onResume() {
         super.onResume()
         binding.createAccBtn.requestFocus()
+    }
+
+    override fun handleKey(keyCode: Int): Boolean {
+        return when (keyCode) {
+            KeyEvent.KEYCODE_DPAD_DOWN -> {
+                binding.createAccBtn.requestFocus()
+                true
+            }
+            else -> false
+        }
     }
 
     companion object {
