@@ -6,8 +6,9 @@ import androidx.recyclerview.widget.RecyclerView
 import com.zelyder.chilldev.customview.AppView
 import com.zelyder.chilldev.extensions.dpToPx
 
-class AppRecyclerAdapter :
-    RecyclerView.Adapter<AppRecyclerAdapter.MyViewHolder>() {
+class AppRecyclerAdapter(
+    private val listener: AppClickListener
+) : RecyclerView.Adapter<AppRecyclerAdapter.MyViewHolder>() {
 
     private val items = arrayListOf<AppItem>()
 
@@ -15,9 +16,15 @@ class AppRecyclerAdapter :
         private val appView: AppView
     ) : RecyclerView.ViewHolder(appView) {
 
-        fun bind(item: AppItem) {
+        fun bind(item: AppItem, listener: AppClickListener) {
             appView.text = item.name
             appView.color = ContextCompat.getColor(appView.context, item.color)
+            appView.setIcon(item.icon)
+            appView.checked = item.checked
+            appView.setOnClickListener {
+                appView.checked = !appView.checked
+                listener.onAppClick(item.name, appView.checked)
+            }
         }
     }
 
@@ -32,7 +39,7 @@ class AppRecyclerAdapter :
     }
 
     override fun onBindViewHolder(holder: MyViewHolder, position: Int) {
-        holder.bind(items[position])
+        holder.bind(items[position], listener)
     }
 
     override fun getItemCount() = items.size

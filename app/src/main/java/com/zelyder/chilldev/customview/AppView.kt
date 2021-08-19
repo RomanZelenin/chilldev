@@ -1,6 +1,7 @@
 package com.zelyder.chilldev.customview
 
 import android.content.Context
+import android.graphics.drawable.Drawable
 import android.util.AttributeSet
 import android.view.View
 import android.widget.Switch
@@ -11,8 +12,15 @@ import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.core.content.ContextCompat
 import com.zelyder.chilldev.R
 
-class AppView(context: Context, attrs: AttributeSet?) : ConstraintLayout(context, attrs),
-    View.OnFocusChangeListener, View.OnClickListener {
+class AppView(
+    context: Context,
+    attrs: AttributeSet?
+) : ConstraintLayout(context, attrs),
+    View.OnFocusChangeListener {
+
+    fun setIcon(icon: Drawable){
+        findViewById<AppCompatImageView>(R.id.app_icon).setImageDrawable(icon)
+    }
 
     @ColorInt
     var color : Int =  ContextCompat.getColor(context, R.color.disabled)
@@ -37,10 +45,6 @@ class AppView(context: Context, attrs: AttributeSet?) : ConstraintLayout(context
         updateBackgroundAndTextColor(hasFocus)
     }
 
-    override fun onClick(v: View?) {
-        checked = !checked
-    }
-
     init {
         inflate(context, R.layout.app_item_page, this)
         context.obtainStyledAttributes(attrs, R.styleable.AppView).apply {
@@ -56,8 +60,6 @@ class AppView(context: Context, attrs: AttributeSet?) : ConstraintLayout(context
         }
         isClickable = true
         isFocusable = true
-
-        setOnClickListener(this)
 
         findViewById<Switch>(R.id.switch_view).setOnCheckedChangeListener { buttonView, isChecked ->
             checked = isChecked

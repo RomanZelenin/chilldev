@@ -1,30 +1,23 @@
 package com.zelyder.chilldev.ui.main
 
 import android.net.Uri
-import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import androidx.lifecycle.viewModelScope
-import com.google.gson.JsonObject
-import com.zelyder.chilldev.domain.repository.Repository
+import androidx.lifecycle.liveData
 import com.zelyder.chilldev.domain.models.*
-import kotlinx.coroutines.launch
+import com.zelyder.chilldev.domain.repository.Repository
 import timber.log.Timber
 
 class PageViewModel(private val repository: Repository) :
     ViewModel() {
 
-    private val _categories = MutableLiveData<List<String>>()
     private val _kidInfo = MutableLiveData(KidInfo())
     val kidInfo: LiveData<KidInfo> = _kidInfo
 
-    fun getCategories(): LiveData<List<String>> {
-        viewModelScope.launch {
+    val categories = liveData {
             val categories = repository.getCategories()
-            _categories.postValue(categories)
-        }
-        return _categories
+            emit(categories)
     }
 
     suspend fun getPosters(ageLimit: AgeLimit): List<Uri> {
@@ -57,12 +50,15 @@ class PageViewModel(private val repository: Repository) :
         Timber.d("Set categories: $categories")
     }
 
-    fun setKidServices(availableServices: List<AvailableService>) {
-        val services = JsonObject().apply {
-            addProperty("Дублирование экрана", true)
-            addProperty("Медиаплеер", true)
+    fun updateServices(title: String, checked: Boolean) {
+        val services = _kidInfo.value!!.apps
+        if (checked) {
+            services.addProperty(title, checked)
+        } else {
+            services.remove(title)
         }
         _kidInfo.postValue(_kidInfo.value!!.copy(apps = services))
+        Timber.d("Update services: $services")
     }
 
     fun setPinCode(pinCode: String) {
