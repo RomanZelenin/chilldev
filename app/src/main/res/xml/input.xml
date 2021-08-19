@@ -36,7 +36,7 @@
         <item type="0">Ю</item>
         <item type="0">Я</item>
         <item type="5" size="2">\\_/</item>
-        <item type="2" size="2">НАЙТИ</item>
+        <item type="2" size="2">Дальше</item>
         <item type="4">&amp;123</item>
     </input>
 
@@ -76,7 +76,7 @@
         <item type="6"/>
         <item type="6"/>
         <item type="5" size="2">\\_/</item>
-        <item type="2" size="2">НАЙТИ</item>
+        <item type="2" size="2">Дальше</item>
         <item type="4">&amp;123</item>
     </input>
 
@@ -156,7 +156,7 @@
         <item type="6" />
         <item type="6" />
         <item type="5" size="2">\\_/</item>
-        <item type="2" size="2">НАЙТИ</item>
+        <item type="2" size="2">Дальше</item>
         <item type="4">АБВ</item>
     </input>
 </input-methods>
