@@ -167,12 +167,12 @@ class KidNameFragment : FragmentPage<KidNamePageBinding>() {
 
     private val keyboardNextFocusListener = object : SearchNextFocusListener {
         override fun searchDown(focused: View?): View? {
-            focused?.requestFocus()
+            page.swipeToNext()
             return null
         }
 
         override fun searchTop(focused: View?): View? {
-            focused?.requestFocus()
+            binding.itemList.requestFocus()
             return null
         }
     }
