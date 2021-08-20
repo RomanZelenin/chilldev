@@ -39,16 +39,21 @@ class ApplicationAccessFragment : FragmentPage<ApplicationAccessPageBinding>() {
         val list = arrayListOf<String>()
 
         viewModel.kidInfo.observe(viewLifecycleOwner) { it ->
-            str = it.name + ", "
             val ageFromView = it.birthdate.parseToDate() ?: Date()
             val age = getAge(ageFromView)
+            str = it.name
+            if (age in 1..20) {
+                str += ", "
+            }
             str += buildString {
-                append("$age ")
-                when (age) {
-                    1 -> append("год")
-                    in 2..4 -> append("года")
-                    0, in 5..20 -> append("лет")
-                    else -> append("")
+                if (age in 1..20) {
+                    append("$age ")
+                    when (age) {
+                        1 -> append("год")
+                        in 2..4 -> append("года")
+                        in 5..20 -> append("лет")
+                        else -> append("")
+                    }
                 }
             }
             binding.apply {
@@ -69,8 +74,8 @@ class ApplicationAccessFragment : FragmentPage<ApplicationAccessPageBinding>() {
                     }
                 kidNameTextView.text = str
                 kidGender.text = when (it.gender) {
-                    Gender.FEMALE -> ", ${getString(R.string.child_gender_female).lowercase()}"
-                    Gender.MALE -> ", ${getString(R.string.child_gender_male).lowercase()}"
+                    Gender.FEMALE -> ", ${getString(R.string.child_gender_female).toLowerCase()}"
+                    Gender.MALE -> ", ${getString(R.string.child_gender_male).toLowerCase()}"
                     Gender.WHATEVER -> ""
                 }
                 savedLimitationAge.text = getString(R.string.check_kid_age, it.age_limit)
