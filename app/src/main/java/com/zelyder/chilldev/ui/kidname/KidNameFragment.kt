@@ -34,7 +34,7 @@ class KidNameFragment : FragmentPage<KidNamePageBinding>() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         binding.kidNameText.apply {
-            text = viewModel.kidInfo.value!!.name
+            text = viewModel.kidInfo.value?.name
         }
         binding.itemList.layoutManager!!.scrollToPosition(Integer.MAX_VALUE / 2)
     }
@@ -98,7 +98,7 @@ class KidNameFragment : FragmentPage<KidNamePageBinding>() {
             bindInput(KeyboardListenerWrapper(object : KeyboardView.KeyboardListener {
                 override fun onInput(symbol: Char?) {
                     val textView = binding.kidNameText
-                    textView.text = (textView.text.toString() + symbol.toString())
+                    textView.append(symbol.toString())
                     textView.setTextColor(ContextCompat.getColor(context, R.color.white))
                 }
 
