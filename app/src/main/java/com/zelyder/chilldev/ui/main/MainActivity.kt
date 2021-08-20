@@ -70,9 +70,8 @@ class MainActivity : FragmentActivity(), SwipePage {
         val currentPosition = binding.scrollBar.selectedPosition
         when (event.keyCode) {
             KeyEvent.KEYCODE_DPAD_UP -> {
-
                 when (currentPosition) {
-                    4, 5 ,7-> { }
+                    4, 5, 7-> { }
                     else -> swipeToPrevious()
                 }
             }
@@ -80,6 +79,7 @@ class MainActivity : FragmentActivity(), SwipePage {
             KeyEvent.KEYCODE_DPAD_DOWN -> {
                 when (currentPosition) {
                     4, 5, 7 -> { }
+                    6 -> return true
                     else -> swipeToNext()
                 }
             }
