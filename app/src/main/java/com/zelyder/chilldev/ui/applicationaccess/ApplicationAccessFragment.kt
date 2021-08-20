@@ -118,16 +118,6 @@ class ApplicationAccessFragment : FragmentPage<ApplicationAccessPageBinding>() {
         binding.createAccBtn.requestFocus()
     }
 
-    override fun handleKey(keyCode: Int): Boolean {
-        return when (keyCode) {
-            KeyEvent.KEYCODE_DPAD_DOWN -> {
-                binding.createAccBtn.requestFocus()
-                true
-            }
-            else -> false
-        }
-    }
-
     companion object {
         @JvmStatic
         fun newInstance() = ApplicationAccessFragment()
