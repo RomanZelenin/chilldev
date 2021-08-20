@@ -1,16 +1,13 @@
 package com.zelyder.chilldev.ui.kidname
 
-import android.content.Context
 import android.os.Bundle
-import android.os.Handler
-import android.os.Looper
-import android.util.Log
-import android.view.*
-import android.view.inputmethod.EditorInfo
-import android.view.inputmethod.InputMethodManager
+import android.view.LayoutInflater
+import android.view.View
+import android.view.ViewGroup
+import android.view.accessibility.AccessibilityEvent
 import androidx.annotation.DrawableRes
-import androidx.appcompat.content.res.AppCompatResources
-import androidx.core.content.ContextCompat.getSystemService
+import androidx.core.content.ContextCompat
+import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import androidx.recyclerview.widget.RecyclerView.SCROLL_STATE_IDLE
 import com.zelyder.chilldev.R
@@ -18,10 +15,6 @@ import com.zelyder.chilldev.databinding.KidNamePageBinding
 import com.zelyder.chilldev.domain.models.KidNameIconType
 import com.zelyder.chilldev.ui.CarouselItemAdapter
 import com.zelyder.chilldev.ui.FragmentPage
-import com.zelyder.chilldev.ui.chooseaccount.AccountsLinearLayoutManager
-import com.zelyder.chilldev.ui.movieage.AgeRatingLayout
-import java.lang.Exception
-
 
 class KidNameFragment : FragmentPage<KidNamePageBinding>() {
 
@@ -33,11 +26,17 @@ class KidNameFragment : FragmentPage<KidNamePageBinding>() {
         _binding = KidNamePageBinding.inflate(inflater, container, attachToParent)
     }
 
+    override fun onResume() {
+        super.onResume()
+        requestFocusOnKeyboard()
+    }
+
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         binding.kidNameText.apply {
-            setText(viewModel.kidInfo.value!!.name)
+            text = viewModel.kidInfo.value?.name
         }
+        binding.itemList.layoutManager!!.scrollToPosition(Integer.MAX_VALUE / 2)
     }
 
     override fun onPause() {
@@ -52,12 +51,8 @@ class KidNameFragment : FragmentPage<KidNamePageBinding>() {
 
     private val itemAdapter by lazy {
         CarouselItemAdapter(requireContext()) { position: Int, _: Item ->
-            binding.itemList.scrollToPosition(position)
-            binding.kidNameText.requestFocus()
-            (requireActivity().getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager).toggleSoftInput(
-                InputMethodManager.SHOW_FORCED,
-                InputMethodManager.HIDE_IMPLICIT_ONLY
-            )
+            binding.itemList.smoothScrollToPosition(position)
+            binding.keyboardView.requestFocus()
         }
     }
 
@@ -74,6 +69,7 @@ class KidNameFragment : FragmentPage<KidNamePageBinding>() {
         Item(R.drawable.ic_avas10)
     )
     private var keyboardView: KeyboardView? = null
+
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
@@ -83,68 +79,49 @@ class KidNameFragment : FragmentPage<KidNamePageBinding>() {
         inflater.inflate(R.layout.kid_name_page, container, false)
         viewModel.setIcon(KidNameIconType.getForPosition(1))
 
-//        keyboardView = binding.keyboardView
+        keyboardView = binding.keyboardView
         binding.itemList.initialize(itemAdapter)
         binding.itemList.requestFocus()
-        binding.itemList.layoutManager = AccountsLinearLayoutManager(requireContext())
-        binding.itemList.requestFocus()
-
-
+        binding.itemList.layoutManager = LinearLayoutManager(
+            context,
+            RecyclerView.HORIZONTAL,
+            false
+        )
         binding.itemList.setOnFocusChangeListener { focused, direction ->
-            Log.wtf("helloy", "$direction, $focused")
             focused.requestFocus()
         }
-//        val icon = AppCompatResources.getDrawable(requireContext(), R.drawable.circle_item)
-//        binding.keyboardView.setKeySelector(icon)
+
         itemAdapter.setItems(iconItems)
 
-
-//        keyboardView?.apply {
-//            setInputXml(resources.getXml(R.xml.input))
-//            bindInput(KeyboardListenerWrapper(object : KeyboardView.KeyboardListener {
-//                override fun onInput(symbol: Char?) {
-//                    val textView = binding.kidNameText
-//                    textView.append(symbol.toString())
-//                }
-//
-//                override fun onDelete() {
-//                    val textView = binding.kidNameText
-//                    if (textView.text.isNotEmpty()) {
-//                        textView.text = textView.text.substring(0, textView.text.length - 1)
-//                    }
-//                }
-//
-//                override fun onDeleteAll() {
-//                    Log.wtf("button", "deleteAll")
-//
-//                }
-//
-//                override fun onEnter() {
-//                    val textView = binding.kidNameText
-//                    textView.text = textView.text.toString().replace("\\s+".toRegex(), " ")
-//                    if (textView.text.isNotEmpty()) {
-////                        textView.text = "21"
-//                    }
-//                }
-//            }))
-//            setKeyboardNextFocusListener(keyboardNextFocusListener)
-//        }
-
-//        val kidNameEditText = binding.kidNameText
-
-        binding.kidNameText.setOnEditorActionListener { _, actionId, _ ->
-            if (actionId == EditorInfo.IME_ACTION_DONE || actionId == EditorInfo.IME_ACTION_NEXT) {
-                binding.kidNameText.clearFocus()
-                try {
-                    val imm: InputMethodManager? =
-                        requireActivity().getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager?
-                    imm?.hideSoftInputFromWindow(requireActivity().currentFocus?.windowToken, 0)
-                } catch (e: Exception) {
-                    Log.e(this::class.simpleName, "Hide keyboard failed")
+        keyboardView?.apply {
+            setInputXml(resources.getXml(R.xml.input))
+            bindInput(KeyboardListenerWrapper(object : KeyboardView.KeyboardListener {
+                override fun onInput(symbol: Char?) {
+                    val textView = binding.kidNameText
+                    textView.append(symbol.toString())
+                    textView.setTextColor(ContextCompat.getColor(context, R.color.white))
                 }
-                page.swipeToNext()
-            }
-            false
+
+                override fun onDelete() {
+                    val textView = binding.kidNameText
+                    if (textView.text.isNotEmpty()) {
+                        textView.text = textView.text.substring(0, textView.text.length - 1)
+                    }
+                }
+
+                override fun onDeleteAll() {
+                }
+
+                override fun onEnter() {
+                    val textView = binding.kidNameText
+                    textView.text = textView.text.toString().replace("\\s+".toRegex(), " ")
+                    if (textView.text.isEmpty()) {
+                        textView.text = resources.getText(R.string.saved_kid_name)
+                    }
+                    page.swipeToNext()
+                }
+            }))
+            setKeyboardNextFocusListener(keyboardNextFocusListener)
         }
 
         binding.itemList.addOnScrollListener(object : RecyclerView.OnScrollListener() {
@@ -157,29 +134,7 @@ class KidNameFragment : FragmentPage<KidNamePageBinding>() {
                 }
             }
         })
-
-//        binding.itemList.setOnKeyListener { v, keyCode, event ->
-//            if (event.action == KeyEvent.ACTION_DOWN) {
-//                when (keyCode) {
-//                    KeyEvent.KEYCODE_DPAD_CENTER -> {
-//                        Handler(Looper.getMainLooper()).post {
-//                            binding.kidNameText.requestFocus()
-//                        }
-//                        true
-//                    }
-//                    else -> false
-//                }
-//            } else {
-//                false
-//            }
-//        }
-
-//        binding.itemList.layoutManager?.scrollToPosition(5)
         return binding.root
-    }
-
-    override fun onResume() {
-        super.onResume()
     }
 
     override fun onDestroyView() {
@@ -189,8 +144,7 @@ class KidNameFragment : FragmentPage<KidNamePageBinding>() {
         super.onDestroyView()
     }
 
-    private inner class KeyboardListenerWrapper(private val listener: KeyboardView.KeyboardListener) :
-        KeyboardView.KeyboardListener {
+    private inner class KeyboardListenerWrapper(private val listener: KeyboardView.KeyboardListener) : KeyboardView.KeyboardListener {
         override fun onInput(symbol: Char?) {
             listener.onInput(symbol)
         }
@@ -210,15 +164,23 @@ class KidNameFragment : FragmentPage<KidNamePageBinding>() {
 
     private val keyboardNextFocusListener = object : SearchNextFocusListener {
         override fun searchDown(focused: View?): View? {
+            focused?.requestFocus()
             return null
         }
 
         override fun searchTop(focused: View?): View? {
+            focused?.requestFocus()
             return null
         }
     }
-}
 
+    private fun requestFocusOnKeyboard() {
+        binding.keyboardView.apply {
+            requestFocus()
+            sendAccessibilityEvent(AccessibilityEvent.TYPE_VIEW_FOCUSED)
+        }
+    }
+}
 
 data class Item(
     @DrawableRes val icon: Int

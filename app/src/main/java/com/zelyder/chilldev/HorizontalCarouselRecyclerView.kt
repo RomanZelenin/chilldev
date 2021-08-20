@@ -2,7 +2,6 @@ package com.zelyder.chilldev
 
 import android.content.Context
 import android.util.AttributeSet
-import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 

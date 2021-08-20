@@ -71,14 +71,14 @@ class MainActivity : FragmentActivity(), SwipePage {
         when (event.keyCode) {
             KeyEvent.KEYCODE_DPAD_UP -> {
                 when (currentPosition) {
-                    4, 5, 7-> { }
+                    0, 4, 5, 7 -> { }
                     else -> swipeToPrevious()
                 }
             }
 
             KeyEvent.KEYCODE_DPAD_DOWN -> {
                 when (currentPosition) {
-                    4, 5, 7 -> { }
+                    0, 4, 5, 7 -> { }
                     6 -> return true
                     else -> swipeToNext()
                 }
