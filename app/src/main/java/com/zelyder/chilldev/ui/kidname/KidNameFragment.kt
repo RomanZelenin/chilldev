@@ -95,6 +95,9 @@ class KidNameFragment : FragmentPage<KidNamePageBinding>() {
 
         keyboardView?.apply {
             setInputXml(resources.getXml(R.xml.input))
+            setKeySelector(ContextCompat.getDrawable(
+                requireContext(), R.drawable.key_button_bg_selector
+            ))
             bindInput(KeyboardListenerWrapper(object : KeyboardView.KeyboardListener {
                 override fun onInput(symbol: Char?) {
                     val textView = binding.kidNameText

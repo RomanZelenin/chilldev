@@ -17,7 +17,6 @@ import kotlinx.coroutines.*
 import timber.log.Timber
 import javax.inject.Inject
 
-
 interface SwipePage {
     fun swipeToNext()
     fun swipeToPrevious()
@@ -71,7 +70,7 @@ class MainActivity : FragmentActivity(), SwipePage {
         when (event.keyCode) {
             KeyEvent.KEYCODE_DPAD_UP -> {
                 when (currentPosition) {
-                    0, 4, 5, 7 -> { }
+                    4, 5, 7 -> { }
                     else -> swipeToPrevious()
                 }
             }
