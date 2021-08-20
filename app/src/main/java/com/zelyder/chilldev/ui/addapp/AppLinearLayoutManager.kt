@@ -41,9 +41,11 @@ class AppLinearLayoutManager(context : Context, private val page: SwipePage) : L
                 previousView?.checked?.let { previousView?.onFocusChange(previousView, false) }
             }
         }
-        previousView = focused as AppView
-        focused.onFocusChange(focused, true)
-        position = parent.getChildLayoutPosition(focused)
+        if (focused is AppView) {
+            previousView = focused
+            focused.onFocusChange(focused, true)
+            position = parent.getChildLayoutPosition(focused)
+        }
         return flg
     }
 }

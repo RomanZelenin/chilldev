@@ -16,7 +16,7 @@
     <string name="last_screen_message">Поздравляем! Вы успешно создали детский аккаунт =)</string>
     <string name="screen_pin_title">ПИН-код</string>
     <string name="screen_pin_description">Хотите защитить выход из детского профиля?\nПридумайте ПИН-код из четырёх символов.</string>
-    <string name="screen_pin_confirm">Повторите</string>
+    <string name="screen_pin_confirm">Повторите\n</string>
     <string name="screen_pin_enter">Введите ПИН для выхода \nиз детского профиля</string>
     <string name="screen_pin_done">Не хочу задавать ПИН-код</string>
     <string name="screen_pin_error_text">ПИН коды не совпадают!</string>
@@ -54,4 +54,5 @@
     <string name="choose_account_logout_label">Выйти из аккаунта</string>
     <string name="choose_account_configure_mode_label">Настройки детского режима</string>
     <string name="choose_account_add_profile_label">Добавить профиль</string>
+    <string name="all">Всё</string>
 </resources>

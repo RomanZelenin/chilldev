@@ -8,7 +8,7 @@ enum class Gender(val gender: String) {
     @SerializedName("female")
     FEMALE("female"),
     @SerializedName("whatever")
-    WHATEVER("whatever"); // TODO: Сверить с бэкендом
+    WHATEVER("whatever");
 
     override fun toString(): String {
         return gender
