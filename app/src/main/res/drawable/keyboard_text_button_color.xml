@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <selector xmlns:android="http://schemas.android.com/apk/res/android" android:layout_height="wrap_content" android:layout_width="wrap_content">
-    <item android:state_focused="true" android:color="?attr/homeBackgroundColor" />
-    <item android:state_hovered="true" android:color="?attr/homeBackgroundColor" />
+    <item android:state_focused="true" android:color="@color/blue" />
+    <item android:state_hovered="true" android:color="@color/text_black" />
     <item android:color="@color/white" />
 </selector>

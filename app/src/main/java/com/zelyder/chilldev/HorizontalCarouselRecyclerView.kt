@@ -2,7 +2,6 @@ package com.zelyder.chilldev
 
 import android.content.Context
 import android.util.AttributeSet
-import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 
@@ -40,6 +39,8 @@ class HorizontalCarouselRecyclerView(
                 child.scaleX = scaleValue
                 child.scaleY = scaleValue
                 child.tag = Math.abs(scaleValue - SELECTED_ICON_SCALE_FACTOR) < 0.001
+                child.isFocusable = true
+                child.isClickable = true
             }
         }
     }

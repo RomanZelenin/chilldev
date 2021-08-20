@@ -4,8 +4,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:clipToPadding="false"
-    android:clipChildren="false">
+    android:clipChildren="false"
+    android:clipToPadding="false">
 
     <TextView
         android:id="@+id/kid_name_text_view"
@@ -26,8 +26,8 @@
         android:layout_width="500dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="20dp"
-        app:layout_constraintLeft_toLeftOf="parent"
         android:focusable="true"
+        app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toBottomOf="@id/kid_name_text_view">
 
@@ -35,22 +35,20 @@
             android:id="@+id/item_list"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:focusable="true"
             android:clipToPadding="false"
-            android:overScrollMode="never"/>
+            android:focusable="true"
+            android:overScrollMode="never" />
     </FrameLayout>
 
-    <EditText
-        android:id="@+id/kid_name_edit_text"
+    <TextView
+        android:id="@+id/kid_name_text"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:autofillHints="username"
         android:background="@null"
         android:hint="@string/name_hint"
-        android:imeOptions="actionNext"
-
-        android:inputType="textPersonName"
-        android:privateImeOptions="horizontalAlignment=center"
+        android:maxLines="1"
+        android:textAllCaps="false"
         android:textSize="32sp"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
@@ -61,18 +59,17 @@
         android:id="@+id/keyboard_view"
         android:layout_width="500dp"
         android:layout_height="200dp"
+        android:background="@color/ya_colors_black_background"
         android:descendantFocusability="afterDescendants"
         android:focusableInTouchMode="true"
         app:columnCount="@integer/search_keyboard_column_count"
         app:keyAnimator="@animator/keyboard_list_animator"
-        app:keyBackgroundSelector="@drawable/keyboard_text_button_background"
         app:keyColorSelector="@drawable/keyboard_text_button_color"
         app:keyTextSize="@dimen/search_keyboard_text_size"
         app:languages="ru|en|num"
-        android:background="@color/blue"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintBottom_toBottomOf="parent" />
+        app:layout_constraintStart_toStartOf="parent" />
 
     <ImageView
         android:layout_width="80dp"
