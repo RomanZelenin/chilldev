@@ -7,6 +7,7 @@ import dagger.Module
 @Module
 interface DataSources {
     @Binds
+    @ApplicationScope
     fun getRemoteSource(implRemoteSource: ImplRemoteSource): RemoteSource
 
     @Binds

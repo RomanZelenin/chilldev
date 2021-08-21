@@ -1,6 +1,7 @@
 package com.zelyder.chilldev.domain.repository
 
 import android.net.Uri
+import com.zelyder.chilldev.di.ApplicationScope
 import com.zelyder.chilldev.domain.models.AgeLimit
 import com.zelyder.chilldev.domain.models.Kid
 import com.zelyder.chilldev.domain.models.KidInfo
@@ -8,6 +9,8 @@ import com.zelyder.chilldev.domain.repository.datasource.LocalSource
 import com.zelyder.chilldev.domain.repository.datasource.RemoteSource
 import javax.inject.Inject
 
+@ApplicationScope
+class Repository @Inject constructor(private val remoteSource: RemoteSource) {
 
 class Repository @Inject constructor(
     private val remoteSource: RemoteSource,

@@ -1,6 +1,5 @@
 package com.zelyder.chilldev.di
 
-import android.app.Application
 import com.zelyder.chilldev.domain.models.Token
 import com.zelyder.chilldev.ui.chooseaccount.ChooseAccountActivity
 import com.zelyder.chilldev.ui.main.MainActivity
@@ -17,10 +16,7 @@ interface AppComponent {
 
     @Component.Factory
     interface Factory {
-        fun create(
-            @BindsInstance token: Token,
-            @BindsInstance application: Application
-        ): AppComponent
+        fun create(@BindsInstance token: Token): AppComponent
     }
 
     fun inject(activity: MainActivity)
