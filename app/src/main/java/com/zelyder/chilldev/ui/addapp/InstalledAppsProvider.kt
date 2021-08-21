@@ -11,7 +11,7 @@ class InstalledAppsProvider(private val packageManager: PackageManager) {
     private val extraAppRegex = Regex("Chilldev|MainActivity|Дублирование экрана")
 
 
-        fun provide(): List<InstalledApp> {
+    fun provide(): List<InstalledApp> {
         val launchIntent = Intent(Intent.ACTION_MAIN).addCategory(Intent.CATEGORY_LEANBACK_LAUNCHER)
         val resolveInfos = packageManager.queryIntentActivities(launchIntent, PackageManager.MATCH_ALL)
         return resolveInfos
@@ -24,6 +24,9 @@ class InstalledAppsProvider(private val packageManager: PackageManager) {
             }
             .filterNot { installedApp ->
                 installedApp.packageName.matches(yandexAppRegex)
+            }
+            .filterNot {
+                    installedApp ->
                 installedApp.name.matches(extraAppRegex)
             }
     }
