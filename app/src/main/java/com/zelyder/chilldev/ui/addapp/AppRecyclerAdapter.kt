@@ -43,9 +43,10 @@ class AppRecyclerAdapter(
     override fun getItemCount() = items.size
 
 
-    fun setItems(items : List<AppItem>) {
+    fun setItems(items : List<AppItem>, additionalData: List<AppItem>) {
         this.items.clear()
         this.items.addAll(items)
+        this.items.addAll(additionalData)
         notifyDataSetChanged()
     }
 }
