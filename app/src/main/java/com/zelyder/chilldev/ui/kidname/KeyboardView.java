@@ -8,6 +8,7 @@ import android.content.res.TypedArray;
 import android.graphics.Typeface;
 import android.graphics.drawable.Drawable;
 import android.util.AttributeSet;
+import android.util.Log;
 import android.util.TypedValue;
 import android.view.Gravity;
 import android.view.View;
@@ -744,6 +745,9 @@ public class KeyboardView extends RecyclerView {
             FontsKt.applyFont(view, Fonts.yandexSansMedium(context));
             if (textColor != null)
                 view.setTextColor(textColor);
+            Drawable background  = keySelector;
+            if (background != null)
+                view.setBackground(background.getConstantState().newDrawable());
             if (keyAnimator != 0) {
                 StateListAnimator anim = AnimatorInflater.loadStateListAnimator(context, keyAnimator);
                 view.setStateListAnimator(anim);
@@ -777,8 +781,15 @@ public class KeyboardView extends RecyclerView {
             view.setImageDrawable(image);
             view.setPadding(0,10,0,10);
             view.setScaleType(scaleType);
-            view.setLayoutParams(new ViewGroup.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT));
+            view.setLayoutParams(new ViewGroup.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT,
+                    ViewGroup.LayoutParams.MATCH_PARENT));
+
+            Drawable background  = keySelector;
+            if (background != null)
+                view.setBackground(background.getConstantState().newDrawable());
             if (keyAnimator != 0) {
+
+
                 StateListAnimator anim = AnimatorInflater.loadStateListAnimator(context, keyAnimator);
                 view.setStateListAnimator(anim);
             }

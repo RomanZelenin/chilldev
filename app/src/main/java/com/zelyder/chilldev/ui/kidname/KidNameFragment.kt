@@ -95,6 +95,9 @@ class KidNameFragment : FragmentPage<KidNamePageBinding>() {
 
         keyboardView?.apply {
             setInputXml(resources.getXml(R.xml.input))
+            setKeySelector(ContextCompat.getDrawable(
+                requireContext(), R.drawable.key_button_bg_selector
+            ))
             bindInput(KeyboardListenerWrapper(object : KeyboardView.KeyboardListener {
                 override fun onInput(symbol: Char?) {
                     val textView = binding.kidNameText
@@ -164,12 +167,12 @@ class KidNameFragment : FragmentPage<KidNamePageBinding>() {
 
     private val keyboardNextFocusListener = object : SearchNextFocusListener {
         override fun searchDown(focused: View?): View? {
-            focused?.requestFocus()
+            page.swipeToNext()
             return null
         }
 
         override fun searchTop(focused: View?): View? {
-            focused?.requestFocus()
+            binding.itemList.requestFocus()
             return null
         }
     }
