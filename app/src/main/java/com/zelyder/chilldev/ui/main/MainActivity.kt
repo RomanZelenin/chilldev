@@ -38,7 +38,7 @@ class MainActivity : FragmentActivity(), SwipePage {
 
         getAccessToken { token ->
             DaggerAppComponent.factory()
-                .create(Token(token!!))
+                .create(Token(token!!), application)
                 .inject(this)
 
             pageViewModel = ViewModelProvider(

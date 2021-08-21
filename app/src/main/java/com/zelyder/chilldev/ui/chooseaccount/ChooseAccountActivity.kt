@@ -3,6 +3,7 @@ package com.zelyder.chilldev.ui.chooseaccount
 import android.os.Bundle
 import android.widget.Toast
 import androidx.core.text.isDigitsOnly
+import android.util.Log
 import androidx.fragment.app.FragmentActivity
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.lifecycleScope
@@ -36,7 +37,7 @@ class ChooseAccountActivity : FragmentActivity() {
         getAccessToken { token ->
             Timber.d("Provider SDK Token:${token}")
             DaggerAppComponent.factory()
-                .create(Token(token!!))
+                .create(Token(token!!), application)
                 .inject(this)
 
             pageViewModel = ViewModelProvider(
@@ -48,6 +49,10 @@ class ChooseAccountActivity : FragmentActivity() {
                 object : AccountClickListener {
                     override fun onAddProfileClick() {
                         MainActivity.startActivity(this@ChooseAccountActivity)
+                    }
+
+                    override fun onParentAccountClick() {
+
                     }
                 })
 
