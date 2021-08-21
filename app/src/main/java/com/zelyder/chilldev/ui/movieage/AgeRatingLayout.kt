@@ -22,16 +22,13 @@ class AgeRatingLayout(context: Context, attrSet: AttributeSet?) :
             val endPosition = size - 1
             for (i in startPosition..selectedPosition) {
                 (this[i] as TextView).apply {
-                    configureFocusedTextView(this)
+                    configureSelectedTextView(this, i)
                 }
             }
             for (i in selectedPosition + 1..endPosition) {
                 (this[i] as TextView).apply {
-                    configureDefaultTextView(this, isLast(i))
+                    configureDefaultTextView(this)
                 }
-            }
-            (this[value] as TextView).apply {
-               configureSelectedTextView(this, isLast(value))
             }
         }
 
@@ -39,7 +36,7 @@ class AgeRatingLayout(context: Context, attrSet: AttributeSet?) :
         removeAllViews()
         for (i in 0 until size) {
             val tvAgeRating = TextView(context).apply {
-                configureDefaultTextView(this, isLast(i))
+                configureDefaultTextView(this)
                 gravity = Gravity.CENTER
                 textSize = 12.dpToPx().toFloat()
                 text = AgeRating.values()[i].rating
@@ -49,39 +46,33 @@ class AgeRatingLayout(context: Context, attrSet: AttributeSet?) :
         selectedPosition = 0
     }
 
-    private fun isLast(position: Int) = position == size - 1
-
-    private fun configureFocusedTextView(textView: TextView): TextView {
+    private fun configureSelectedTextView(textView: TextView, position: Int): TextView {
         return textView.apply {
-            setBackgroundResource(R.drawable.shp_focused_age_rating_bg)
-            setTextColor(ContextCompat.getColor(context, android.R.color.white))
-            val layoutParams = LayoutParams(50.dpToPx(), 50.dpToPx())
-            layoutParams.rightMargin = 8.dpToPx()
-            setLayoutParams(layoutParams)
+            when {
+                selectedPosition == 0 -> {
+                    setBackgroundResource(R.drawable.shp_rounded_selected_age_rating_bg)
+                    setTextColor(ContextCompat.getColor(context, android.R.color.black))
+                }
+                position == 0 -> {
+                    setBackgroundResource(R.drawable.shp_left_rounded_selected_age_rating_bg)
+                    setTextColor(ContextCompat.getColor(context, android.R.color.black))
+                }
+                position != selectedPosition -> {
+                    setBackgroundResource(R.drawable.shp_selected_age_rating_bg)
+                    setTextColor(ContextCompat.getColor(context, android.R.color.black))
+                }
+                else -> {
+                    setBackgroundResource(R.drawable.shp_right_rounded_selected_age_rating_bg)
+                    setTextColor(ContextCompat.getColor(context, android.R.color.black))
+                }
+            }
         }
     }
 
-    private fun configureDefaultTextView(textView: TextView, isLast: Boolean): TextView {
+    private fun configureDefaultTextView(textView: TextView): TextView {
         return textView.apply {
             setBackgroundResource(R.drawable.shp_default_age_rating_bg)
             setTextColor(ContextCompat.getColor(context, android.R.color.white))
-            val layoutParams = LayoutParams(50.dpToPx(), 50.dpToPx())
-            if (!isLast) {
-                layoutParams.rightMargin = 8.dpToPx()
-            }
-            setLayoutParams(layoutParams)
-        }
-    }
-
-    private fun configureSelectedTextView(textView: TextView, isLast: Boolean): TextView {
-        return textView.apply {
-            setBackgroundResource(R.drawable.shp_selected_age_rating_bg)
-            setTextColor(ContextCompat.getColor(context, android.R.color.black))
-            val layoutParams = LayoutParams(60.dpToPx(), 60.dpToPx())
-            if (!isLast) {
-                layoutParams.rightMargin = 8.dpToPx()
-            }
-            setLayoutParams(layoutParams)
         }
     }
 
