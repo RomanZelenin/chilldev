@@ -22,15 +22,15 @@ class PageAdapter(fragment: FragmentActivity) : FragmentStateAdapter(fragment) {
 
     //fragment order is important!!!
     private val listPages: OrderedListPages = mapOf(
-        1 to lazy {  KidNameFragment.newInstance() }, //
+        1 to lazy {  KidNameFragment.newInstance() },
         2 to lazy { MovieAgeFragment.newInstance() },
         3 to lazy { ChildGenderFragmentPage.newInstance() },
-        4 to lazy { BirthdayFragment.newInstance() },
-        5 to lazy { InterestsScreenFragment.newInstance() },
-        6 to lazy { AddAppScreenFragment.newInstance() },
-        7 to lazy { ApplicationAccessFragment.newInstance() },
-        8 to lazy { PinCodeFragment.newInstance(PinCodeStage.NEW) },
-        9 to lazy { CongratulationFragment.newInstance() },
+        // 4 to lazy { BirthdayFragment.newInstance() },
+        4 to lazy { InterestsScreenFragment.newInstance() },
+        5 to lazy { AddAppScreenFragment.newInstance() },
+        6 to lazy { ApplicationAccessFragment.newInstance() },
+        7 to lazy { PinCodeFragment.newInstance(PinCodeStage.NEW) },
+        8 to lazy { CongratulationFragment.newInstance() },
     )
 
     override fun getItemCount(): Int = listPages.size
