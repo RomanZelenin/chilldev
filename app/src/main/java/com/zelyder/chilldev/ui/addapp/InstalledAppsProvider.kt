@@ -8,7 +8,7 @@ import android.graphics.drawable.Drawable
 class InstalledAppsProvider(private val packageManager: PackageManager) {
 
     private val yandexAppRegex = Regex("com.yandex.(tv|io).\\S+" )
-    private val extraAppRegex = Regex("Chilldev|MainActivity|Дублирование экрана")
+    private val extraAppRegex = Regex("Chilldev|MainActivity|Дублирование экрана|Медиаплеер")
 
 
     fun provide(): List<InstalledApp> {
