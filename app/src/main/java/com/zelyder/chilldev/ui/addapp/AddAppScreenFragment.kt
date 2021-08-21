@@ -42,8 +42,9 @@ class AddAppScreenFragment : FragmentPage<AppAccessPageBinding>() {
         val installedAppsList = installedAppsProvider.provide()
 
         val appItems = installedAppsList.map {
-            AppItem(it.name, R.color.orange,
-                viewModel.kidInfo.value!!.apps.keySet().contains(it.name), it.icon)
+            AppItem(it.name,
+                viewModel.kidInfo.value!!.apps.keySet().contains(it.name),
+                it.icon)
         }
 
         (binding.recycler.adapter as AppRecyclerAdapter).setItems(appItems)

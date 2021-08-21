@@ -16,5 +16,6 @@
     <color name="keyboard_default_text_color">#b8b4be</color>
     <color name="keyboard_transparent">@android:color/black</color>
     <color name="header_selected_color">@android:color/white</color>
-
+    <color name="switch_thumb">#35B6FF</color>
+    <color name="switch_activated">#0072B2</color>
 </resources>
