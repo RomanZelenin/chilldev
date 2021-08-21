@@ -1,7 +1,6 @@
 package com.zelyder.chilldev.ui.addapp
 
 import android.view.ViewGroup
-import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.RecyclerView
 import com.zelyder.chilldev.customview.AppView
 import com.zelyder.chilldev.extensions.dpToPx
@@ -18,7 +17,6 @@ class AppRecyclerAdapter(
 
         fun bind(item: AppItem, listener: AppClickListener) {
             appView.text = item.name
-            appView.color = ContextCompat.getColor(appView.context, item.color)
             appView.setIcon(item.icon)
             appView.checked = item.checked
             appView.setOnClickListener {

@@ -51,5 +51,10 @@
         <item name="android:textAllCaps">false</item>
         <item name="android:background">@drawable/default_button_bg_selector</item>
     </style>
+    <style name="MySwitch" parent="Theme.AppCompat.Light">
+        <item name="colorControlActivated">@color/switch_activated</item>
+        <item name="colorSwitchThumbNormal">@color/switch_activated</item>
+        <item name="android:colorForeground">@android:color/darker_gray</item>
+    </style>
 
 </resources>
