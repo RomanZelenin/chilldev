@@ -11,5 +11,6 @@ interface DataSources {
     fun getRemoteSource(implRemoteSource: ImplRemoteSource): RemoteSource
 
     @Binds
+    @ApplicationScope
     fun getLocalSource(implLocalSource: ImplLocalSource): LocalSource
 }

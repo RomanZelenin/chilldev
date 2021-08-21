@@ -1,14 +1,13 @@
 package com.zelyder.chilldev.domain.repository.datasource
 
-import android.app.Application
 import android.content.Context
 import android.content.SharedPreferences
 import javax.inject.Inject
 
 class AppSharedPrefs @Inject constructor(
-    application: Application
+    context: Context
 ) {
-    private val sharedPrefs: SharedPreferences = application.getSharedPreferences(
+    private val sharedPrefs: SharedPreferences = context.getSharedPreferences(
         SHARED_PREFS_NAME,
         Context.MODE_PRIVATE
     )

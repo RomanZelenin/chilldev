@@ -5,6 +5,7 @@ import androidx.core.text.isDigitsOnly
 import androidx.fragment.app.FragmentActivity
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.lifecycleScope
+import com.zelyder.chilldev.YandexKidTvApplication
 import com.zelyder.chilldev.databinding.ActivityChooseAccountBinding
 import com.zelyder.chilldev.domain.models.Account
 import com.zelyder.chilldev.ui.main.GenericViewModelFactory
@@ -42,6 +43,9 @@ class ChooseAccountActivity : FragmentActivity() {
             object : AccountClickListener {
                 override fun onAddProfileClick() {
                     MainActivity.startActivity(this@ChooseAccountActivity)
+                }
+
+                override fun onParentAccountClick() {
                 }
             })
 

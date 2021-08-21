@@ -9,6 +9,7 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.RecyclerView
 import androidx.viewpager2.widget.ViewPager2
 import com.zelyder.chilldev.PageAdapter
+import com.zelyder.chilldev.YandexKidTvApplication
 import com.zelyder.chilldev.databinding.ActivityMainBinding
 import kotlinx.coroutines.*
 import javax.inject.Inject

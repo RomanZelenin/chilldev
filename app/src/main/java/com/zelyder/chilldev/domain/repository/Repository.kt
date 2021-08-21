@@ -10,8 +10,6 @@ import com.zelyder.chilldev.domain.repository.datasource.RemoteSource
 import javax.inject.Inject
 
 @ApplicationScope
-class Repository @Inject constructor(private val remoteSource: RemoteSource) {
-
 class Repository @Inject constructor(
     private val remoteSource: RemoteSource,
     private val localSource: LocalSource
@@ -29,7 +27,7 @@ class Repository @Inject constructor(
         return remoteSource.getAllKids()
     }
 
-    suspend fun saveKid(kidInfo: KidInfo){
+    suspend fun saveKid(kidInfo: KidInfo) {
         remoteSource.saveKidInfo(kidInfo)
     }
 
