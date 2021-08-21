@@ -14,12 +14,12 @@ data class KidInfo(
     val apps: JsonObject = JsonObject(),
     val pin: String? = null,
     var iconType: KidNameIconType = KidNameIconType.ONE,
-    var avatar: Int = R.drawable.ic_avas1
+    var avatar: String = R.drawable.ic_avas1.toString()
 )
 
 data class Kid(
     val id: Int,
-    val avatar: Int,
+    val avatar: String,
     val name: String
 )
 

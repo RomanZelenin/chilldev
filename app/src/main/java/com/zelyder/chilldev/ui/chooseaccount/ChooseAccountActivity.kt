@@ -1,6 +1,8 @@
 package com.zelyder.chilldev.ui.chooseaccount
 
 import android.os.Bundle
+import android.widget.Toast
+import androidx.core.text.isDigitsOnly
 import android.util.Log
 import androidx.fragment.app.FragmentActivity
 import androidx.lifecycle.ViewModelProvider
@@ -61,7 +63,14 @@ class ChooseAccountActivity : FragmentActivity() {
             }
 
             lifecycleScope.launch {
-                val accounts = pageViewModel.getAllKids().map { Account(it.name, it.avatar) }
+                val accounts = pageViewModel.getAllKids().map {
+                    if (it.avatar.isDigitsOnly() && it.avatar.toInt() in (0..10)) {
+                        Account(it.name, it.avatar)
+                    }else{
+                        Timber.d(it.avatar)
+                        Account(it.name, it.avatar)
+                    }
+                }
                 accountsAdapter.accounts = accounts
             }
         }

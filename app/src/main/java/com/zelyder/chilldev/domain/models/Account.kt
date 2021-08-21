@@ -8,7 +8,7 @@ data class Account(
     val name: String,
 
     @SerializedName("avatar")
-    val avatar: Int,
+    val avatar: String,
 
     val checked: Boolean = false
 )

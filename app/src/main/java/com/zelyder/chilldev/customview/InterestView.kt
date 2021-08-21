@@ -16,7 +16,7 @@ class InterestView(context: Context, attrs: AttributeSet?) : LinearLayout(contex
     var checked: Boolean = false
         set(value) {
             field = value
-            findViewById<ImageView>(R.id.check_image_view).isVisible = value
+            findViewById<ImageView>(R.id.check_image_view).visibility = if (value) {View.VISIBLE} else View.INVISIBLE
             updateBackgroundAndTextColor(isFocused, value)
         }
 
