@@ -1,21 +1,27 @@
 package com.zelyder.chilldev.ui.chooseaccount
 
+import android.content.Intent
 import android.os.Bundle
 import android.widget.Toast
 import androidx.core.text.isDigitsOnly
 import android.util.Log
+import android.view.View
 import androidx.fragment.app.FragmentActivity
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.lifecycleScope
 import com.yandex.tv.services.passport.PassportProviderSdk
+import com.zelyder.chilldev.R
 import com.zelyder.chilldev.databinding.ActivityChooseAccountBinding
 import com.zelyder.chilldev.di.DaggerAppComponent
 import com.zelyder.chilldev.domain.models.Account
+import com.zelyder.chilldev.domain.models.PinCodeStage
 import com.zelyder.chilldev.domain.models.Token
+import com.zelyder.chilldev.ui.PinActivity
 import com.zelyder.chilldev.ui.main.GenericViewModelFactory
 import com.zelyder.chilldev.ui.main.MainActivity
 import com.zelyder.chilldev.ui.main.PageViewModel
 import com.zelyder.chilldev.ui.main.PageViewModelFactory
+import com.zelyder.chilldev.ui.pincode.PinCodeFragment
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
@@ -52,7 +58,8 @@ class ChooseAccountActivity : FragmentActivity() {
                     }
 
                     override fun onParentAccountClick() {
-
+                        val intent = Intent(this@ChooseAccountActivity, PinActivity::class.java)
+                        startActivity(intent)
                     }
                 })
 
