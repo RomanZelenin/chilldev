@@ -1,6 +1,7 @@
 package com.zelyder.chilldev.di
 
 import com.zelyder.chilldev.BuildConfig
+import com.zelyder.chilldev.domain.models.Token
 import dagger.Module
 import dagger.Provides
 import okhttp3.Interceptor
@@ -21,14 +22,14 @@ object InterceptorsModule {
     @Provides
     @LocalInterceptor
     @ApplicationScope
-    fun provideLocalInterceptors(): List<Interceptor> {
+    fun provideLocalInterceptors(token: Token): List<Interceptor> {
         val interceptors = mutableListOf<Interceptor>()
         return interceptors.apply {
             add(Interceptor { chain ->
                 val requestBuilder = chain.request().newBuilder()
                 requestBuilder.addHeader(
                     "Authorization",
-                    "OAuth AQAAAAAn24kQAAdMKtm-VDWEMkljrl20f4nKnEk"
+                    "OAuth ${token.value}"
                 )
                 chain.proceed(requestBuilder.build())
             })
