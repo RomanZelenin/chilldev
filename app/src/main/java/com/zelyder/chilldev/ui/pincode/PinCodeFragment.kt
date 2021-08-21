@@ -8,12 +8,14 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
+import androidx.core.view.postDelayed
 import com.zelyder.chilldev.R
 import com.zelyder.chilldev.databinding.PinCodePageBinding
 import com.zelyder.chilldev.domain.PolicyContract
 import com.zelyder.chilldev.domain.models.PinCodeStage
 import com.zelyder.chilldev.ui.FragmentPage
 import com.zelyder.chilldev.ui.customkeyboard.KeyboardOutput
+import timber.log.Timber
 
 class PinCodeFragment : FragmentPage<PinCodePageBinding>() {
 
@@ -43,9 +45,9 @@ class PinCodeFragment : FragmentPage<PinCodePageBinding>() {
                             binding.pinView.setText("")
                         } else if (firstPassword == binding.pinView.text.toString()) {
                             viewModel.setPinCode(firstPassword)
-                            //page.swipeToNext()
-                            transferData()
-
+                            binding.root.postDelayed(500){
+                               transferData()
+                            }
                         } else {
                             Toast.makeText(
                                 requireContext(),
@@ -84,26 +86,14 @@ class PinCodeFragment : FragmentPage<PinCodePageBinding>() {
     fun transferData() {
         val uri: Uri = PolicyContract.buildPolicySettingsUri()
         val updateValues = ContentValues().apply {
-//            put(PolicyContract.COLUMN_NAME, PolicyContract.NAME_KIDS_AGE_LIMIT)
-//            put(PolicyContract.COLUMN_VALUE, viewModel.kidInfo.value?.age_limit?.age.toString())
-
             put(PolicyContract.COLUMN_NAME, PolicyContract.NAME_POLICY_LEVEL_INDEX)
             put(PolicyContract.COLUMN_VALUE, "2")
-//            put(PolicyContract.NAME_LIMITED_AGE_LIMIT, 18)
-//            put(PolicyContract.COLUMN_NAME, PolicyContract.NAME_LIMITED_AGE_LIMIT)
-//            put(PolicyContract.COLUMN_VALUE, "18")
-
-//            put(PolicyContract.NAME_SEARCH_MODE_INDEX, 3)
-//            put(PolicyContract.NAME_SEARCH_MODE_INDEX, PolicyContract.NAME_LIMITED_AGE_LIMIT)
-//            put(PolicyContract.COLUMN_VALUE, "3")
         }
-
-
         val rowsUpdated = requireContext().contentResolver.insert(
             uri,   // the user dictionary content URI
             updateValues
         )
-        Log.d(this::class.simpleName, "rowsUpdated:$rowsUpdated")
+        Timber.d("rowsUpdated:$rowsUpdated")
         requireActivity().finish()
     }
 
