@@ -52,7 +52,7 @@ class ChooseAccountActivity : FragmentActivity() {
                     }
 
                     override fun onParentAccountClick() {
-                        Log.d("taaaaaaaaag", "onParentAccountClick: ${pageViewModel.getPinCode()}")
+
                     }
                 })
 
