@@ -36,7 +36,7 @@
         <item type="0">Ю</item>
         <item type="0">Я</item>
         <item type="5" size="2">\\_/</item>
-        <item type="2" size="2">Дальше</item>
+        <item type="2" size="2">Далее</item>
         <item type="4">&amp;123</item>
     </input>
 
@@ -66,7 +66,7 @@
         <item type="0">V</item>
         <item type="0">W</item>
         <item type="0">X</item>
-        <item type="3">AБВ</item>
+        <item type="3">ABC</item>
         <item type="0">Y</item>
         <item type="0">Z</item>
         <item type="0">'</item>
@@ -76,7 +76,7 @@
         <item type="6"/>
         <item type="6"/>
         <item type="5" size="2">\\_/</item>
-        <item type="2" size="2">Дальше</item>
+        <item type="2" size="2">Next</item>
         <item type="4">&amp;123</item>
     </input>
 
@@ -156,7 +156,7 @@
         <item type="6" />
         <item type="6" />
         <item type="5" size="2">\\_/</item>
-        <item type="2" size="2">Дальше</item>
-        <item type="4">АБВ</item>
+        <item type="2" size="2">Next</item>
+        <item type="4">ABC</item>
     </input>
 </input-methods>
