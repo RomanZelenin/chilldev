@@ -10,6 +10,7 @@ import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import androidx.recyclerview.widget.RecyclerView.SCROLL_STATE_IDLE
+import com.zelyder.chilldev.HorizontalCarouselRecyclerView
 import com.zelyder.chilldev.R
 import com.zelyder.chilldev.databinding.KidNamePageBinding
 import com.zelyder.chilldev.domain.models.KidNameIconType
@@ -147,7 +148,8 @@ class KidNameFragment : FragmentPage<KidNamePageBinding>() {
         super.onDestroyView()
     }
 
-    private inner class KeyboardListenerWrapper(private val listener: KeyboardView.KeyboardListener) : KeyboardView.KeyboardListener {
+    private inner class KeyboardListenerWrapper(
+        private val listener: KeyboardView.KeyboardListener) : KeyboardView.KeyboardListener {
         override fun onInput(symbol: Char?) {
             listener.onInput(symbol)
         }
@@ -167,6 +169,10 @@ class KidNameFragment : FragmentPage<KidNamePageBinding>() {
 
     private val keyboardNextFocusListener = object : SearchNextFocusListener {
         override fun searchDown(focused: View?): View? {
+            val textView = binding.kidNameText
+            if (textView.text.isEmpty()) {
+                textView.text = resources.getText(R.string.saved_kid_name)
+            }
             page.swipeToNext()
             return null
         }
