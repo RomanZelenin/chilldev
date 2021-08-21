@@ -36,35 +36,34 @@ class PinCodeFragment : FragmentPage<PinCodePageBinding>() {
         var firstPassword = ""
         binding.numPad.setupKeyboard(binding.pinView, 4, object : KeyboardOutput {
             override fun onSizeIsReached() {
-                when (arguments?.getInt(PIN_CODE_STAGE)) {
-                    PinCodeStage.NEW.type -> {
-                        if (firstPassword == "") {
-                            firstPassword = binding.pinView.text.toString()
-                            binding.description.text =
-                                resources.getText(R.string.screen_pin_confirm)
-                            binding.pinView.setText("")
-                        } else if (firstPassword == binding.pinView.text.toString()) {
-                            viewModel.setPinCode(firstPassword)
-                            binding.root.postDelayed(500){
-                               transferData()
+                binding.pinView.postDelayed(500) {
+                    when (arguments?.getInt(PIN_CODE_STAGE)) {
+                        PinCodeStage.NEW.type -> {
+                            if (firstPassword == "") {
+                                firstPassword = binding.pinView.text.toString()
+                                binding.description.text =
+                                    resources.getText(R.string.screen_pin_confirm)
+                                binding.pinView.setText("")
+                            } else if (firstPassword == binding.pinView.text.toString()) {
+                                viewModel.setPinCode(firstPassword)
+                                transferData()
+                            } else {
+                                Toast.makeText(
+                                    requireContext(),
+                                    resources.getString(R.string.screen_pin_error_text),
+                                    Toast.LENGTH_LONG
+                                ).show()
+                                firstPassword = ""
+                                binding.description.text =
+                                    resources.getText(R.string.screen_pin_description)
+                                binding.pinView.setText("")
                             }
-                        } else {
-                            Toast.makeText(
-                                requireContext(),
-                                resources.getString(R.string.screen_pin_error_text),
-                                Toast.LENGTH_LONG
-                            ).show()
-                            firstPassword = ""
-                            binding.description.text =
-                                resources.getText(R.string.screen_pin_description)
-                            binding.pinView.setText("")
+                        }
+                        PinCodeStage.ENTER.type -> {
+
                         }
                     }
-                    PinCodeStage.ENTER.type -> {
-
-                    }
                 }
-
             }
         })
 
