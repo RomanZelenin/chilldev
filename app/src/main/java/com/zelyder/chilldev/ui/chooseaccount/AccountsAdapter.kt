@@ -3,13 +3,16 @@ package com.zelyder.chilldev.ui.chooseaccount
 import android.content.Context
 import android.view.ViewGroup
 import androidx.core.content.ContextCompat
+import androidx.core.text.isDigitsOnly
 import androidx.recyclerview.widget.RecyclerView
+import com.squareup.picasso.Picasso
 import com.zelyder.chilldev.R
 import com.zelyder.chilldev.customview.AccountView
 import com.zelyder.chilldev.customview.AddProfileView
 import com.zelyder.chilldev.domain.models.Account
 import com.zelyder.chilldev.domain.models.KidNameIconType
 import de.hdodenhof.circleimageview.CircleImageView
+import timber.log.Timber
 
 class AccountsAdapter(
     private val context: Context,
@@ -67,11 +70,28 @@ class AccountsAdapter(
             view.text = account.name
             view.checked = account.checked
             val civAvatar = view.findViewById<CircleImageView>(R.id.ivAvatar)
-            if (account.avatar == 0) {
-                civAvatar.setImageDrawable(ContextCompat.getDrawable(itemView.context, R.drawable.ic_adult))
+            val avatar = account.avatar
+            Timber.d("!!!!${avatar.isDigitsOnly()}")
+            if (account.avatar.isDigitsOnly()) {
+                if (account.avatar.toInt() == 0) {
+                    civAvatar.setImageDrawable(
+                        ContextCompat.getDrawable(
+                            itemView.context,
+                            R.drawable.ic_adult
+                        )
+                    )
+                } else {
+                    civAvatar.setImageDrawable(
+                        ContextCompat.getDrawable(
+                            itemView.context,
+                            KidNameIconType.getForPosition(account.avatar.toInt()).resId
+                        )
+                    )
+                }
             } else {
-                civAvatar.setImageDrawable(ContextCompat.getDrawable(itemView.context,
-                    KidNameIconType.getForPosition(account.avatar).resId))
+                Picasso.get()
+                    .load("https://avatars.yandex.net/get-yapic/${account.avatar}/islands-200")
+                    .into(civAvatar)
             }
         }
     }
