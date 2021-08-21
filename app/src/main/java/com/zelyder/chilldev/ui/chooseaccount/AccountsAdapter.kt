@@ -70,8 +70,6 @@ class AccountsAdapter(
             view.text = account.name
             view.checked = account.checked
             val civAvatar = view.findViewById<CircleImageView>(R.id.ivAvatar)
-            val avatar = account.avatar
-            Timber.d("!!!!${avatar.isDigitsOnly()}")
             if (account.avatar.isDigitsOnly()) {
                 if (account.avatar.toInt() == 0) {
                     civAvatar.setImageDrawable(
