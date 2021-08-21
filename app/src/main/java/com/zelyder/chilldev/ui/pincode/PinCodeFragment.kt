@@ -36,7 +36,7 @@ class PinCodeFragment : FragmentPage<PinCodePageBinding>() {
         var firstPassword = ""
         binding.numPad.setupKeyboard(binding.pinView, 4, object : KeyboardOutput {
             override fun onSizeIsReached() {
-                binding.pinView.postDelayed(500) {
+                binding.pinView.postDelayed(300) {
                     when (arguments?.getInt(PIN_CODE_STAGE)) {
                         PinCodeStage.NEW.type -> {
                             if (firstPassword == "") {

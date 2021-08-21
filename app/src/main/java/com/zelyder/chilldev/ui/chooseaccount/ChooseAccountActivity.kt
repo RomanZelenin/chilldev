@@ -79,7 +79,7 @@ class ChooseAccountActivity : FragmentActivity() {
                     callback(passportProviderSdk.currentAccount?.token)
                 } catch (e: Exception) {
                     //Send Token for debugging
-                    callback("AQAAAAAn24kQAAdMKtm-VDWEMkljrl20f4nKnEk")
+                    callback("AQAAAAANz-MGAAX_m-59qwupY0EhlUjn265cWDg")
                     Timber.e(e, "Cannot get access token")
                 }
             }
