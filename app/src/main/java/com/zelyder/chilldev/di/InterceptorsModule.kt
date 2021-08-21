@@ -1,12 +1,14 @@
 package com.zelyder.chilldev.di
 
+import android.content.Context
+import com.yandex.tv.services.passport.PassportProviderSdk
 import com.zelyder.chilldev.BuildConfig
-import com.zelyder.chilldev.domain.models.Token
 import dagger.Module
 import dagger.Provides
 import okhttp3.Interceptor
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
+import timber.log.Timber
 import javax.inject.Qualifier
 
 @Qualifier
@@ -22,15 +24,26 @@ object InterceptorsModule {
     @Provides
     @LocalInterceptor
     @ApplicationScope
-    fun provideLocalInterceptors(token: Token): List<Interceptor> {
+    fun provideLocalInterceptors(context: Context): List<Interceptor> {
         val interceptors = mutableListOf<Interceptor>()
         return interceptors.apply {
             add(Interceptor { chain ->
                 val requestBuilder = chain.request().newBuilder()
-                requestBuilder.addHeader(
-                    "Authorization",
-                    "OAuth ${token.value}"
-                )
+                fun getAccessToken(callback: (String?) -> Unit) {
+                    val passportProviderSdk = PassportProviderSdk(context)
+                    try {
+                        callback(passportProviderSdk.currentAccount?.token)
+                    } catch (e: Exception) {
+                        callback("AQAAAAANz-MGAAX_m-59qwupY0EhlUjn265cWDg")
+                        Timber.e(e, "Cannot get access token")
+                    }
+                }
+                getAccessToken { token ->
+                    requestBuilder.addHeader(
+                        "Authorization",
+                        "OAuth $token"
+                    )
+                }
                 chain.proceed(requestBuilder.build())
             })
         }

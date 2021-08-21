@@ -6,16 +6,12 @@ import android.os.Bundle
 import android.view.KeyEvent
 import androidx.fragment.app.FragmentActivity
 import androidx.lifecycle.ViewModelProvider
-import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.RecyclerView
 import androidx.viewpager2.widget.ViewPager2
-import com.yandex.tv.services.passport.PassportProviderSdk
 import com.zelyder.chilldev.PageAdapter
+import com.zelyder.chilldev.YandexKidTvApplication
 import com.zelyder.chilldev.databinding.ActivityMainBinding
-import com.zelyder.chilldev.di.DaggerAppComponent
-import com.zelyder.chilldev.domain.models.Token
 import kotlinx.coroutines.*
-import timber.log.Timber
 import javax.inject.Inject
 
 interface SwipePage {
@@ -36,35 +32,34 @@ class MainActivity : FragmentActivity(), SwipePage {
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        getAccessToken { token ->
-            DaggerAppComponent.factory()
-                .create(Token(token!!))
-                .inject(this)
+        (applicationContext as YandexKidTvApplication).appComponent
+            .createActivitySubcomponent()
+            .create()
+            .inject(this)
 
-            pageViewModel = ViewModelProvider(
-                viewModelStore,
-                GenericViewModelFactory(pageViewModelFactory)
-            )[PageViewModel::class.java]
+        pageViewModel = ViewModelProvider(
+            viewModelStore,
+            GenericViewModelFactory(pageViewModelFactory)
+        )[PageViewModel::class.java]
 
-            // Hack to prevent ViewPager2 from grabbing focus
-            val recyclerView = ViewPager2::class.java.getDeclaredField("mRecyclerView")
-                .also { it.isAccessible = true }
-                .get(binding.pager) as RecyclerView
-            recyclerView.isFocusable = false
+        // Hack to prevent ViewPager2 from grabbing focus
+        val recyclerView = ViewPager2::class.java.getDeclaredField("mRecyclerView")
+            .also { it.isAccessible = true }
+            .get(binding.pager) as RecyclerView
+        recyclerView.isFocusable = false
 
-            val pageAdapter = PageAdapter(this@MainActivity)
-            val numItemsInScrollBar = pageAdapter.itemCount
-            initScrollBar(numItemsInScrollBar)
+        val pageAdapter = PageAdapter(this@MainActivity)
+        val numItemsInScrollBar = pageAdapter.itemCount
+        initScrollBar(numItemsInScrollBar)
 
-            binding.pager.apply {
-                adapter = pageAdapter
-                registerOnPageChangeCallback(object : ViewPager2.OnPageChangeCallback() {
-                    override fun onPageSelected(position: Int) {
-                        binding.scrollBar.selectedPosition = position
-                    }
-                })
-                offscreenPageLimit = 1
-            }
+        binding.pager.apply {
+            adapter = pageAdapter
+            registerOnPageChangeCallback(object : ViewPager2.OnPageChangeCallback() {
+                override fun onPageSelected(position: Int) {
+                    binding.scrollBar.selectedPosition = position
+                }
+            })
+            offscreenPageLimit = 1
         }
     }
 
@@ -96,20 +91,6 @@ class MainActivity : FragmentActivity(), SwipePage {
             this.numItems = numItems
             setOnScrollListenerToPreviousItem { swipeToPrevious() }
             setOnScrollListenerToNextItem { swipeToNext() }
-        }
-    }
-
-    private fun getAccessToken(callback: (String?) -> Unit) {
-        lifecycleScope.launch {
-            val passportProviderSdk = PassportProviderSdk(this@MainActivity)
-            withContext(Dispatchers.Main) {
-                try {
-                    callback(passportProviderSdk.currentAccount?.token)
-                } catch (e: Exception) {
-                    callback("AQAAAAAn24kQAAdMKtm-VDWEMkljrl20f4nKnEk")
-                    Timber.e(e, "Cannot get access token")
-                }
-            }
         }
     }
 
