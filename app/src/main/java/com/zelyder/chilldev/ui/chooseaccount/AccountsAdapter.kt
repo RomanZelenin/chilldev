@@ -39,7 +39,7 @@ class AccountsAdapter(
     override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
         when (holder) {
             is AddProfileViewHolder -> holder.bind(listener)
-            is AccountViewHolder -> holder.bind(accounts[position])
+            is AccountViewHolder -> holder.bind(accounts[position], listener)
         }
     }
 
@@ -62,7 +62,7 @@ class AccountsAdapter(
         itemView: AccountView
     ) : RecyclerView.ViewHolder(itemView) {
 
-        fun bind(account: Account) {
+        fun bind(account: Account, listener: AccountClickListener) {
             val view = itemView as AccountView
             view.text = account.name
             view.checked = account.checked
@@ -72,6 +72,12 @@ class AccountsAdapter(
             } else {
                 civAvatar.setImageDrawable(ContextCompat.getDrawable(itemView.context,
                     KidNameIconType.getForPosition(account.avatar).resId))
+            }
+
+            if (absoluteAdapterPosition == 0) {
+                view.setOnClickListener {
+                    listener.onParentAccountClick()
+                }
             }
         }
     }

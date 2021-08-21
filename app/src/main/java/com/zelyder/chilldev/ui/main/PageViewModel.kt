@@ -63,6 +63,7 @@ class PageViewModel(private val repository: Repository) :
 
     fun setPinCode(pinCode: String) {
         _kidInfo.postValue(_kidInfo.value!!.copy(pin = pinCode))
+        repository.setPinCode(pinCode)
         Timber.d("Set pinCode: $pinCode")
     }
 
@@ -78,4 +79,6 @@ class PageViewModel(private val repository: Repository) :
         _kidInfo.postValue(_kidInfo.value!!.copy(iconType = iconType, avatar = iconType.rank))
         Timber.d("Added icon: ${iconType.rank}")
     }
+
+    fun getPinCode(): String? = repository.getPinCode()
 }
