@@ -11,6 +11,7 @@ class AppLinearLayoutManager(context : Context, private val page: SwipePage) : L
 
     private var previousView: AppView? = null
     private var position : Int = -1
+    private var isFocusFirst = false
 
     override fun onInterceptFocusSearch(focused: View, direction: Int): View? {
         val view = super.onInterceptFocusSearch(focused, direction)
@@ -21,8 +22,11 @@ class AppLinearLayoutManager(context : Context, private val page: SwipePage) : L
                 }
             }
             View.FOCUS_UP -> {
-                if (position == 0) {
+                if (position == 0 && isFocusFirst) {
                     page.swipeToPrevious()
+                    isFocusFirst = false
+                } else {
+                    isFocusFirst = true
                 }
             }
         }

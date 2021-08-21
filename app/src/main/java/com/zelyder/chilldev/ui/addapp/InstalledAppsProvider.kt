@@ -7,7 +7,9 @@ import android.graphics.drawable.Drawable
 
 class InstalledAppsProvider(private val packageManager: PackageManager) {
 
-    private val yandexAppRegex = Regex("com.yandex.(tv|io).\\S+")
+    private val yandexAppRegex = Regex("com.yandex.(tv|io).\\S+" )
+    private val extraAppRegex = Regex("Chilldev|MainActivity|Дублирование экрана")
+
 
     fun provide(): List<InstalledApp> {
         val launchIntent = Intent(Intent.ACTION_MAIN).addCategory(Intent.CATEGORY_LEANBACK_LAUNCHER)
@@ -22,6 +24,10 @@ class InstalledAppsProvider(private val packageManager: PackageManager) {
             }
             .filterNot { installedApp ->
                 installedApp.packageName.matches(yandexAppRegex)
+            }
+            .filterNot {
+                    installedApp ->
+                installedApp.name.matches(extraAppRegex)
             }
     }
 
