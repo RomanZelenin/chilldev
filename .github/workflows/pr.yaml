@@ -17,9 +17,6 @@ jobs:
           
       - name: Granting permission
         run: chmod +x gradlew
-        
-      - name: Run Lint
-        run: ./gradlew lint
           
       - name: Run Tests
         run: ./gradlew testDebugUnitTest
