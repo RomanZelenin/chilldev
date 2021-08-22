@@ -6,35 +6,19 @@ import android.view.LayoutInflater
 import android.view.View
 import android.widget.FrameLayout
 import android.widget.ImageView
-import android.widget.TextView
 import com.zelyder.chilldev.R
 
 
 class KidNameView(context: Context, attrs: AttributeSet?) :
     FrameLayout(context, attrs),
-    View.OnFocusChangeListener,
     View.OnClickListener {
 
-    var checked: Boolean = false
-        set(value) {
-            field = value
-        }
-
-    var text: String = ""
-        set(value) {
-            field = value
-            val tvName = findViewById<TextView>(R.id.tvName)
-            tvName.text = value
-        }
-
     var icon: ImageView
-    val root: View
+    private val root: View = LayoutInflater.from(context).inflate(
+        R.layout.kid_name_list_item, this, true
+    )
 
     init {
-        root =
-        LayoutInflater.from(context).inflate(
-            R.layout.kid_name_list_item, this, true
-        )
         icon = root.findViewById(R.id.list_item_icon)
         isClickable = true
         isFocusable = true
@@ -44,11 +28,7 @@ class KidNameView(context: Context, attrs: AttributeSet?) :
 
     var customOnClick: (() -> Unit)? = null
 
-    override fun onFocusChange(v: View?, hasFocus: Boolean) {
-    }
-
     override fun onClick(v: View?) {
-        checked = !checked
         customOnClick?.invoke()
     }
 }

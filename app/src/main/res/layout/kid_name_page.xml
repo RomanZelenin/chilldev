@@ -29,7 +29,7 @@
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toBottomOf="@id/kid_name_text_view">
 
-        <com.zelyder.chilldev.HorizontalCarouselRecyclerView
+        <com.zelyder.chilldev.ui.kidname.HorizontalCarouselRecyclerView
             android:id="@+id/item_list"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"

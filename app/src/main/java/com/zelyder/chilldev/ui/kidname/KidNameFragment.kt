@@ -10,11 +10,9 @@ import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import androidx.recyclerview.widget.RecyclerView.SCROLL_STATE_IDLE
-import com.zelyder.chilldev.HorizontalCarouselRecyclerView
 import com.zelyder.chilldev.R
 import com.zelyder.chilldev.databinding.KidNamePageBinding
-import com.zelyder.chilldev.domain.models.KidNameIconType
-import com.zelyder.chilldev.ui.CarouselItemAdapter
+import com.zelyder.chilldev.domain.models.KidIcon
 import com.zelyder.chilldev.ui.FragmentPage
 
 class KidNameFragment : FragmentPage<KidNamePageBinding>() {
@@ -57,18 +55,6 @@ class KidNameFragment : FragmentPage<KidNamePageBinding>() {
         }
     }
 
-    private val iconItems = listOf(
-        Item(R.drawable.ic_avas1),
-        Item(R.drawable.ic_avas2),
-        Item(R.drawable.ic_avas3),
-        Item(R.drawable.ic_avas4),
-        Item(R.drawable.ic_avas5),
-        Item(R.drawable.ic_avas6),
-        Item(R.drawable.ic_avas7),
-        Item(R.drawable.ic_avas8),
-        Item(R.drawable.ic_avas9),
-        Item(R.drawable.ic_avas10)
-    )
     private var keyboardView: KeyboardView? = null
 
     override fun onCreateView(
@@ -78,7 +64,7 @@ class KidNameFragment : FragmentPage<KidNamePageBinding>() {
     ): View {
         super.onCreateView(inflater, container, savedInstanceState)
         inflater.inflate(R.layout.kid_name_page, container, false)
-        viewModel.setIcon(KidNameIconType.getForPosition(1))
+        viewModel.setIcon(KidIcon.getForPosition(1))
 
         keyboardView = binding.keyboardView
         binding.itemList.initialize(itemAdapter)
@@ -88,11 +74,11 @@ class KidNameFragment : FragmentPage<KidNamePageBinding>() {
             RecyclerView.HORIZONTAL,
             false
         )
-        binding.itemList.setOnFocusChangeListener { focused, direction ->
+        binding.itemList.setOnFocusChangeListener { focused, _ ->
             focused.requestFocus()
         }
 
-        itemAdapter.setItems(iconItems)
+        itemAdapter.setItems(KidIcon.getCarouselItems())
 
         keyboardView?.apply {
             setInputXml(resources.getXml(R.xml.input))
@@ -134,7 +120,7 @@ class KidNameFragment : FragmentPage<KidNamePageBinding>() {
                 if (newState == SCROLL_STATE_IDLE) {
                     val position =
                         binding.itemList.getChildAdapterPosition(binding.itemList.focusedChild) + 1
-                    viewModel.setIcon(KidNameIconType.getForPosition(position))
+                    viewModel.setIcon(KidIcon.getForPosition(position))
                 }
             }
         })
@@ -169,17 +155,17 @@ class KidNameFragment : FragmentPage<KidNamePageBinding>() {
 
     private val keyboardNextFocusListener = object : SearchNextFocusListener {
         override fun searchDown(focused: View?): View? {
-            val textView = binding.kidNameText
-            if (textView.text.isEmpty()) {
-                textView.text = resources.getText(R.string.saved_kid_name)
+            val kidNameView = binding.kidNameText
+            if (kidNameView.text.isEmpty()) {
+                kidNameView.text = resources.getText(R.string.saved_kid_name)
             }
             page.swipeToNext()
-            return null
+            return focused
         }
 
         override fun searchTop(focused: View?): View? {
             binding.itemList.requestFocus()
-            return null
+            return focused
         }
     }
 
