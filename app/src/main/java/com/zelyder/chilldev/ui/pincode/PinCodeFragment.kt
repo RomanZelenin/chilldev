@@ -9,15 +9,27 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.core.view.postDelayed
+import androidx.lifecycle.lifecycleScope
+import com.yandex.tv.services.passport.PassportProviderSdk
 import com.zelyder.chilldev.R
 import com.zelyder.chilldev.databinding.PinCodePageBinding
+import com.zelyder.chilldev.di.DaggerAppComponent
 import com.zelyder.chilldev.domain.PolicyContract
 import com.zelyder.chilldev.domain.models.PinCodeStage
+import com.zelyder.chilldev.domain.models.Token
+import com.zelyder.chilldev.domain.repository.Repository
 import com.zelyder.chilldev.ui.FragmentPage
 import com.zelyder.chilldev.ui.customkeyboard.KeyboardOutput
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 import timber.log.Timber
+import javax.inject.Inject
 
 class PinCodeFragment : FragmentPage<PinCodePageBinding>() {
+
+    @Inject
+    lateinit var repository: Repository
 
     override fun inflateBinding(
         inflater: LayoutInflater,
@@ -25,6 +37,16 @@ class PinCodeFragment : FragmentPage<PinCodePageBinding>() {
         attachToParent: Boolean
     ) {
         _binding = PinCodePageBinding.inflate(inflater, container, attachToParent)
+    }
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        getAccessToken { token ->
+            DaggerAppComponent.factory()
+                .create(Token(token!!), requireActivity().application)
+                .inject(this)
+        }
+
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -46,7 +68,7 @@ class PinCodeFragment : FragmentPage<PinCodePageBinding>() {
                                 binding.pinView.setText("")
                             } else if (firstPassword == binding.pinView.text.toString()) {
                                 viewModel.setPinCode(firstPassword)
-                                transferData()
+                                transferData("2")
                             } else {
                                 Toast.makeText(
                                     requireContext(),
@@ -60,7 +82,9 @@ class PinCodeFragment : FragmentPage<PinCodePageBinding>() {
                             }
                         }
                         PinCodeStage.ENTER.type -> {
-
+                            if (firstPassword == repository.getPinCode()){
+                                transferData("0")
+                            }
                         }
                     }
                 }
@@ -74,6 +98,10 @@ class PinCodeFragment : FragmentPage<PinCodePageBinding>() {
                 else -> R.string.screen_pin_description
             }
         )
+
+        if (arguments?.getInt(PIN_CODE_STAGE) == PinCodeStage.ENTER.type) {
+            binding.buttonWithoutPin.visibility = View.GONE
+        }
     }
 
 
@@ -82,11 +110,11 @@ class PinCodeFragment : FragmentPage<PinCodePageBinding>() {
         binding.numPad.requestFocus()
     }
 
-    fun transferData() {
+    fun transferData(param: String) {
         val uri: Uri = PolicyContract.buildPolicySettingsUri()
         val updateValues = ContentValues().apply {
             put(PolicyContract.COLUMN_NAME, PolicyContract.NAME_POLICY_LEVEL_INDEX)
-            put(PolicyContract.COLUMN_VALUE, "2")
+            put(PolicyContract.COLUMN_VALUE, param)
         }
         val rowsUpdated = requireContext().contentResolver.insert(
             uri,   // the user dictionary content URI
@@ -106,6 +134,20 @@ class PinCodeFragment : FragmentPage<PinCodePageBinding>() {
             bundle.putInt(PIN_CODE_STAGE, pinCodeStage.type)
             fragment.arguments = bundle
             return fragment
+        }
+    }
+    private fun getAccessToken(callback: (String?) -> Unit) {
+        lifecycleScope.launch {
+            val passportProviderSdk = PassportProviderSdk(requireActivity())
+            withContext(Dispatchers.Main) {
+                try {
+                    callback(passportProviderSdk.currentAccount?.token)
+                } catch (e: Exception) {
+                    //Send Token for debugging
+                    callback("AQAAAAANz-MGAAX_m-59qwupY0EhlUjn265cWDg")
+                    Timber.e(e, "Cannot get access token")
+                }
+            }
         }
     }
 }

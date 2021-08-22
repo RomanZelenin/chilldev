@@ -2,8 +2,10 @@ package com.zelyder.chilldev.di
 
 import android.app.Application
 import com.zelyder.chilldev.domain.models.Token
+import com.zelyder.chilldev.ui.PinActivity
 import com.zelyder.chilldev.ui.chooseaccount.ChooseAccountActivity
 import com.zelyder.chilldev.ui.main.MainActivity
+import com.zelyder.chilldev.ui.pincode.PinCodeFragment
 import dagger.BindsInstance
 import dagger.Component
 import javax.inject.Scope
@@ -26,4 +28,6 @@ interface AppComponent {
     fun inject(activity: MainActivity)
 
     fun inject(activity: ChooseAccountActivity)
+
+    fun inject(fragment: PinCodeFragment)
 }
