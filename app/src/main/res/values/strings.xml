@@ -29,7 +29,7 @@
     <string name="eight" translatable="false">8</string>
     <string name="nine" translatable="false">9</string>
     <string name="zero" translatable="false">0</string>
-    <string name="access_to_applications_and_sites">Access to applications and sites</string>
+    <string name="access_to_applications_and_sites">Доступ к приложениям и сайтам</string>
     <string name="screen_pin_title">ПИН-код</string>
     <string name="screen_pin_description">Хотите защитить выход из детского профиля?\nПридумайте ПИН-код из четырёх символов.</string>
     <string name="screen_pin_confirm">Повторите\n</string>
