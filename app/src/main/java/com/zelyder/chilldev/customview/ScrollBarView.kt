@@ -4,6 +4,7 @@ import android.content.Context
 import android.util.AttributeSet
 import android.view.Gravity
 import android.view.View
+import android.view.animation.AnimationUtils
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.appcompat.content.res.AppCompatResources
@@ -65,13 +66,20 @@ class ScrollBarView(context: Context, attrSet: AttributeSet?) :
 
             for (i in startPos..endPos) {
                 (this[i] as TextView).apply {
-                    background =
-                        AppCompatResources.getDrawable(context, R.drawable.circle_item)
-                    setTextColor(ContextCompat.getColor(context, android.R.color.white))
-                    text = ""
-                    val params =  LayoutParams(LayoutParams.WRAP_CONTENT, LayoutParams.WRAP_CONTENT)
-                    params.setMargins(0,0,0,8)
-                    layoutParams = params
+                    if (i != value + 1) {
+                        background =
+                            AppCompatResources.getDrawable(context, R.drawable.circle_item)
+                        setTextColor(ContextCompat.getColor(context, android.R.color.white))
+                        text = ""
+                        val params =
+                            LayoutParams(LayoutParams.WRAP_CONTENT, LayoutParams.WRAP_CONTENT)
+                        params.setMargins(0, 0, 0, 8)
+                        layoutParams = params
+                    }else{
+                        AnimationUtils.loadAnimation(context, R.anim.scroll_bar_hide_item_anim).also {
+                            startAnimation(it)
+                        }
+                    }
                 }
             }
             if (startPos != endPos) {
@@ -95,6 +103,9 @@ class ScrollBarView(context: Context, attrSet: AttributeSet?) :
                 background =
                     AppCompatResources.getDrawable(context, R.drawable.circle_item_selected)
                 text = (value + 1).toString()
+                AnimationUtils.loadAnimation(context, R.anim.scroll_bar_show_item_anim).also {
+                    item.startAnimation(it)
+                }
             }
         }
 
@@ -128,6 +139,4 @@ class ScrollBarView(context: Context, attrSet: AttributeSet?) :
     fun setOnScrollListenerToNextItem(listener: OnClickListener) {
         imageViewDown.value.setOnClickListener(listener)
     }
-
-
 }
