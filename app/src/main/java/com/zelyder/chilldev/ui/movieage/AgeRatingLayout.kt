@@ -20,14 +20,14 @@ class AgeRatingLayout(context: Context, attrSet: AttributeSet?) :
             field = value
             val startPosition = 0
             val endPosition = size - 1
+            for (i in selectedPosition + 1..endPosition) {
+                (this[i] as TextView).apply {
+                    configureDefaultTextView(this, i)
+                }
+            }
             for (i in startPosition..selectedPosition) {
                 (this[i] as TextView).apply {
                     configureSelectedTextView(this, i)
-                }
-            }
-            for (i in selectedPosition + 1..endPosition) {
-                (this[i] as TextView).apply {
-                    configureDefaultTextView(this)
                 }
             }
         }
@@ -36,7 +36,7 @@ class AgeRatingLayout(context: Context, attrSet: AttributeSet?) :
         removeAllViews()
         for (i in 0 until size) {
             val tvAgeRating = TextView(context).apply {
-                configureDefaultTextView(this)
+                configureDefaultTextView(this, i)
                 gravity = Gravity.CENTER
                 textSize = 12.dpToPx().toFloat()
                 text = AgeRating.values()[i].rating
@@ -69,7 +69,7 @@ class AgeRatingLayout(context: Context, attrSet: AttributeSet?) :
         }
     }
 
-    private fun configureDefaultTextView(textView: TextView): TextView {
+    private fun configureDefaultTextView(textView: TextView, idx: Int): TextView {
         return textView.apply {
             setBackgroundResource(R.drawable.shp_default_age_rating_bg)
             setTextColor(ContextCompat.getColor(context, android.R.color.white))
