@@ -1,8 +1,6 @@
 package com.zelyder.chilldev.ui.kidname;
 
 import android.animation.AnimatorInflater;
-import android.animation.AnimatorSet;
-import android.animation.ObjectAnimator;
 import android.animation.StateListAnimator;
 import android.content.Context;
 import android.content.res.ColorStateList;
@@ -12,6 +10,7 @@ import android.graphics.drawable.Drawable;
 import android.util.AttributeSet;
 import android.util.TypedValue;
 import android.view.Gravity;
+import android.view.KeyEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
@@ -456,14 +455,33 @@ public class KeyboardView extends RecyclerView {
         public void onBindViewHolder(@NonNull RecyclerView.ViewHolder holder, int position) {
             KeyButton button = controller.getButtons().get(position);
 
-            AnimatorSet animSet = new AnimatorSet();
+            holder.itemView.setOnKeyListener((v, keyCode, event) -> {
+                if (keyCode == KeyEvent.KEYCODE_DPAD_CENTER) {
+                    if(v.getTag(v.getId()) == null) {
+                        v.setTag(v.getId(),v);
+                    }else {
+                        v.setTag(v.getId(), null);
+                        v.animate()
+                        .scaleX(1.3f)
+                                .scaleY(1.3f)
+                                .start();
+                    }
+                }
+                return false;
+            });
+
             holder.itemView.setOnFocusChangeListener((v, hasFocus) -> {
                 if (hasFocus) {
-                    animSet.playTogether(ObjectAnimator.ofFloat(v, "scaleX", 1f, 1.3f), ObjectAnimator.ofFloat(v, "scaleY", 1f, 1.3f));
+                    holder.itemView.animate()
+                            .scaleX(1.3f)
+                            .scaleY(1.3f)
+                            .start();
                 } else {
-                    animSet.playTogether(ObjectAnimator.ofFloat(v, "scaleX", 1.3f, 1f), ObjectAnimator.ofFloat(v, "scaleY", 1.3f, 1f));
+                    holder.itemView.animate()
+                            .scaleX(1f)
+                            .scaleY(1f)
+                            .start();
                 }
-                animSet.start();
             });
 
             switch (awaitingFocus) {

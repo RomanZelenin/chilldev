@@ -1,8 +1,6 @@
 package com.zelyder.chilldev.ui.movieage
 
-import android.animation.ObjectAnimator
 import android.content.Context
-import android.graphics.drawable.GradientDrawable
 import android.util.AttributeSet
 import android.view.Gravity
 import android.widget.LinearLayout
@@ -62,26 +60,10 @@ class AgeRatingLayout(context: Context, attrSet: AttributeSet?) :
                 position != selectedPosition -> {
                     setBackgroundResource(R.drawable.shp_selected_age_rating_bg)
                     setTextColor(ContextCompat.getColor(context, android.R.color.black))
-
                 }
                 else -> {
-                    val drawable = resources.getDrawable(
-                        R.drawable.shp_right_rounded_selected_age_rating_bg,
-                        null
-                    ) as GradientDrawable
-                    background = drawable.apply {
-                        alpha = 0
-                    }
-                    ObjectAnimator.ofFloat(this, "alpha", 0.2f, 1f).apply {
-                        addUpdateListener {
-                            drawable.alpha = (it.animatedFraction * 255).toInt()
-                        }
-                        duration = 500
-                        start()
-                    }
-                    //setBackgroundResource(R.drawable.shp_right_rounded_selected_age_rating_bg)
+                    setBackgroundResource(R.drawable.shp_right_rounded_selected_age_rating_bg)
                     setTextColor(ContextCompat.getColor(context, android.R.color.black))
-
                 }
             }
         }
@@ -89,24 +71,7 @@ class AgeRatingLayout(context: Context, attrSet: AttributeSet?) :
 
     private fun configureDefaultTextView(textView: TextView, idx: Int): TextView {
         return textView.apply {
-            if (selectedPosition == 0 && idx == selectedPosition + 1) {
-                val drawable = resources.getDrawable(
-                    R.drawable.shp_default_age_rating_bg,
-                    null
-                ) as GradientDrawable
-                background = drawable.apply {
-                    alpha = 0
-                }
-                ObjectAnimator.ofFloat(this, "alpha", 0f, 1f).apply {
-                    addUpdateListener {
-                        drawable.alpha = (it.animatedFraction * 255).toInt()
-                    }
-                    duration = 200
-                    start()
-                }
-            } else {
-                setBackgroundResource(R.drawable.shp_default_age_rating_bg)
-            }
+            setBackgroundResource(R.drawable.shp_default_age_rating_bg)
             setTextColor(ContextCompat.getColor(context, android.R.color.white))
         }
     }
