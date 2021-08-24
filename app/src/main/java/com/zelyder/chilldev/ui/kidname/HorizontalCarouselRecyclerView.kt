@@ -1,9 +1,10 @@
-package com.zelyder.chilldev
+package com.zelyder.chilldev.ui.kidname
 
 import android.content.Context
 import android.util.AttributeSet
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import kotlin.math.pow
 
 class HorizontalCarouselRecyclerView(
     context: Context,
@@ -35,10 +36,9 @@ class HorizontalCarouselRecyclerView(
             (0 until childCount).forEach { position ->
                 val child = getChildAt(position)
                 val childCenterX = (child.left + child.right) / 2
-                val scaleValue = getGaussianScale(childCenterX, 1f, SELECTED_ICON_SCALE_FACTOR - 1f, 150.toDouble())
+                val scaleValue = getGaussianScale(childCenterX)
                 child.scaleX = scaleValue
                 child.scaleY = scaleValue
-                child.tag = Math.abs(scaleValue - SELECTED_ICON_SCALE_FACTOR) < 0.001
                 child.isFocusable = true
                 child.isClickable = true
             }
@@ -47,21 +47,16 @@ class HorizontalCarouselRecyclerView(
 
     private fun getGaussianScale(
         childCenterX: Int,
-        minScaleOffest: Float,
-        scaleFactor: Float,
-        spreadFactor: Double
     ): Float {
         val recyclerCenterX = (left + right) / 2
-        return (Math.pow(
-            Math.E,
-            -Math.pow(childCenterX - recyclerCenterX.toDouble(), 2.toDouble()) / (2 * Math.pow(
-                spreadFactor,
-                2.toDouble()
-            ))
-        ) * scaleFactor + minScaleOffest).toFloat()
+        return (Math.E.pow(
+            -(childCenterX - recyclerCenterX.toDouble()).pow(2.toDouble()) / (2 * SPREAD_FACTOR.pow(2.toDouble()))
+        ) * SCALE_FACTOR + MIN_SCALE_OFFSET).toFloat()
     }
 
     companion object {
-        const val SELECTED_ICON_SCALE_FACTOR = 2f
+        const val MIN_SCALE_OFFSET = 1f
+        const val SCALE_FACTOR = 1f
+        const val SPREAD_FACTOR = 150.toDouble()
     }
 }

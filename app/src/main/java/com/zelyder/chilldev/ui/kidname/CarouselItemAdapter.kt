@@ -1,10 +1,8 @@
-package com.zelyder.chilldev.ui
+package com.zelyder.chilldev.ui.kidname
 
 import android.content.Context
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
-import com.zelyder.chilldev.ui.kidname.Item
-import com.zelyder.chilldev.ui.kidname.KidNameView
 import java.lang.Integer.MAX_VALUE
 
 class CarouselItemAdapter(
@@ -14,7 +12,7 @@ class CarouselItemAdapter(
     private var items: List<Item> = listOf()
 
     override fun getItemCount(): Int {
-        return MAX_VALUE;
+        return MAX_VALUE
     }
 
     fun setItems(newItems: List<Item>) {

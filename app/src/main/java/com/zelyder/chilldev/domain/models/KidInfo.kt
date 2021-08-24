@@ -13,7 +13,7 @@ data class KidInfo(
     val categories: List<Int> = emptyList(),
     val apps: JsonObject = JsonObject(),
     val pin: String? = null,
-    var iconType: KidNameIconType = KidNameIconType.ONE,
+    var iconType: KidIcon = KidIcon.ONE,
     var avatar: String = R.drawable.ic_avas1.toString()
 )
 

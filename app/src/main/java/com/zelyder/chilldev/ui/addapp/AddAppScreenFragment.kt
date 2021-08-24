@@ -5,6 +5,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.view.accessibility.AccessibilityEvent
+import androidx.core.content.ContextCompat
 import com.zelyder.chilldev.R
 import com.zelyder.chilldev.databinding.AppAccessPageBinding
 import com.zelyder.chilldev.ui.FragmentPage
@@ -47,7 +48,18 @@ class AddAppScreenFragment : FragmentPage<AppAccessPageBinding>() {
                 it.icon)
         }
 
-        (binding.recycler.adapter as AppRecyclerAdapter).setItems(appItems)
+        val additionalItems : ArrayList<AppItem> = arrayListOf()
+
+        additionalItems.add(AppItem("Youtube",
+            viewModel.kidInfo.value!!.apps.keySet().contains("Youtube"),
+            ContextCompat.getDrawable(requireContext(), R.drawable.ic_icon_youtube)!!))
+
+        additionalItems.add(
+            AppItem("ivi",
+                viewModel.kidInfo.value!!.apps.keySet().contains("ivi"),
+                ContextCompat.getDrawable(requireContext(), R.drawable.ic_icon_ivi)!!))
+
+        (binding.recycler.adapter as AppRecyclerAdapter).setItems(appItems, additionalItems)
     }
 
     override fun onResume() {

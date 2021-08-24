@@ -75,7 +75,7 @@ class PageViewModel(private val repository: Repository) :
         repository.saveKid(kidInfo.value!!)
     }
 
-    fun setIcon(iconType: KidNameIconType) {
+    fun setIcon(iconType: KidIcon) {
         _kidInfo.postValue(_kidInfo.value!!.copy(iconType = iconType, avatar = iconType.rank.toString()))
         Timber.d("Added icon: ${iconType.rank}")
     }

@@ -10,9 +10,8 @@ import com.zelyder.chilldev.R
 import com.zelyder.chilldev.customview.AccountView
 import com.zelyder.chilldev.customview.AddProfileView
 import com.zelyder.chilldev.domain.models.Account
-import com.zelyder.chilldev.domain.models.KidNameIconType
+import com.zelyder.chilldev.domain.models.KidIcon
 import de.hdodenhof.circleimageview.CircleImageView
-import timber.log.Timber
 
 class AccountsAdapter(
     private val context: Context,
@@ -82,7 +81,7 @@ class AccountsAdapter(
                     civAvatar.setImageDrawable(
                         ContextCompat.getDrawable(
                             itemView.context,
-                            KidNameIconType.getForPosition(account.avatar.toInt()).resId
+                            KidIcon.getForPosition(account.avatar.toInt()).resId
                         )
                     )
                 }
