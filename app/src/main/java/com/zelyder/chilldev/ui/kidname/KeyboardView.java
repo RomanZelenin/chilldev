@@ -1,6 +1,8 @@
 package com.zelyder.chilldev.ui.kidname;
 
 import android.animation.AnimatorInflater;
+import android.animation.AnimatorSet;
+import android.animation.ObjectAnimator;
 import android.animation.StateListAnimator;
 import android.content.Context;
 import android.content.res.ColorStateList;
@@ -8,7 +10,6 @@ import android.content.res.TypedArray;
 import android.graphics.Typeface;
 import android.graphics.drawable.Drawable;
 import android.util.AttributeSet;
-import android.util.Log;
 import android.util.TypedValue;
 import android.view.Gravity;
 import android.view.View;
@@ -19,14 +20,13 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.annotation.VisibleForTesting;
+import androidx.appcompat.widget.AppCompatTextView;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.yandex.tv.common.ui.Fonts;
 import com.yandex.tv.common.ui.FontsKt;
 import com.zelyder.chilldev.R;
-
-import androidx.appcompat.widget.AppCompatTextView;
 
 import org.xmlpull.v1.XmlPullParser;
 import org.xmlpull.v1.XmlPullParserException;
@@ -64,6 +64,7 @@ public class KeyboardView extends RecyclerView {
 
     /**
      * Set keyboard languages
+     *
      * @param inputXml xml that contains information about languages
      */
     public void setInputXml(XmlPullParser inputXml) {
@@ -77,8 +78,9 @@ public class KeyboardView extends RecyclerView {
     /**
      * Set the languages used for the keyboard.
      * The flag has the following representation:
-     *      1. languages translate to binary
-     *      2. if the i-th byte == 1, then {@link #AVAILABLE_LANGUAGES}[i] is used
+     * 1. languages translate to binary
+     * 2. if the i-th byte == 1, then {@link #AVAILABLE_LANGUAGES}[i] is used
+     *
      * @param languages languages flag
      */
     public void setLanguages(int languages) {
@@ -89,7 +91,6 @@ public class KeyboardView extends RecyclerView {
     }
 
     /**
-     *
      * @param selector selector of keyboard button
      */
     public void setKeySelector(Drawable selector) {
@@ -98,7 +99,6 @@ public class KeyboardView extends RecyclerView {
     }
 
     /**
-     *
      * @param color text color of keyboard button
      */
     public void setTextColor(ColorStateList color) {
@@ -107,7 +107,6 @@ public class KeyboardView extends RecyclerView {
     }
 
     /**
-     *
      * @param animator animator of keyboard button
      */
     public void setKeyAnimator(int animator) {
@@ -115,7 +114,6 @@ public class KeyboardView extends RecyclerView {
     }
 
     /**
-     *
      * @param size text size of keyboard button
      */
     public void setTextSize(int size) {
@@ -191,7 +189,7 @@ public class KeyboardView extends RecyclerView {
      * Create a keyboard view and set a global view parameters of button
      *
      * @param context context of application
-     * @param attrs attributes for keyboard view and buttons view
+     * @param attrs   attributes for keyboard view and buttons view
      */
     public KeyboardView(Context context, AttributeSet attrs) {
         super(context, attrs);
@@ -275,7 +273,7 @@ public class KeyboardView extends RecyclerView {
         switch (direction) {
             case View.FOCUS_UP:
                 if (getChildAdapterPosition(focused) / itemInColumn == 0) {
-                   return focusListener.searchTop(focused);
+                    return focusListener.searchTop(focused);
                 }
                 break;
             case View.FOCUS_DOWN:
@@ -313,19 +311,21 @@ public class KeyboardView extends RecyclerView {
 
         /**
          * Change available languages
+         *
          * @param languages languages that keyboard uses
          */
         private void setAvailableLangs(int languages) {
             currentLangIndex = 0;
             availableLangs.clear();
             for (int i = 0; i < AVAILABLE_LANGUAGES.length; i++)
-                if ((languages & ((int)Math.pow(2, i))) != 0) {
+                if ((languages & ((int) Math.pow(2, i))) != 0) {
                     availableLangs.add(AVAILABLE_LANGUAGES[i]);
                 }
         }
 
         /**
          * Update size of buttons
+         *
          * @param manager manager that controls the size of buttons
          */
         @VisibleForTesting
@@ -386,8 +386,7 @@ public class KeyboardView extends RecyclerView {
         private AdapterController controller;
 
         /**
-         *
-         * @param factory button factory that creates views of buttons
+         * @param factory    button factory that creates views of buttons
          * @param controller list of used alphabets
          */
         KeyboardAdapter(ButtonViewFactory factory, AdapterController controller) {
@@ -456,6 +455,16 @@ public class KeyboardView extends RecyclerView {
         @Override
         public void onBindViewHolder(@NonNull RecyclerView.ViewHolder holder, int position) {
             KeyButton button = controller.getButtons().get(position);
+
+            AnimatorSet animSet = new AnimatorSet();
+            holder.itemView.setOnFocusChangeListener((v, hasFocus) -> {
+                if (hasFocus) {
+                    animSet.playTogether(ObjectAnimator.ofFloat(v, "scaleX", 1f, 1.3f), ObjectAnimator.ofFloat(v, "scaleY", 1f, 1.3f));
+                } else {
+                    animSet.playTogether(ObjectAnimator.ofFloat(v, "scaleX", 1.3f, 1f), ObjectAnimator.ofFloat(v, "scaleY", 1.3f, 1f));
+                }
+                animSet.start();
+            });
 
             switch (awaitingFocus) {
                 case KeyButton.DELETE:
@@ -734,6 +743,7 @@ public class KeyboardView extends RecyclerView {
 
         /**
          * Create the view of text button
+         *
          * @param context context of activity
          * @return text button view
          */
@@ -745,7 +755,7 @@ public class KeyboardView extends RecyclerView {
             FontsKt.applyFont(view, Fonts.yandexSansMedium(context));
             if (textColor != null)
                 view.setTextColor(textColor);
-            Drawable background  = keySelector;
+            Drawable background = keySelector;
             if (background != null)
                 view.setBackground(background.getConstantState().newDrawable());
             if (keyAnimator != 0) {
@@ -759,8 +769,9 @@ public class KeyboardView extends RecyclerView {
 
         /**
          * Create the view of image button
+         *
          * @param context context of activity
-         * @param image image of button
+         * @param image   image of button
          * @return image button view
          */
         View createImageButton(Context context, Drawable image) {
@@ -769,8 +780,9 @@ public class KeyboardView extends RecyclerView {
 
         /**
          * Create the view of image button
-         * @param context context of activity
-         * @param image image of button
+         *
+         * @param context   context of activity
+         * @param image     image of button
          * @param scaleType image scale type
          * @return image button view
          */
@@ -779,12 +791,12 @@ public class KeyboardView extends RecyclerView {
             view.setTextAlignment(View.TEXT_ALIGNMENT_CENTER);
             view.setImageTintList(textColor);
             view.setImageDrawable(image);
-            view.setPadding(0,10,0,10);
+            view.setPadding(0, 10, 0, 10);
             view.setScaleType(scaleType);
             view.setLayoutParams(new ViewGroup.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT,
                     ViewGroup.LayoutParams.MATCH_PARENT));
 
-            Drawable background  = keySelector;
+            Drawable background = keySelector;
             if (background != null)
                 view.setBackground(background.getConstantState().newDrawable());
             if (keyAnimator != 0) {
@@ -811,14 +823,15 @@ public class KeyboardView extends RecyclerView {
 
         /**
          * Simple constructor
+         *
          * @param parser parser for the file of the following form:
-         *        <input-methods>
-         *          <input lang="{alphabet language, e.g. ru}">
-         *              <item type="{button type}" size="{size of this button}" />
-         *              ...
-         *          </input>
-         *          ...
-         *        </input-method>
+         *               <input-methods>
+         *               <input lang="{alphabet language, e.g. ru}">
+         *               <item type="{button type}" size="{size of this button}" />
+         *               ...
+         *               </input>
+         *               ...
+         *               </input-method>
          * @see KeyButton
          */
         KeyboardXmlParser(XmlPullParser parser) {
@@ -830,7 +843,7 @@ public class KeyboardView extends RecyclerView {
          *
          * @return HashMap of alphabets
          * @throws XmlPullParserException if format of xml is wrong
-         * @throws IOException if format of xml is wrong
+         * @throws IOException            if format of xml is wrong
          */
         public HashMap<String, List<KeyButton>> parse() throws XmlPullParserException, IOException {
             if (parser == null)
