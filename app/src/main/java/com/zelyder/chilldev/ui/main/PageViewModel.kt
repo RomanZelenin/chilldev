@@ -79,4 +79,8 @@ class PageViewModel(private val repository: Repository) :
         _kidInfo.postValue(_kidInfo.value!!.copy(iconType = iconType, avatar = iconType.rank.toString()))
         Timber.d("Added icon: ${iconType.rank}")
     }
+
+    fun getPinCode():String? {
+       return repository.getPinCode()
+    }
 }
