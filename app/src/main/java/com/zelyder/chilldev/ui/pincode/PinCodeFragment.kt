@@ -9,13 +9,24 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.core.view.postDelayed
+import androidx.lifecycle.lifecycleScope
+import com.yandex.tv.services.passport.PassportProviderSdk
 import com.zelyder.chilldev.R
+import com.zelyder.chilldev.YandexKidTvApplication
 import com.zelyder.chilldev.databinding.PinCodePageBinding
 import com.zelyder.chilldev.domain.PolicyContract
 import com.zelyder.chilldev.domain.models.PinCodeStage
+import com.zelyder.chilldev.domain.models.Token
+import com.zelyder.chilldev.domain.repository.Repository
 import com.zelyder.chilldev.ui.FragmentPage
+import com.zelyder.chilldev.ui.PinActivity
 import com.zelyder.chilldev.ui.customkeyboard.KeyboardOutput
+import com.zelyder.chilldev.ui.main.PageViewModelFactory
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 import timber.log.Timber
+import javax.inject.Inject
 
 class PinCodeFragment : FragmentPage<PinCodePageBinding>() {
 
@@ -26,7 +37,6 @@ class PinCodeFragment : FragmentPage<PinCodePageBinding>() {
     ) {
         _binding = PinCodePageBinding.inflate(inflater, container, attachToParent)
     }
-
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         binding.buttonWithoutPin.setOnClickListener {
@@ -46,7 +56,7 @@ class PinCodeFragment : FragmentPage<PinCodePageBinding>() {
                                 binding.pinView.setText("")
                             } else if (firstPassword == binding.pinView.text.toString()) {
                                 viewModel.setPinCode(firstPassword)
-                                transferData()
+                                transferData("2")
                             } else {
                                 Toast.makeText(
                                     requireContext(),
@@ -60,6 +70,19 @@ class PinCodeFragment : FragmentPage<PinCodePageBinding>() {
                             }
                         }
                         PinCodeStage.ENTER.type -> {
+                            if (activity is PinActivity ) {
+                                if(viewModel.getPinCode() == binding.pinView.text.toString()) {
+                                    transferData("0")
+                                }else {
+                                    Toast.makeText(
+                                        requireContext(),
+                                        resources.getString(R.string.screen_pin_error_text),
+                                        Toast.LENGTH_LONG
+                                    ).show()
+                                    firstPassword = ""
+                                    binding.pinView.setText("")
+                                }
+                            }
 
                         }
                     }
@@ -74,6 +97,10 @@ class PinCodeFragment : FragmentPage<PinCodePageBinding>() {
                 else -> R.string.screen_pin_description
             }
         )
+
+        if (arguments?.getInt(PIN_CODE_STAGE) == PinCodeStage.ENTER.type) {
+            binding.buttonWithoutPin.visibility = View.GONE
+        }
     }
 
 
@@ -82,18 +109,28 @@ class PinCodeFragment : FragmentPage<PinCodePageBinding>() {
         binding.numPad.requestFocus()
     }
 
-    fun transferData() {
-        val uri: Uri = PolicyContract.buildPolicySettingsUri()
-        val updateValues = ContentValues().apply {
-            put(PolicyContract.COLUMN_NAME, PolicyContract.NAME_POLICY_LEVEL_INDEX)
-            put(PolicyContract.COLUMN_VALUE, "2")
+    fun transferData(param: String) {
+        try {
+            val uri: Uri = PolicyContract.buildPolicySettingsUri()
+            val updateValues = ContentValues().apply {
+                put(PolicyContract.COLUMN_NAME, PolicyContract.NAME_POLICY_LEVEL_INDEX)
+                put(PolicyContract.COLUMN_VALUE, param)
+            }
+            val rowsUpdated = requireContext().contentResolver.insert(
+                uri,   // the user dictionary content URI
+                updateValues
+            )
+            Timber.d("rowsUpdated:$rowsUpdated")
+            requireActivity().finish()
+        }catch (e: java.lang.Exception) {
+            Timber.d("Transfer Data failed!")
+            Toast.makeText(
+                requireContext(),
+                resources.getString(R.string.screen_pin_transfer_error),
+                Toast.LENGTH_LONG
+            ).show()
+            binding.pinView.setText("")
         }
-        val rowsUpdated = requireContext().contentResolver.insert(
-            uri,   // the user dictionary content URI
-            updateValues
-        )
-        Timber.d("rowsUpdated:$rowsUpdated")
-        requireActivity().finish()
     }
 
     companion object {

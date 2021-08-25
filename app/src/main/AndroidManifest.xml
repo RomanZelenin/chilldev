@@ -2,8 +2,8 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.zelyder.chilldev">
 
-    <uses-permission android:name="android.permission.INTERNET"/>
-    <uses-permission android:name="com.yandex.tv.permission.ACCESS_POLICY_MANAGER_DATA"/>
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="com.yandex.tv.permission.ACCESS_POLICY_MANAGER_DATA" />
     <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED" />
     <uses-permission android:name="android.permission.QUICKBOOT_POWERON" />
 
@@ -22,19 +22,23 @@
         android:label="@string/app_name"
         android:supportsRtl="true"
         android:theme="@style/Theme.Chilldev">
-        <activity android:name=".ui.chooseaccount.ChooseAccountActivity"
+        <activity android:name=".ui.PinActivity"></activity>
+        <activity
+            android:name=".ui.chooseaccount.ChooseAccountActivity"
             android:launchMode="singleTop"
-            android:noHistory="true" >
+            android:noHistory="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LEANBACK_LAUNCHER" />
             </intent-filter>
             <intent-filter>
-                <action android:name="com.yandex.tv.passport.MANAGE_ACCOUNTS"/>
+                <action android:name="com.yandex.tv.passport.MANAGE_ACCOUNTS" />
+
                 <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
         </activity>
+
         <receiver android:name=".ui.receiver.BootCompletedReceiver">
             <intent-filter>
                 <action android:name="android.intent.action.BOOT_COMPLETED" />
@@ -43,9 +47,10 @@
             </intent-filter>
         </receiver>
 
-        <activity android:name=".ui.main.MainActivity"
-            android:noHistory="true"
-            android:launchMode="singleTop"/>
+        <activity
+            android:name=".ui.main.MainActivity"
+            android:launchMode="singleTop"
+            android:noHistory="true" />
     </application>
 
 </manifest>

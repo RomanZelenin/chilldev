@@ -1,5 +1,6 @@
 package com.zelyder.chilldev.ui.chooseaccount
 
+import android.content.Intent
 import android.os.Bundle
 import androidx.core.text.isDigitsOnly
 import androidx.fragment.app.FragmentActivity
@@ -8,6 +9,7 @@ import androidx.lifecycle.lifecycleScope
 import com.zelyder.chilldev.YandexKidTvApplication
 import com.zelyder.chilldev.databinding.ActivityChooseAccountBinding
 import com.zelyder.chilldev.domain.models.Account
+import com.zelyder.chilldev.ui.PinActivity
 import com.zelyder.chilldev.ui.main.GenericViewModelFactory
 import com.zelyder.chilldev.ui.main.MainActivity
 import com.zelyder.chilldev.ui.main.PageViewModel
@@ -46,6 +48,8 @@ class ChooseAccountActivity : FragmentActivity() {
                 }
 
                 override fun onParentAccountClick() {
+                    val intent = Intent(this@ChooseAccountActivity, PinActivity::class.java)
+                    startActivity(intent)
                 }
             })
 

@@ -20,6 +20,7 @@
     <string name="screen_pin_enter">Введите ПИН для выхода \nиз детского профиля</string>
     <string name="screen_pin_done">Не хочу задавать ПИН-код</string>
     <string name="screen_pin_error_text">ПИН коды не совпадают!</string>
+    <string name="screen_pin_transfer_error">Не удалось передать данные! Проверьте, что вы используете Яндекс ТВ</string>
     <string name="screen_congratulation">Поздравляем, вы подключили детский режим!</string>
     <string name="next_fragment_text_view">Какое кино будем показывать?</string>
     <string name="kid_name_text_view">Как зовут ребёнка?</string>
